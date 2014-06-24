@@ -1,0 +1,9 @@
+fa-view(fa-index="1")
+  fa-view(ng-repeat="card in cards track by $index")
+    include job-detail
+  fa-modifier#helpMod(fa-origin="[.5, .5]", fa-align="[1, 0]", fa-translate="[-37,37]")
+    fa-image-surface.help(fa-image-url="/images/assets/help.png", fa-size="[40,40]", fa-click="clickHelp()")
+
+  fa-animation(timeline="scrollXPosition", ng-repeat="card in cards track by $index")
+    animate(ng-if="$index <= 2", targetmodselector="{{'#swipeMod'+$index}}", field="translate", startvalue="[0,0,0]", endvalue="[0,-cardSpacing,cardSpacing]")
+      animate(ng-if="$index > 2", targetmodselector="{{'#swipeMod'+$index}}", field="translate", startvalue="[0,0,0]", endvalue="[0,0,0]")

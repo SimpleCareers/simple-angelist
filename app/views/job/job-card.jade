@@ -1,0 +1,19 @@
+fa-modifier(id="{{'swipeMod'+$index}}",fa-translate="getPosition($index)")
+  fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[9,64]")
+    fa-surface(class="{{'jobcard'+$index}}", fa-pipe-to="swipePipe", fa-size="[300,true]")
+      .card-background
+        img.card-logo(src="/images/assets/logosq.png")
+        .card-title-grad
+        .card-title
+          | Engineer
+        .card-subtitle
+          | Famo.us
+        img.card-hero(src="/images/assets/hero.png")
+        .card-desc-wrap
+          .card-desc
+            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+          .hline
+          .card-detail
+            ul
+              li.list-item(ng-repeat="item in items track by $index")
+                | {{item}}

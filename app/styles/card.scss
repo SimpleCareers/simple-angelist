@@ -1,0 +1,139 @@
+$width: 300px;
+$detailcardwidth: 320px;
+$heroheight: 200px;
+
+.card-desc{
+  margin: 15px;
+  font-size: 15px;
+  color: #5A5A5A;
+  line-height: 20px;
+  height: 100px;
+  overflow: hidden;
+}
+.card-hero{
+  width: $width;
+  height: $heroheight;
+  overflow: hidden;
+  z-index: 250;
+  max-width:100%;
+}
+.card-title{
+  position: absolute;
+  left:95px;
+  top:155px;
+  z-index: 260;
+  color: #fff;
+  
+  font-size: 20px;
+  line-height: 20px;
+  text-wrap: nowrap;
+}
+.card-subtitle{
+  position: absolute;
+  left:95px;
+  top:180px;  
+  z-index: 260;
+  color: #fff;
+  
+  font-size: 13px;
+  line-height: 13px;
+  text-wrap: nowrap;
+}
+.card-logo{
+  position: absolute;
+  left:24px;
+  top:150px;
+  width: 65px;
+  height: 65px;
+  z-index: 260;
+}
+.card-title-grad{
+  position: absolute;
+  width: $width;
+  height: 90px;
+  left: 0px;
+  top: 110px;
+  background-image: -o-linear-gradient(-89deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+  background-image: -moz-linear-gradient(-89deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+  background-image: -ms-linear-gradient(-89deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+  background-image: linear-gradient(-179deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+}
+.card-background{
+  position: relative;
+  background: #fff;
+  width: $width;
+  border: 1px solid #E1E1E1;
+}
+.card-detail{
+  margin: 5px;
+  width: $width;
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  height: 50px;
+  overflow: hidden;
+  font-size: 14px;
+  color: #AFAFAF;
+  ul{
+    padding-left: 0;
+  }
+}
+
+div[class^="jobcard"] {
+  z-index: 176;
+}
+.jobcard0{
+  z-index: 180;
+}
+.jobcard1{
+  z-index: 179;
+}
+.jobcard2{
+  z-index: 178;
+}
+.jobcard3{
+  z-index: 177;
+}
+
+// Detail card
+.detail-card-background{
+  position: relative;
+  background: #fff;
+  width: $detailcardwidth;
+  height: 100%;
+  border: 1px solid #E1E1E1;
+}
+.detail-card-logo{
+  z-index: 270;
+  @extend .card-logo;
+}
+.detail-card-hero{
+  z-index: 250;
+  @extend .card-hero;
+  width: $detailcardwidth;
+}
+.detail-card-title-grad{
+  z-index: 260;
+  @extend .card-title-grad;
+  width: $detailcardwidth;
+}
+.detail-card-title{
+  z-index: 270;
+  @extend .card-title;
+  width: $detailcardwidth;
+}
+.detail-card-subtitle{
+  z-index: 270;
+  @extend .card-subtitle;
+  width: $detailcardwidth;
+}
+.detail-card-desc{
+  z-index: 240;
+  @extend .card-desc;
+  height: auto;
+}
+.detail-card-detail{
+  z-index: 240;
+  @extend .card-detail;
+  width: $detailcardwidth;
+}

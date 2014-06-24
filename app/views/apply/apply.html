@@ -1,0 +1,109 @@
+<fa-view id="applyView" fa-index="2"><fa-modifier fa-translate="getApplyPosition()"><fa-modifier id="handleMod" fa-origin="[0, 0]" fa-align="[0, 0]"><fa-surface fa-pipe-to="applyPipe" fa-background-color="'rgba(0,0,0,0.1)'" fa-size="[320,64]" class="apply-menu apply-layer"></fa-surface></fa-modifier><fa-modifier id="bgrMod" fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[0, 30]"><fa-surface fa-pipe-to="applyPipe" fa-background-color="'#DD4F3C'" fa-size="[320,64]" class="apply-menu apply-layer"><fa-modifier fa-origin="[0,0]" fa-align="[0,0]" fa-translate="[0,45/2]"><fa-sequential-layout fa-options="options.applyMenuList"><fa-view ng-repeat="menu in applymenus"><fa-surface fa-size="[320/3,true]" class="apply-menu-item">{{menu}}</fa-surface></fa-view></fa-sequential-layout></fa-modifier></fa-surface></fa-modifier><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[0,64]" fa-size="[undefined,504]"><fa-scroll-view id="list-scroll-view" fa-start-index="0" fa-pipe-from="listPipe" fa-options="options.listScrollView"><!--<fa-sequential-layout 
+  fa-options="options.applyList"> --><!--<fa-surface
+      class="list-item apply-layer"
+      fa-size="[undefined,175/2]"
+      ng-repeat="menu in rows track by $index"
+      >
+        <img class="list-item-thumb"
+      src="/images/assets/logosq.png" width="55" height="55"></img>
+        <div class="list-h1">
+        {{menu}}
+        </div>
+        <div class="list-h2">
+        {{menu}}
+        </div>
+        <div class="list-h2">
+        {{menu}}
+        </div>
+</fa-surface> --><fa-view fa-size="[320.5,175/2]" ng-repeat="menu in rows track by $index"><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]"><fa-surface fa-background-color="white" fa-size="[undefined,175/2]" fa-pipe-to="listPipe"></fa-surface></fa-modifier><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[25/2,25/2]"><fa-image-surface fa-image-url="/images/assets/logosq.png" fa-size="[55,55]" fa-pipe-to="listPipe" class="list-item-thumb"></fa-image-surface></fa-modifier><fa-surface fa-pipe-to="listPipe" class="apply-layer"><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[78,16]"><fa-surface fa-size="[150,20.5]" class="list-h1 apply-layer">{{menu}}</fa-surface></fa-modifier><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[78,36]"><fa-surface fa-size="[170.5,15.5]" class="list-h2 apply-layer">{{menu}}</fa-surface></fa-modifier><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[78,53.5]"><fa-surface fa-size="[220.5,15.5]" class="list-h2 apply-layer">{{menu}}</fa-surface></fa-modifier></fa-surface><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]"><fa-image-surface fa-image-url="/images/assets/hline.png" fa-pipe-to="listPipe" fa-size="[undefined,true]"></fa-image-surface></fa-modifier></fa-view><!-- </fa-sequential-layout>--></fa-scroll-view></fa-modifier><!--<fa-surface fa-background-color="'rgba(0,0,0,0.5)'"
+   fa-size="[undefined, undefined]"
+   >
+</fa-surface>
+
+ <fa-modifier
+   id="swipedownMod"
+   fa-origin="[.5, .5]"
+   fa-align="[0.5, 0]"
+   fa-translate="[0,26]"
+ >
+ <fa-image-surface 
+   fa-image-url="/images/assets/swipedown.png"
+   fa-size="[371/2,8.5]"
+   >
+ </fa-image-surface>
+ 
+ </fa-modifier>
+ <fa-modifier
+   id="swipeupMod"
+   fa-origin="[.5, .5]"
+   fa-align="[0.5, 1]"
+   fa-translate="[0,-26]"
+ >
+ <fa-image-surface 
+   fa-image-url="/images/assets/swipeup.png"
+   fa-size="[474/2,8.5]"
+   >
+ </fa-image-surface>
+ 
+ </fa-modifier>
+ <fa-modifier
+   id="cardMod"
+   fa-origin="[0, 0]"
+   fa-align="[0, 0]"
+   fa-translate="[18/2, 86/2]"
+ >
+ <fa-image-surface 
+   fa-image-url="/images/assets/card.png"
+   fa-size="[300,470]"
+   >
+ </fa-image-surface>
+ </fa-modifier>
+ <fa-modifier
+   id="heroMod"
+   fa-origin="[0, 0]"
+   fa-align="[0, 0]"
+   fa-translate="[18/2, 86/2]"
+ >
+ <fa-image-surface 
+   fa-image-url="/images/assets/hero.png"
+   fa-size="[300,225]"
+   >
+ </fa-image-surface>
+ </fa-modifier>
+ <fa-modifier
+   id="titlegradMod"
+   fa-origin="[0, 0]"
+   fa-align="[0, 0]"
+   fa-translate="[18/2,356/2]"
+ >
+ <fa-surface 
+   class="title-grad"
+   fa-size="[300,90]"
+   >
+ </fa-surface>
+ </fa-modifier>
+ <fa-modifier
+   id="logoMod"
+   fa-origin="[0, 0]"
+   fa-align="[0, 0]"
+   fa-translate="[48/2,434/2]"
+ >
+ <fa-image-surface 
+   fa-image-url="/images/assets/logosq.png"
+   fa-size="[65,65]"
+   >
+ </fa-image-surface>
+ 
+ </fa-modifier>
+ <fa-modifier
+   id="helpMod"
+   fa-origin="[.5, .5]"
+   fa-align="[1, 0]"
+   fa-translate="[-37,37]"
+ >
+ <fa-image-surface 
+   fa-image-url="/images/assets/help.png"
+   fa-size="[40,40]"
+   >
+ </fa-image-surface>
+ </fa-modifier> --></fa-modifier></fa-view>

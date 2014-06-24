@@ -1,0 +1,85 @@
+fa-view#paperView(fa-index="2", ng-controller="PaperCtrl")
+  fa-modifier(fa-translate="paperpos.get()")
+    fa-view
+      fa-modifier#backCoverMod(fa-origin="[0, 0]", fa-align="[0, 0]")
+        fa-scroll-view(fa-start-index="0", fa-pipe-from="heroPipe", fa-options="options.heroScrollView")
+          fa-image-surface.back-cover(fa-image-url="/images/assets/hero.png", fa-size="[undefined,undefined]", fa-pipe-to="heroPipe", ng-repeat="img in [1,2,3,4]")
+      //
+         <fa-modifier
+                fa-translate="paperListPos.get()"
+              > 
+      fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[0, 568+210]")
+        fa-modifier(fa-scale="paperScale.get()")
+          fa-modifier(fa-translate="[0, -568-210]")
+            fa-scroll-view(fa-start-index="0", fa-pipe-from="paperSlideListPipe", ng-controller="CoverScrollCtrl", sc-render-node="renderNode", fa-options="options.paperListScrollView")
+              fa-view(ng-repeat="card in [1,2,3,4,5]")
+                fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]")
+                  fa-surface(fa-background-color="'white'", fa-size="[320,undefined]", fa-pipe-to="paperHeroListPipe")
+                fa-modifier#heroMod(fa-origin="[0, 0]", fa-align="[0, 0]")
+                  fa-image-surface.paper-card-hero(fa-image-url="/images/assets/hero.png", fa-size="[320,225]", fa-pipe-to="paperHeroListPipe")
+                fa-modifier#gradMod(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[0,356/2-43]")
+                  fa-surface.paper-title-grad.apply-layer(fa-pipe-to="paperHeroListPipe", fa-size="[320,90]")
+                fa-modifier#titleMod(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[95,224-43]")
+                  fa-surface.paper-title.apply-layer(fa-pipe-to="paperHeroListPipe", fa-size="[undefined,20.5]")
+                    | Front End Engineer
+                fa-modifier#subtitleMod(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[95,246.5-43]")
+                  fa-surface.paper-subtitle.apply-layer(fa-pipe-to="paperHeroListPipe", fa-size="[undefined,15.5]")
+                    | Famo.us &#8226; San Francisco
+                fa-modifier#logoMod(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[39/2,434/2-43]")
+                  fa-image-surface.paper-logo(fa-pipe-to="paperHeroListPipe", fa-image-url="/images/assets/logosq.png", fa-size="[65,65]")
+                fa-modifier(fa-translate="paperListPos.get()")
+                  fa-modifier#innerListMod
+                    fa-modifier(fa-translate="[0,225]", fa-size="[320,568-140]")
+                      fa-scroll-view(fa-start-index="0", fa-pipe-from="paperScrollListPipe", sc-render-node="renderNode", ng-controller="DetailScrollCtrl", fa-options="options.detailListScrollView")
+                        fa-surface.card-detail(fa-background-color="'white'", fa-pipe-to="innerPaperListPipe", fa-size="[320,true]")
+                          .desc
+                            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+                          .hline  
+                          .detail
+                            ul
+                              li.list-item(ng-repeat="item in items track by $index")
+                                | {{item}}
+                          .hline  
+                          .score-header Compatibility Score
+                          .score
+                            .front-score
+                            .back-score
+                          .hline  
+                          .desc
+                            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+                          .hline  
+                          .desc
+                            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+                          .hline  
+                          .desc
+                            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+                          .hline  
+                          .desc
+                            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+    fa-animation(timeline="scrollYScale")
+      animate(targetmodselector="#heroMod", field="translate", startvalue="[0,0,0]", endvalue="[0,-140,0]")
+    fa-animation(timeline="scrollYScale")
+      animate(targetmodselector="#titleMod", field="translate", startvalue="[0,0,0]", endvalue="[0,-140,0]")
+    fa-animation(timeline="scrollYScale")
+      animate(targetmodselector="#subtitleMod", field="translate", startvalue="[0,0,0]", endvalue="[0,-140,0]")
+    fa-animation(timeline="scrollYScale")
+      animate(targetmodselector="#gradMod", field="translate", startvalue="[0,0,0]", endvalue="[0,-140,0]")
+    fa-animation(timeline="scrollYScale")
+      animate(targetmodselector="#logoMod", field="translate", startvalue="[0,0,0]", endvalue="[0,-140,0]")
+    fa-animation(timeline="scrollYScale")
+      animate(targetmodselector="#innerListMod", field="translate", startvalue="[0,0,0]", endvalue="[0,-140,0]")
+    //
+       <fa-modifier
+          id="swipeupMod"
+          fa-origin="[.5, 0]"
+          fa-align="[0.5, 0]"
+          fa-translate="[0,8.5]"
+        >
+        <fa-image-surface
+          class="apply-layer"
+          fa-image-url="/images/assets/swipeup.png"
+          fa-size="[474/2,8.5]"
+          >
+        </fa-image-surface>
+        </fa-modifier>
+         
