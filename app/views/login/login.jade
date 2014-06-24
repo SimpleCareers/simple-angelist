@@ -2,14 +2,6 @@ fa-view#menuView(fa-index="0")
   fa-modifier(fa-translate="getMenuPosition()")
     fa-modifier#backgroundMod(fa-origin="[.5, .5]")
       fa-surface.menu-background(fa-background-color="'#000030'", fa-pipe-to="menuPipe", fa-size="[undefined, undefined]")
-      //
-         <fa-image-surface
-              class="menu-background"
-              fa-pipe-to="menuPipe"
-              fa-image-url="/images/assets/profile.png"
-              fa-size="[true, undefined]"
-              >
-            </fa-image-surface> 
     fa-modifier(fa-origin="[0,0]", fa-align="[0,0]", fa-translate="[110,67]")
       fa-image-surface.menu-layer(fa-pipe-to="menuPipe", fa-image-url="/images/assets/logo.png", fa-size="[100,39]")
     fa-modifier(fa-origin="[.5,0]", fa-align="[0,0]", fa-translate="[94/2,178/2]")
@@ -21,14 +13,3 @@ fa-view#menuView(fa-index="0")
           | {{menu}}
     fa-modifier#swipedownMod(fa-origin="[.5, 1]", fa-align="[0.5, 1]", fa-translate="[0,-8.5,0]")
       fa-image-surface.menu-layer(fa-pipe-to="menuPipe", fa-image-url="/images/assets/swipedown.png", fa-size="[371/2,8.5]")
-  //
-        <fa-animation event="startEvent" duration="2000">
-       <animate  targetModSelector="#backgroundMod"
-                 field="scale"
-                 startValue="[0,0,0]"
-                 endValue="[1,1,1]"
-                 curve="outBack"
-                 timelineLowerBound="0"
-                 timelineUpperBound=".25" />
-     </fa-animation> 
-// </fa-modifier>
