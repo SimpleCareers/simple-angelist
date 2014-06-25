@@ -165,6 +165,17 @@ DetailCtrl = (function(_super) {
     this.timeout = timeout;
     this.famous = famous;
     DetailCtrl.__super__.constructor.call(this, this.scope);
+    this.scope.cards = ["1", "2", "3", "4"];
+    this.scope.enginePipe = new this.EventHandler();
+    this.Engine.pipe(this.scope.enginePipe);
+    this.scope.options = {
+      mainScrollView: {
+        paginated: true,
+        direction: 1,
+        speedLimit: 5,
+        margin: 10000
+      }
+    };
   }
 
   return DetailCtrl;

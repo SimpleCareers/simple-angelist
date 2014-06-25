@@ -1,13 +1,18 @@
 $width: 300px;
-$detailcardwidth: 320px;
+$detailcardwidth: 95%;
 $heroheight: 200px;
+
+
+li {
+  list-style-image: url(/images/assets/oval2.png);
+  }
 
 .card-desc{
   margin: 15px;
   font-size: 15px;
   color: #5A5A5A;
   line-height: 20px;
-  height: 100px;
+  height: auto;
   overflow: hidden;
 }
 .card-hero{
@@ -23,7 +28,7 @@ $heroheight: 200px;
   top:155px;
   z-index: 260;
   color: #fff;
-  
+
   font-size: 20px;
   line-height: 20px;
   text-wrap: nowrap;
@@ -31,10 +36,10 @@ $heroheight: 200px;
 .card-subtitle{
   position: absolute;
   left:95px;
-  top:180px;  
+  top:180px;
   z-index: 260;
   color: #fff;
-  
+
   font-size: 13px;
   line-height: 13px;
   text-wrap: nowrap;
@@ -96,6 +101,15 @@ div[class^="jobcard"] {
 }
 
 // Detail card
+.detail-card {
+  color: #5A5A5A;
+  width: $detailcardwidth;
+}
+.detail-card h4 {
+  color: #DD4F3C;
+  font-size: 14px;
+  text-align: center;
+}
 .detail-card-background{
   position: relative;
   background: #fff;
@@ -136,4 +150,70 @@ div[class^="jobcard"] {
   z-index: 240;
   @extend .card-detail;
   width: $detailcardwidth;
+}
+
+.detail-card-skillset{
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-company{
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-founder{
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-founder .media-heading {
+  color: color: #5A5A5A;
+  font-weight: strong;
+}
+
+.detail-card-product {
+  z-index: 220;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-whyus {
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.img-founder-1 {
+  display:block;
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-image: url('/images/assets/Steve_Newcomb.jpg');
+  background-size: cover;
+  display: block;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+}
+
+.img-founder-2 {
+  display:block;
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-image: url('/images/assets/Mark_Lu.jpg');
+  background-size: cover;
+  display: block;
+   border-radius: 100%;
+ -webkit-border-radius: 100%;
+ -moz-border-radius: 100%;
+}
+
+
+.name-founder {
+  content: "Troy D";
 }

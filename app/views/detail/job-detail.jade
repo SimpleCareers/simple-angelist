@@ -1,19 +1,59 @@
 fa-modifier(id="{{'swipeMod'+$index}}",fa-translate="getPosition($index)")
   fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[9,64]")
-    fa-surface(class="{{'jobcard'+$index}}", fa-pipe-to="swipePipe", fa-size="[300,true]")
-      .detail-card-background
-        img.detail-card-logo(src="/images/assets/logosq.png")
-        .detail-card-title-grad
-        .detail-card-title
-          | Engineer
-        .detail-card-subtitle
-          | Famo.us
-        img.detail-card-hero(src="/images/assets/hero.png")
-        .detail-card-desc-wrap
-          .detail-card-desc
-            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
-          .hline  
-          .detail-card-detail
-            ul
-              li.list-item(ng-repeat="item in items track by $index")
-                | {{item}}
+    fa-scroll-view(fa-start-index="0", fa-pipe-from="enginePipe", fa-options="options.mainScrollView")
+      fa-surface(class="{{'jobcard'+$index}}", fa-pipe-to="swipePipe", fa-size="[300,true]")
+        .card-background
+          img.card-logo(src="/images/assets/logosq.png")
+          .card-title-grad
+          .card-title
+            | Engineer
+          .card-subtitle
+            | Famo.us
+          img.card-hero(src="/images/assets/hero.png")
+          .card-desc-wrap
+            .card-desc
+              | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+            .hline
+            .detail-card
+              .col-xs-6
+                li 58 applications
+                li Full-time
+              .col-xs-6
+                li $40K - $60K
+                li 0.05% - 0.1%
+              .detail-card-skillset
+                h4 SKILLSETS
+                p.
+                  Operation &#183; Social Media &#183; Email Marketing &#183; Social Media Marketing &#183; Community Manager &#183; Sales and Marketing
+
+              .detail-card-company
+                h4 COMPANY
+                li $2.2M Seed in 2013
+                li 11-50 employees
+                li San Francisco, CA
+
+              .detail-card-founder
+                h4 FOUNDER
+                div.media
+                  img.img-founder-1
+                  div.media-body
+                    .media-heading Troy Do
+                    |Founder/CEO and front end developer/designer at @Famo.us , also co-founded @PowerSet
+
+                div.media
+                  img.img-founder-2
+                  div.media-body
+                    .media-heading Troy Do
+                    |Founder/Engineer at @Famo.us • Studied at @Berkeley
+
+
+              .detail-card-product
+                h4 PRODUCT
+                p What is Karma?
+                p. The search for reliable WiFi can be frustrating. During your commute, at the local coffee shop, at the airport or hotel. The need to get online is greater now, more than ever.
+
+                p. Meet Karma: your pocket's new pal. Karma will boost your productivity
+
+              .detail-card-whyus
+                h4 WHY US?
+                p. How great would it be to keep the entire world connected to the internet, anywhere they go in the world? Well, you tell us. In re-inventing connectivity with us, you'll get to work on extraordinary problems and build a solution that all consumers can use in their every day lives. If you're an all-round talent in design, development, operations, marketing or sales: get in touch.xc
