@@ -171,7 +171,7 @@ div[class^="jobcard"] {
 }
 
 .detail-card-founder .media-heading {
-  color: color: #5A5A5A;
+  color: #5A5A5A;
   font-weight: strong;
 }
 
@@ -187,12 +187,13 @@ div[class^="jobcard"] {
   width: $detailcardwidth;
 }
 
-.img-founder-1 {
+.img-founder1 {
   display:block;
   float: left;
-  width: 100px;
-  height: 100px;
-  background-image: url('/images/assets/Steve_Newcomb.jpg');
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+  background-image: url('/images/assets/SteveNewcomb.jpg');
   background-size: cover;
   display: block;
   border-radius: 100%;
@@ -200,12 +201,13 @@ div[class^="jobcard"] {
   -moz-border-radius: 100%;
 }
 
-.img-founder-2 {
+.img-founder2 {
   display:block;
   float: left;
-  width: 100px;
-  height: 100px;
-  background-image: url('/images/assets/Mark_Lu.jpg');
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+  background-image: url('/images/assets/MarkLu.jpg');
   background-size: cover;
   display: block;
    border-radius: 100%;
@@ -213,7 +215,6 @@ div[class^="jobcard"] {
  -moz-border-radius: 100%;
 }
 
-
-.name-founder {
-  content: "Troy D";
+.media-heading {
+  font-weight: 800;
 }

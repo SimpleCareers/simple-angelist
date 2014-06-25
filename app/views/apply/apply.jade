@@ -1,17 +1,17 @@
 fa-view#applyView(fa-index="2")
   fa-modifier(fa-translate="getApplyPosition()")
     fa-modifier#handleMod(fa-origin="[0, 0]", fa-align="[0, 0]")
-      fa-surface.apply-menu.apply-layer(fa-pipe-to="applyPipe", fa-background-color="'rgba(0,0,0,0.1)'", fa-size="[320,64]")
+      fa-surface.apply-menu.apply-layer(fa-pipe-to="applyPipe", fa-background-color="#DD4F3C", fa-size="[320,64]")
     fa-modifier#bgrMod(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[0, 30]")
-      fa-surface.apply-menu.apply-layer(fa-pipe-to="applyPipe", fa-background-color="'#DD4F3C'", fa-size="[320,64]")
+      fa-surface.apply-menu.apply-layer(fa-pipe-to="applyPipe", fa-background-color="#DD4F3C", fa-size="[320,64]")
         fa-modifier(fa-origin="[0,0]", fa-align="[0,0]", fa-translate="[0,45/2]")
           fa-sequential-layout(fa-options="options.applyMenuList")
             fa-view(ng-repeat="menu in applymenus")
               fa-surface.apply-menu-item(fa-size="[320/3,true]")
                 | {{menu}}
+                h1 Hello World
     fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[0,64]", fa-size="[undefined,504]")
       fa-scroll-view#list-scroll-view(fa-start-index="0", fa-pipe-from="listPipe", fa-options="options.listScrollView")
-
 
 
 //
