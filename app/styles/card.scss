@@ -1,10 +1,15 @@
 $width: 300px;
-$detailcardwidth: 320px;
+$detailcardwidth: 95%;
 $heroheight: 200px;
 
 .hline{
   border: 1px solid #E1E1E1;
 }
+
+li {
+  list-style-image: url(/images/assets/oval2.png);
+}
+
 .card-desc{
   margin: 15px;
   font-size: 15px;
@@ -47,9 +52,10 @@ $heroheight: 200px;
   top:155px;
   z-index: 260;
   color: #fff;
+
   overflow: hidden;
-  
-  font-size: 18px;
+
+  font-size: 20px;
   line-height: 20px;
   white-space:nowrap;
   text-overflow: ellipsis;
@@ -58,12 +64,12 @@ $heroheight: 200px;
 .card-subtitle{
   position: absolute;
   left:95px;
-  top:180px;  
+  top:180px;
   z-index: 260;
   color: #fff;
   overflow: hidden;
-  
-  font-size: 11px;
+
+  font-size: 13px;
   line-height: 13px;
   white-space:nowrap;
   text-overflow: ellipsis;
@@ -145,6 +151,17 @@ div[class^="jobcard"] {
 }
 
 // Detail card
+.detail-card {
+  color: #5A5A5A;
+  margin-top: 5px;
+  height: auto;
+  width: $detailcardwidth;
+}
+.detail-card h4 {
+  color: #DD4F3C;
+  font-size: 14px;
+  text-align: center;
+}
 .detail-card-background{
   position: relative;
   background: #fff;
@@ -185,4 +202,71 @@ div[class^="jobcard"] {
   z-index: 240;
   @extend .card-detail;
   width: $detailcardwidth;
+}
+
+.detail-card-skillset{
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-company{
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-founder{
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-founder .media-heading {
+  color: #5A5A5A;
+  font-weight: strong;
+}
+
+.detail-card-product {
+  z-index: 220;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.detail-card-whyus {
+  z-index: 240;
+  @extend .card-desc;
+  width: $detailcardwidth;
+}
+
+.img-founder1 {
+  display:block;
+  float: left;
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+  background-image: url('/images/assets/SteveNewcomb.jpg');
+  background-size: cover;
+  display: block;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+}
+
+.img-founder2 {
+  display:block;
+  float: left;
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+  background-image: url('/images/assets/MarkLu.jpg');
+  background-size: cover;
+  display: block;
+   border-radius: 100%;
+ -webkit-border-radius: 100%;
+ -moz-border-radius: 100%;
+}
+
+.media-heading {
+  font-weight: 800;
 }
