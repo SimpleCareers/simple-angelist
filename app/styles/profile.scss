@@ -1,0 +1,40 @@
+.profile-card {
+  color: #FFF;
+}
+.profile-card h4 {
+  color: #fff;
+}
+.profile-background{
+  background: rgba(0,0,0,0.3);
+  position: center;
+}
+.profile-content {
+  font-family: 'Avenir LT Std 35 Light';
+  font-size: 15px;
+  color: #FFFFFF;
+  line-height: 20px;
+}
+.profile-logo {
+  background-image: url('/images/assets/logo.png');
+  background-size: cover;
+  width: 100px;
+  height: 39px;
+  display: block;
+  float: center;
+  margin-top: 67px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-img {
+  display:block;
+  float: left;
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+  background-image: url('/images/assets/SteveNewcomb.jpg');
+  background-size: cover;
+   border-radius: 100%;
+ -webkit-border-radius: 100%;
+ -moz-border-radius: 100%;
+}

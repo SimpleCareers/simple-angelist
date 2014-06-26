@@ -4,7 +4,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 @import "./font.scss";
-
+@import "./profile.scss";
 @import "./card.scss";
 
 /* Bitmap: */
@@ -15,7 +15,7 @@ $bg-color: #e1e1e1;
 
 body {
     margin: 0;
-    font-family: 'Source Sans Pro';
+    font-family: 'Avenir LT Std 35 Light';
     font-weight: 400;
 }
 
@@ -32,7 +32,7 @@ body {
     right: 0;
 }
 
-@mixin filter($filter) { 
+@mixin filter($filter) {
   -webkit-filter: $filter;
   -moz-filter: $filter;
   -ms-filter: $filter;
@@ -40,7 +40,7 @@ body {
   filter: $filter;
 }
 
-@mixin box-shadow($filter) { 
+@mixin box-shadow($filter) {
   -webkit-box-shadow: $filter;
   -moz-box-shadow: $filter;
   box-shadow: $filter;
@@ -165,7 +165,7 @@ body {
   color: #AFAFAF;
   line-height: 18px;
 }
-li.list-item { 
+li.list-item {
   list-style-type: none;
   position: relative;
 //  margin: 2px;
@@ -174,7 +174,7 @@ li.list-item {
   margin-top: 1px;
   margin-bottom: 1px;
 }
-li.list-item:before { 
+li.list-item:before {
   content: '';
   position: absolute;
 //  border-color: #009933;
@@ -235,7 +235,7 @@ li.list-item:before {
 }
 // Apply layer z-index
 .famous-group{
-  position: absolute;  
+  position: absolute;
   z-index: 250;
 }
 .apply-layer{
@@ -287,7 +287,7 @@ li.list-item:before {
   @extend .title;
 }
 .paper-subtitle{
-  z-index: 270 !important;  
+  z-index: 270 !important;
   @extend .subtitle;
 }
 .back-cover{
@@ -304,4 +304,3 @@ div[class^="jobcard"] {
 .job-screen{
   border-radius: 10px 10px 0px 0px;
 }
-
