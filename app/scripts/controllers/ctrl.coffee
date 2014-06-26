@@ -1,7 +1,6 @@
 'use strict'
 
 class Ctrl
-  @$inject: ['$scope']    
   constructor: (@scope) ->
     for k in _.functions @
       @scope[k] = @[k] if k!="constructor"
@@ -18,5 +17,13 @@ class Ctrl
     @Easing = @famous["famous/transitions/Easing"]
     @TweenTransition = @famous["famous/transitions/TweenTransition"]
     @TweenTransition.registerCurve('inSine', @Easing.inSine)
+    @GenericSync.register
+      mouse : @MouseSync
+      touch : @TouchSync
+      rotate: @RotateSync
+      pinch : @PinchSync
+  pass:=>
+    console.log "Not Yet Implemented"
+
 
 module.exports = Ctrl

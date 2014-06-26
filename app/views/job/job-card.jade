@@ -1,19 +1,36 @@
-fa-modifier(id="{{'swipeMod'+$index}}",fa-translate="getPosition($index)")
-  fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[9,64]")
-    fa-surface(class="{{'jobcard'+$index}}", fa-pipe-to="swipePipe", fa-size="[300,true]")
-      .card-background
-        img.card-logo(src="/images/assets/logosq.png")
-        .card-title-grad
-        .card-title
-          | Engineer
-        .card-subtitle
-          | Famo.us
-        img.card-hero(src="/images/assets/hero.png")
-        .card-desc-wrap
-          .card-desc
-            | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
-          .hline
-          .card-detail
-            ul
-              li.list-item(ng-repeat="item in items track by $index")
-                | {{item}}
+fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa-size="[300,430]")
+  .card-background
+    div
+      img.card-logo(ng-src="{{card.startup.thumb_url}}")
+    .card-title-grad
+    .card-title
+      | {{card.title}}
+    .card-subtitle
+      | {{card.startup.name}}
+      span(ng-if="card.location")
+        | , {{card.location}}
+    div.card-hero-wrapper
+      //- img.card-hero(ng-repeat="screenshot in card.startup.screenshots", ng-src="{{screenshot.thumb}}")
+      img.card-hero(ng-src="{{card.screenshot}}")
+      //- img.card-hero(ng-src="{{card.startup.logo_url}}")
+      //- img.card-hero(ng-src="{{card.startup.logo_url}}")
+      //- img.card-hero(ng-src="{{card.startup.logo_url}}")
+      //- img.card-hero(ng-src="{{card.startup.logo_url}}")
+    .card-desc-wrap
+      .card-desc
+        | {{card.description || card.startup.product_desc}}
+      .hline
+      .card-detail
+        ul
+          li.list-item
+            | {{card.startup.job_type}}
+          li.list-item
+            | {{card.startup.salary_min | number}} - {{card.startup.salary_max | number}}
+  .card-overlay-wrapper(ng-show="status=='pass'")
+    img(src="/images/assets/overlay-pass.png")
+  .card-overlay-wrapper(ng-show="status=='fav'")
+    img(src="/images/assets/overlay-fav.png")
+  //- .card-overlay-wrapper
+  //-   img(src="/images/assets/overlay-pass.png")
+  //- .card-overlay-wrapper
+  //-   img(src="/images/assets/overlay-fav.png")

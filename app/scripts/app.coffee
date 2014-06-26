@@ -15,7 +15,7 @@ angular
       $locationProvider.html5Mode(false);        
       RestangularProvider.setRestangularFields
         id: "_id"
-      RestangularProvider.setBaseUrl "/api/data/"
+      RestangularProvider.setBaseUrl "http://simplecareers-test.apigee.net/angel/"
         
       $urlRouterProvider.otherwise "/app"
     
@@ -39,5 +39,6 @@ require "./controllers/profile/profile.coffee"
 require "./controllers/apply/apply.coffee"
 require "./controllers/detail/detail.coffee"
 require "./controllers/job/job.coffee"
+require "./controllers/job/jobcard.coffee"
 
 angular.bootstrap(document, ['simplecareersApp']);

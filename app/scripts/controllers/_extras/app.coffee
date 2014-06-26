@@ -46,7 +46,6 @@ class AppCtrl extends Ctrl
     @scope.windowWidth = angular.element(window).width()
     @scope.windowHeight = angular.element(window).height()
     
-    
     GenericSync.register
       mouse : MouseSync
       touch : TouchSync
