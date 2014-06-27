@@ -1,17 +1,24 @@
 fa-view(fa-index="0" class="profile-card")
-  fa-image-surface(class="profile-background",fa-origin="[0.5, 0.5]", fa-align="[0.5, 0.5]",fa-translate="[0.5,0.5,0]",fa-pipe-to="swipePipe", fa-size="[true,auto]", fa-image-url="/images/assets/hero.png")
+  fa-modifier(fa-origin="[0.5,0]")
+    fa-image-surface(class="blur",fa-translate="[0,0,0]", fa-pipe-to="swipePipe", fa-size="[700,true]", fa-image-url="/images/assets/Troy.jpg")
   fa-surface(class="profile-content" ,fa-translate="[0,0,1]" )
     .profile-logo
     div.media
       img.profile-img
       div.media-body
         h4.name
-          |STEFAN BORSJE
+          |Troy Do
         p.bio
-          |Co-founder / CTO @karma Previously founded @PressDoc.com and @Shallibuy.it
+          |Founder @Spyke, @Hitch Lab • Worked at @Bank of America Merrill Lynch • Studied at @Ohio Wesleyan, @Berkeley
         p.skill
-          |San Francisco · Silicon Valley · Notable Founder · Notable Operator · Angel · Operations
+          |San Francisco · Sales · Product Manager · Angel · University of California, Berkeley · Ohio Wesleyan University
         p.signout
           |Signout
 
-  fa-surface(class="footer", fa-translate="[0,0,0]", fa-pipe-to="swipePipe", fa-size="[300,true]", class="red-bg")
+  fa-modifier(fa-align="[0,.85]")
+    fa-surface(class="profile-footer", fa-translate="[0,0,2]", fa-pipe-to="swipePipe", fa-size="[auto,64]")
+      .row
+        .col-xs-4.col-xs-offset-4
+          img.profile-icon(src="/images/assets/profile.png")
+        .col-xs-4
+          img.profile-nav(src="/images/assets/nav-arrow.png")

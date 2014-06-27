@@ -38,15 +38,15 @@
   src: url('/fonts/AvenirLTStd-Light.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Light.woff') format("woff"), url('/fonts/AvenirLTStd-Light.ttf') format("truetype"), url('/fonts/AvenirLTStd-Light.svg#a3894d49b0c62da6d619d8a85ab36753') format("svg");
   /* Legacy iOS */
   font-style: normal;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 
 @font-face {
   font-family: 'Avenir LT Std 65 Medium';
-  src: url('/fonts/AvenirLTStd-Medium.eot');
+  src: url('./fonts/AvenirLTStd-Medium.eot');
   /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Medium.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Medium.woff') format("woff"), url('/fonts/AvenirLTStd-Medium.ttf') format("truetype"), url('/fonts/AvenirLTStd-Medium.svg#ef669aafc9b550b465914779447af056') format("svg");
+  src: url('./fonts/AvenirLTStd-Medium.eot?#iefix') format("embedded-opentype"), url('./fonts/AvenirLTStd-Medium.woff') format("woff"), url('./fonts/AvenirLTStd-Medium.ttf') format("truetype"), url('./fonts/AvenirLTStd-Medium.svg#ef669aafc9b550b465914779447af056') format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: 400;
