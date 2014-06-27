@@ -24,12 +24,16 @@
   margin-right: auto;
 }
 
-
+.profile-background-blur{
+  @extend .blur;
+  z-index: 100;
+}
 .profile-content {
   font-family: 'Avenir LT Std 35 Light';
   font-size: 15px;
   color: #FFFFFF;
   line-height: 20px;
+  z-index: 180;
 }
 
 .name {
