@@ -4,7 +4,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 @import "./font.scss";
-
+@import "./profile.scss";
 @import "./card.scss";
 
 /* Bitmap: */
@@ -15,7 +15,7 @@ $bg-color: #e1e1e1;
 
 body {
     margin: 0;
-    font-family: 'Source Sans Pro';
+//    font-family: 'Avenir LT Std 35 Light';
     font-weight: 400;
 }
 
@@ -27,12 +27,18 @@ body {
     right: 0;
 }
 
-@mixin filter($filter) { 
+@mixin filter($filter) {
   -webkit-filter: $filter;
   -moz-filter: $filter;
   -ms-filter: $filter;
   -o-filter: $filter;
   filter: $filter;
+}
+
+@mixin box-shadow($filter) {
+  -webkit-box-shadow: $filter;
+  -moz-box-shadow: $filter;
+  box-shadow: $filter;
 }
 
 .blur{
