@@ -1,5 +1,5 @@
-fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[0, 0]")
-  fa-scroll-view(fa-start-index="0", fa-pipe-from="detailScrollPipe", fa-options="options.detailScrollView")
+fa-modifier
+  fa-scroll-view.detail-scroll-view(fa-start-index="0", fa-pipe-from="detailScrollPipe", fa-options="options.detailScrollView")
     fa-surface(fa-pipe-to="detailScrollPipe", fa-background-color="'white'", fa-size="[320,true]")
       img.detail-card-hero(src="/images/assets/hero.png")
       img.detail-card-logo(src="/images/assets/logosq.png")
@@ -67,3 +67,8 @@ fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[0, 0]")
         h4.detail-card-section-header WHY US?
         .detail-card-desc
           p. Famo.us is an an engineering centric company that is working on a complex front end engineering problem that requires only A+ engineers. We do not believe in hacking through code but rather we believe in elegant abstractions and well written code written correctly the first time. It is incredibly difficult to get into famo.us and only a very few engineers qualify through our interview process. However, once you are, you are among only the best.
+        .margin-bottom-100
+      
+  fa-modifier(fa-origin="[0.5,1]", fa-align="[0.5,1]", fa-translate="[0, -13.5, 1]")
+    fa-surface(fa-size="[true,true]")
+      .btn.action-button.apply-btn APPLY

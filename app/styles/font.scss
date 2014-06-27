@@ -1,30 +1,18 @@
 @font-face {
-  font-family: 'Avenir LT Std 65 Medium';
-  src: url('/fonts/AvenirLTStd-Black.eot');
-  /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Black.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Black.woff') format("woff"), url('/fonts/AvenirLTStd-Black.ttf') format("truetype"), url('/fonts/AvenirLTStd-Black.svg#2d55e36446b90be6f85f84e74f83cb6c') format("svg");
-  /* Legacy iOS */
-  font-style: normal;
-  font-weight: 400;
-}
-
-
-@font-face {
-  font-family: 'Avenir LT Std 45 Book';
-  src: url('/fonts/AvenirLTStd-Book.eot');
-  /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Book.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Book.woff') format("woff"), url('/fonts/AvenirLTStd-Book.ttf') format("truetype"), url('/fonts/AvenirLTStd-Book.svg#68ae522795537c9085762656931f5f55') format("svg");
-  /* Legacy iOS */
-  font-style: normal;
-  font-weight: 400;
-}
-
-
-@font-face {
-  font-family: 'Avenir LT Std 55 Roman';
+  font-family: 'AvenirLTStd-Heavy';
   src: url('/fonts/AvenirLTStd-Heavy.eot');
   /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Heavy.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Heavy.woff') format("woff"), url('/fonts/AvenirLTStd-Heavy.ttf') format("truetype"), url('/fonts/AvenirLTStd-Heavy.svg#a1eb5a5cfcec2ff7c30fe732daf3b2e8') format("svg");
+  src: url('/fonts/AvenirLTStd-Heavy.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Heavy.woff') format("woff"), url('/fonts/AvenirLTStd-Heavy.ttf') format("truetype"), url('/fonts/AvenirLTStd-Heavy.svg#2d55e36446b90be6f85f84e74f83cb6c') format("svg");
+  /* Legacy iOS */
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Medium';
+  src: url('/fonts/AvenirLTStd-Medium.eot');
+  /* IE9 Compat Modes */
+  src: url('/fonts/AvenirLTStd-Medium.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Medium.woff') format("woff"), url('/fonts/AvenirLTStd-Medium.ttf') format("truetype"), url('/fonts/AvenirLTStd-Medium.svg#2d55e36446b90be6f85f84e74f83cb6c') format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: 400;
@@ -32,43 +20,19 @@
 
 
 @font-face {
-  font-family: 'Avenir LT Std 35 Light';
+  font-family: 'AvenirLTStd-Light';
   src: url('/fonts/AvenirLTStd-Light.eot');
   /* IE9 Compat Modes */
   src: url('/fonts/AvenirLTStd-Light.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Light.woff') format("woff"), url('/fonts/AvenirLTStd-Light.ttf') format("truetype"), url('/fonts/AvenirLTStd-Light.svg#a3894d49b0c62da6d619d8a85ab36753') format("svg");
   /* Legacy iOS */
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 
 @font-face {
-  font-family: 'Avenir LT Std 65 Medium';
-  src: url('/fonts/AvenirLTStd-Medium.eot');
-  /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Medium.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Medium.woff') format("woff"), url('/fonts/AvenirLTStd-Medium.ttf') format("truetype"), url('/fonts/AvenirLTStd-Medium.svg#ef669aafc9b550b465914779447af056') format("svg");
-  /* Legacy iOS */
-  font-style: normal;
-  font-weight: 400;
-}
-
-
-@font-face {
-  font-family: 'Avenir LT Std 55 Roman';
-  src: url('/fonts/AvenirLTStd-Oblique.eot');
-  /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Oblique.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Oblique.woff') format("woff"), url('/fonts/AvenirLTStd-Oblique.ttf') format("truetype"), url('/fonts/AvenirLTStd-Oblique.svg#3940793a09c3eddee1217f9201c66bf9') format("svg");
-  /* Legacy iOS */
-  font-style: oblique;
-  font-weight: 400;
-}
-
-
-@font-face {
-  font-family: 'Avenir LT Std 55 Roman';
-  src: url('/fonts/AvenirLTStd-Roman.eot');
-  /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Roman.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Roman.woff') format("woff"), url('/fonts/AvenirLTStd-Roman.ttf') format("truetype"), url('/fonts/AvenirLTStd-Roman.svg#1297092b477b7e1dcddfcf3bbb416185') format("svg");
+  font-family: 'Brisa-Alternates';
+  src: url('/fonts/Brisa-Alternates.ttf') format("truetype");
   /* Legacy iOS */
   font-style: normal;
   font-weight: 400;

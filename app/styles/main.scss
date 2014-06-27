@@ -7,6 +7,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import "./profile.scss";
 @import "./card.scss";
 @import "./question.scss";
+@import "./tutorial.scss";
 
 /* Bitmap: */
 $primary-color: #ffffff;
@@ -16,8 +17,8 @@ $bg-color: #e1e1e1;
 
 body {
     margin: 0;
-//    font-family: 'Avenir LT Std 35 Light';
-    font-weight: 400;
+    font-family: 'AvenirLTStd-Light';
+    font-weight: 300;
 }
 
 .full-screen {

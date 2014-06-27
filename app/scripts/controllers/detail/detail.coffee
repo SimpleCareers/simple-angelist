@@ -14,5 +14,7 @@ class DetailCtrl extends Ctrl
         direction: 1
         speedLimit: 5
         margin: 10000
+      containerSurface:
+        size: [320,568]
 
 angular.module('simplecareersApp').controller('DetailCtrl', DetailCtrl)

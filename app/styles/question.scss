@@ -14,6 +14,16 @@
   border: 1px solid #E1E1E1;
   width: 250px;
   height: 255px;
+  textarea{
+    width:100%;
+    height:100%; 
+    box-sizing: border-box;         /* For IE and modern versions of Chrome */
+    -moz-box-sizing: border-box;    /* For Firefox                          */
+    -webkit-box-sizing: border-box; /* For Safari                           */
+    border: none;
+    font: 'AvenirLTStd-Light';
+    background: #FCFCFC;
+  }
 }
 
 .submit-btn{

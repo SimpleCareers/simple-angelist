@@ -1,11 +1,12 @@
 fa-view
-  fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]")
-    fa-image-surface.background-blur(fa-image-url="/images/assets/troy.jpg",fa-size="[320,undefined]")
+  fa-modifier
+    fa-image-surface.background-blur(fa-image-url="/images/assets/troy.jpg")
     fa-surface(fa-size="[320,undefined]")
       img.xbutton(src="/images/assets/xbutton.png")
       .question
         | What excites you about us? Why would you be a good fit?
       .outter-box
         .inner-box
+          textarea 
         .btn.action-button.submit-btn SUBMIT
       

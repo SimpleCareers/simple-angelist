@@ -1,0 +1,99 @@
+.headline-text{
+  font-family: 'AvenirLTStd-Light';
+  font-size: 18px;
+  color: #FFFFFF;
+  line-height: 21.5px;
+  /* With Simple, the job: */
+}
+.logo-text{
+  font-family: 'AvenirLTStd-Heavy';
+  font-size: 18px;
+  color: #FFFFFF;
+  line-height: 21.5px;
+  /* With Simple, the job: */
+}
+.instruction-text{
+  font-family: 'AvenirLTStd-Light';
+  font-size: 15px;
+  color: #FFFFFF;
+  line-height: 18px;
+  opacity: 0.4;
+}
+.action-text{
+  font-family: 'Brisa-Alternates';
+  font-size: 33px;
+  color: #FFFFFF;
+  line-height: 28px;
+  /* Start your applicati: */
+}
+.headline-block{
+//  position: absolute;
+  margin-top: 100px;
+  text-align: center;
+  width: 100%;
+}
+.application-block{
+  position: absolute;
+  right: 20px;
+  width: 200px;
+  bottom: 60px;
+  text-align: right;
+}
+.profile-block{
+  position: absolute;
+  text-align: left;
+  width: 100%;
+  left: 20px;
+  bottom: 35px;
+}
+.swipeleft-block{
+  position: absolute;
+  top: 237.5px;
+  text-align: left;
+  padding-left: 20px;
+  width: 100%;
+}
+.swiperight-block{
+  position: absolute;
+  top: 192.5px;
+  text-align: right;
+  padding-right: 20px;
+  width: 100%;
+}
+img.leftarrow{
+  width: 49px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+img.rightarrow{
+  width: 49px; 
+  margin-right: 20px; 
+  margin-top: 10px;
+}
+img.leftdownarrow{
+  width: 28px;
+  height: 37.5px;
+  margin-left: 47.5px; 
+  margin-top: 10px; 
+}
+img.rightdownarrow{
+  width: 45px; 
+  height: 80px; 
+  margin-right: 44px; 
+  margin-top: 10px; 
+}
+img.circle{
+  position: absolute;
+  width: 42px;
+  height: 42px;
+}
+img.circleleft{
+  left: 17px;
+  bottom: 17px;
+  @extend img.circle;
+}
+img.circleright{
+  right: 17px;
+  bottom: 17px;
+  @extend img.circle;
+}
