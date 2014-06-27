@@ -1,5 +1,5 @@
 $width: 300px;
-$detailcardwidth: 95%;
+$detailcardwidth: 320px;
 $heroheight: 200px;
 
 .hline{
@@ -9,8 +9,6 @@ $heroheight: 200px;
 li.list-item { 
   list-style-type: none;
   position: relative;
-//  margin: 2px;
-//  padding: 10px;
   padding-left: 25px;
   margin-top: 1px;
   margin-bottom: 1px;
@@ -18,23 +16,12 @@ li.list-item {
 li.list-item:before { 
   content: '';
   position: absolute;
-//  border-color: #009933;
-//  border-style: solid;
-//  border-width: 0 0.3em 0.25em 0;
-//  height: 1em;
   top: 5px;
   left: 5px;
-//  margin-top: -1em;
-//  transform: rotate(45deg);
-//  width: 0.5em;
-//  content: ' ';
   background: url(/images/assets/oval2.png) no-repeat left top;
   background-size: 14px;
-//  background-position: -10px 0px;
   height: 28px;
   width: 28px;
-//  position: absolute;
-//  margin-left: 20px;
 }
 
 .card-desc{
@@ -132,13 +119,11 @@ li.list-item:before {
   border-bottom: 1px solid #E1E1E1;
   height: 415px;
 }
-.card-detail{
-  /* 34 applicants: */
+@mixin card-detail($ncol) {
   margin: 14px;
-//  width: $width;
-  -webkit-column-count: 2; /* Chrome, Safari, Opera */
-  -moz-column-count: 2; /* Firefox */
-  column-count: 2;
+  -webkit-column-count: $ncol; /* Chrome, Safari, Opera */
+  -moz-column-count: $ncol; /* Firefox */
+  column-count: $ncol;
   height: 50px;
   overflow: hidden;
   font-size: 14px;
@@ -148,6 +133,13 @@ li.list-item:before {
     padding-left: 0;
   }
 }
+.card-detail{
+  @include card-detail(1)
+}
+.card-detail-2{
+  @include card-detail(2)
+}
+
 .card-tutorial-btn{
   z-index: 280;
 }
@@ -179,16 +171,12 @@ div[class^="jobcard"] {
   z-index: 177;
 }
 
-// Detail card
-.detail-card {
-  color: #5A5A5A;
-  margin-top: 5px;
-  width: $detailcardwidth;
-}
-.detail-card h4 {
+h4.detail-card-section-header {
   color: #DD4F3C;
   font-size: 14px;
   text-align: center;
+  margin-top:15px;
+  margin-bottom:15px;
 }
 .detail-card-background{
   position: relative;
@@ -197,57 +185,53 @@ div[class^="jobcard"] {
   height: 100%;
   border: 1px solid #E1E1E1;
 }
-.detail-card-logo{
-  z-index: 270;
-  @extend .card-logo;
+.detail-card-desc-wrapper{
+  padding-top:240px;
 }
 .detail-card-hero{
   z-index: 250;
+  border-radius: 0;  
   @extend .card-hero;
   width: $detailcardwidth;
+  height: 240px;
+}
+.detail-card-logo{
+  z-index: 270;
+  @extend .card-logo;
+  top:190px;
 }
 .detail-card-title-grad{
   z-index: 260;
   @extend .card-title-grad;
   width: $detailcardwidth;
+  top: 150px;
 }
 .detail-card-title{
   z-index: 270;
   @extend .card-title;
   width: $detailcardwidth;
+  top:195px;
 }
 .detail-card-subtitle{
   z-index: 270;
   @extend .card-subtitle;
   width: $detailcardwidth;
+  top:220px;
 }
 .detail-card-desc{
   z-index: 240;
   @extend .card-desc;
   height: auto;
 }
+.detail-card-detail-2{
+  z-index: 240;
+  @extend .card-detail-2;
+  height: auto;
+}
 .detail-card-detail{
   z-index: 240;
   @extend .card-detail;
-  width: $detailcardwidth;
-}
-
-.detail-card-skillset{
-  z-index: 240;
-  @extend .card-desc;
-  width: $detailcardwidth;
-}
-
-.detail-card-company{
-  z-index: 240;
-  @extend .card-desc;
-  width: $detailcardwidth;
-}
-
-.detail-card-founder{
-  z-index: 240;
-  @extend .card-desc;
-  width: $detailcardwidth;
+  height: auto;
 }
 
 .detail-card-founder .media-heading {
@@ -255,46 +239,19 @@ div[class^="jobcard"] {
   font-weight: strong;
 }
 
-.detail-card-product {
-  z-index: 220;
-  @extend .card-desc;
-  width: $detailcardwidth;
-}
-
-.detail-card-whyus {
-  z-index: 240;
-  @extend .card-desc;
-  width: $detailcardwidth;
-}
-
-.img-founder1 {
+img.img-founder {
   display:block;
   float: left;
-  margin: 10px;
+  margin: 5px 15px 5px 0;
   width: 80px;
   height: 80px;
-  background-image: url('/images/assets/SteveNewcomb.jpg');
-  background-size: cover;
   display: block;
   border-radius: 100%;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
 }
 
-.img-founder2 {
-  display:block;
-  float: left;
-  margin: 10px;
-  width: 80px;
-  height: 80px;
-  background-image: url('/images/assets/MarkLu.jpg');
-  background-size: cover;
-  display: block;
-   border-radius: 100%;
- -webkit-border-radius: 100%;
- -moz-border-radius: 100%;
-}
-
 .media-heading {
   font-weight: 800;
 }
+

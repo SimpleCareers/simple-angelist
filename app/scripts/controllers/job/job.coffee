@@ -35,7 +35,7 @@ class JobCtrl extends Ctrl
     @process()
 
   loadPage: (cb)=>
-    p = @http.get "#{@baseUrl}jobs?page=#{@page++}"
+    p = @http.get "#{@baseUrl}/jobs?page=#{@page++}"
     # https://api.angel.co/1/tags/14781/jobs
     p.error (err)=>
     p.success (data)=>
@@ -54,8 +54,6 @@ class JobCtrl extends Ctrl
   constructor: (@scope, @stateParams, @state, @timeout, @famous, @http) ->
     super @scope
 
-      
-    @baseUrl = "http://simplecareers-test.apigee.net/angel/"
     @index = 0
     @page = 0
     @done = false

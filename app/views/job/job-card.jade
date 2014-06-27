@@ -6,9 +6,9 @@ fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa
     .card-title
       | {{card.title}}
     .card-subtitle
-      | {{card.startup.name}}
+      | {{card.startup.name}} 
       span(ng-if="card.location")
-        | , {{card.location}}
+        | • {{card.location}}
     div.card-hero-wrapper
       //- img.card-hero(ng-repeat="screenshot in card.startup.screenshots", ng-src="{{screenshot.thumb}}")
       img.card-hero(ng-src="{{card.screenshot}}")
@@ -25,9 +25,9 @@ fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa
           li.list-item
             | {{card.job_type.capitalize()}}
           li.list-item
-            | {{(card.salary_min/1000|| 0) | number}}K - {{(card.salary_max/1000|| 0) | number}}K
+            | ${{(card.salary_min/1000|| 0) | number}}K - ${{(card.salary_max/1000|| 0) | number}}K
           li.list-item
-            | {{card.startup.company_size}} employees
+            | {{card.startup.company_size}} empl.
           li.list-item
             | {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
   .card-overlay-wrapper(ng-show="status=='pass'")

@@ -7,11 +7,10 @@ class DetailCtrl extends Ctrl
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous) ->
     super @scope
     @scope.cards = ["1","2","3","4"]
-    @scope.enginePipe = new @EventHandler()
-    @Engine.pipe(@scope.enginePipe)
+    @scope.detailScrollPipe = new @EventHandler()
     @scope.options =
-      mainScrollView:
-        paginated: true
+      detailScrollView:
+        paginated: false
         direction: 1
         speedLimit: 5
         margin: 10000

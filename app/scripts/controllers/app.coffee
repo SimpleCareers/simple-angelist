@@ -20,7 +20,14 @@ class AppCtrl extends Ctrl
     window.sessionToken = sessionToken = data.sessionToken
     @timeout.cancel(@checkpromise)
     @popup?.close()
-    @http.defaults.headers.common.Authorization = 'Basic #{accessToken}'
+    @http.defaults.headers.common.Authorization = "Bearer #{accessToken}"
+    e = =>
+      p = @http.get "#{@baseUrl}/me"
+      # https://api.angel.co/1/tags/14781/jobs
+      p.success (data)=>
+        console.log data
+      p.error (err)=>
+    e()
     # @Restangular.setDefaultHeaders
     #   "Authorization": "Bearer #{accessToken}"
     window.removeEventListener "message", @receiveMessage
