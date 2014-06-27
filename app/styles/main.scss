@@ -6,6 +6,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 @import "./font.scss";
 @import "./profile.scss";
 @import "./card.scss";
+@import "./question.scss";
 
 /* Bitmap: */
 $primary-color: #ffffff;
@@ -45,4 +46,18 @@ body {
   height: 100%;
   z-index: 100;
   @include filter(blur(25px) brightness(0.3));
+}
+
+.action-button{
+  border-radius: 40px;
+  background-color: #4CC68A;
+  background-image: -o-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
+  background-image: -moz-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
+  background-image: -ms-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
+  background-image: linear-gradient(-176deg, #4CC68A 0%, #30B071 100%);
+  font-family: 'AvenirLTStd-Medium';
+  font-size: 15px;
+  color: #FFFFFF;
+  line-height: 40px;
+  text-transform: uppercase;
 }

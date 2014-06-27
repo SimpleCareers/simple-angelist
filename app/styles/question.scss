@@ -1,0 +1,48 @@
+.outter-box{
+  border-radius: 4px;
+  background: #FFFFFF;
+  border: 1px solid #E1E1E1;
+  width: 290px;
+  height: 365px;
+  position: relative;
+  margin: auto;
+}
+
+.inner-box{
+  margin: 22.5px 20px 87.5px 20px;
+  background: #FCFCFC;
+  border: 1px solid #E1E1E1;
+  width: 250px;
+  height: 255px;
+}
+
+.submit-btn{
+  width: 250px;
+  bottom: 17.5px;
+  margin: 0 20px;
+  position: absolute;
+}
+
+.question{
+  font-family: 'AvenirLTStd-Light';
+  font-size: 18px;
+  color: #FFFFFF;
+  line-height: 22px;
+  margin-top: 66px;
+  margin-bottom: 21px;
+  margin-left: 17.5px;
+  margin-right: 17.5px;
+}
+
+.background-blur{
+  @extend .blur;
+  z-index: -1 !important;
+}
+
+img.xbutton{
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 25px;
+  height: 25px;
+}
