@@ -1,8 +1,5 @@
-fa-view#menuView(fa-index="0")
-  fa-modifier(fa-translate="getMenuPosition()")
-    fa-modifier#backgroundMod(fa-origin="[.5, .5]")
-      fa-surface.menu-background(
-        fa-background-color="'#000030'",
-        fa-pipe-to="menuPipe",
-        fa-size="[undefined, undefined]")
-          fa-image-surface.help(fa-image-url="/images/assets/help.png", fa-size="[40,40]", fa-click="clickHelp()")
+fa-view
+  fa-modifier
+    fa-modifier(fa-origin="[.5, .5]", fa-align="[.5,.5]")
+      fa-surface(fa-size="[undefined,undefined]")
+        div(ng-click="login()",class="btn btn-primary") Login

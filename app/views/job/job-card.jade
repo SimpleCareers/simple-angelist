@@ -23,9 +23,13 @@ fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa
       .card-detail
         ul
           li.list-item
-            | {{card.startup.job_type}}
+            | {{card.job_type.capitalize()}}
           li.list-item
-            | {{card.startup.salary_min | number}} - {{card.startup.salary_max | number}}
+            | {{(card.salary_min/1000|| 0) | number}}K - {{(card.salary_max/1000|| 0) | number}}K
+          li.list-item
+            | {{card.startup.company_size}} employees
+          li.list-item
+            | {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
   .card-overlay-wrapper(ng-show="status=='pass'")
     img(src="/images/assets/overlay-pass.png")
   .card-overlay-wrapper(ng-show="status=='fav'")

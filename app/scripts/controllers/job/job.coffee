@@ -14,11 +14,11 @@ class JobCtrl extends Ctrl
       card.location = startup.locations?[0]?.display_name
       card.screenshot = startup.screenshots?[0]?.thumb or startup.logo_url
       if card.description and card.startup.product_desc and startup.screenshots?[0]?.thumb
-        if not @scope.currentImage
-          @scope.currentImage = startup.screenshots[0]?.thumb
         cb? card
       else
         cb? null
+    p.error =>
+      cb? null
   process: =>
     @dataBuffer.splice(0,4).forEach (card)=>
       card.index = @index++
@@ -64,10 +64,10 @@ class JobCtrl extends Ctrl
     # @scope.cards = []
     # @loadMore()
     
-    @scope.cards = data
-    for card in @scope.cards
+    @scope.cards = []
+    data.forEach (card)=>
       card.index = @index++
-    
+      @scope.cards.push card
     
     # p = @http.get "#{@baseUrl}jobs?page=10"
     # # https://api.angel.co/1/tags/14781/jobs
@@ -83,6 +83,8 @@ class JobCtrl extends Ctrl
     @scope.$on "next", =>
       @scope.curIdx++
       @scope.cards.shift()
+      if @scope.cards[0]
+        @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
       if @scope.cards.length < 4
         @loadMore()
     

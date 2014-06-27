@@ -18,14 +18,16 @@ gulp.task('templates', function() {
   gulp.src('app/*.jade')
     .pipe(plumber())
     .pipe(jade({
-      locals: YOUR_LOCALS
+      locals: YOUR_LOCALS,
+      pretty: true
     }))
     .pipe(gulp.dest('app/'))
   
   gulp.src('app/views/**/*.jade')
     .pipe(plumber())
     .pipe(jade({
-      locals: YOUR_LOCALS
+      locals: YOUR_LOCALS,
+      pretty: true
     }))
     .pipe(gulp.dest('app/views/'))
 });
@@ -58,6 +60,7 @@ gulp.task('scripts', ['coffee'], function () {
         .pipe(plumber())
         .pipe($.jshint())
         .pipe($.jshint.reporter(require('jshint-stylish')))
+        .pipe(gulp.dest('dist/scripts'))
         .pipe($.size());
 });
 
@@ -109,7 +112,7 @@ gulp.task('views', function () {
 });
 
 gulp.task('extras', function () {
-    return gulp.src(['app/*.*', '!app/*.html'], { dot: true })
+    return gulp.src(['app/*.*', '!app/*.html', '!app/*.jade'], { dot: true })
         .pipe(plumber())
         .pipe(gulp.dest('dist'));
 });
@@ -119,8 +122,14 @@ gulp.task('clean', function () {
         .pipe(plumber())
         .pipe($.clean());
 });
+gulp.task('libs', function () {
+    return gulp.src(['app/libs/**/*.*'])
+        .pipe(plumber())
+        .pipe(gulp.dest('dist/libs'))
+        .pipe($.size());
+});
 
-gulp.task('build', ['html', 'images', 'fonts', 'views', 'extras']);
+gulp.task('build', ['html', 'libs', 'images', 'fonts', 'views', 'extras']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');

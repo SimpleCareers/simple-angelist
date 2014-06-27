@@ -1,5 +1,7 @@
 'use strict'
 
+require "./extensions/capitalize.coffee"
+
 angular
   .module('simplecareersApp', [
     'ui.router',
