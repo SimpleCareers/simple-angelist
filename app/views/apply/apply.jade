@@ -10,63 +10,15 @@ fa-view
     fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[0,64]", fa-size="[undefined,504]")
       fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipe", fa-options="options.listScrollView")
         fa-view(fa-size="[320.5,175/2]", ng-repeat="menu in rows track by $index")
-          fa-surface(class="apply-content" ,fa-translate="[0,0,0]" fa-size="[undefined,true]")
+          fa-surface(class="apply-content", fa-pipe-to="listPipe", fa-translate="[0,0,0]" fa-size="[undefined,true]")
             div.media
               img.company-img
               div.media-body
                 h4.title
-                  |Front-end Engineer
+                  | Front-end Engineer
                 p.subtitle
-                  |Abacus • New York City
+                  | Abacus • New York City
                 p.description
-                  |Full Time • $80K - 120K • 0.0% - 2.0%
+                  | Full Time • $80K - 120K • 0.0% - 2.0%
             .hline
-            div.media
-              img.company-img
-              div.media-body
-                h4.title
-                  |Front-end Engineer
-                p.subtitle
-                  |Abacus • New York City
-                p.description
-                  |Full Time • $80K - 120K • 0.0% - 2.0%
-            .hline
-            div.media
-              img.company-img
-              div.media-body
-                h4.title
-                  |Front-end Engineer
-                p.subtitle
-                  |Abacus • New York City
-                p.description
-                  |Full Time • $80K - 120K • 0.0% - 2.0%
-            .hline
-            div.media
-              img.company-img
-              div.media-body
-                h4.title
-                  |Front-end Engineer
-                p.subtitle
-                  |Abacus • New York City
-                p.description
-                  |Full Time • $80K - 120K • 0.0% - 2.0%
-            .hline
-
-
-//
-          fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]")
-            fa-surface(fa-background-color="white", fa-size="[undefined,175/2]", fa-pipe-to="listPipe")
-          fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[25/2,25/2]")
-            fa-image-surface.list-item-thumb(fa-image-url="/images/assets/hero.png", fa-size="[55,55]", fa-pipe-to="listPipe")
-          fa-surface.apply-layer(fa-pipe-to="listPipe")
-            fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[78,16]")
-              fa-surface.list-h1.apply-layer(fa-size="[150,20.5]")
-                | {{menu}}
-            fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[78,36]")
-              fa-surface.list-h2.apply-layer(fa-size="[170.5,15.5]")
-                | {{menu}}
-            fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]", fa-translate="[78,53.5]")
-              fa-surface.list-h2.apply-layer(fa-size="[220.5,15.5]")
-                | {{menu}}
-          fa-modifier(fa-origin="[0, 0]", fa-align="[0, 0]")
-            fa-image-surface(fa-image-url="/images/assets/hline.png", fa-pipe-to="listPipe", fa-size="[undefined,true]")
+            .margin-bottom-100(ng-if="$index==rows.length-1")

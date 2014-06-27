@@ -1,5 +1,6 @@
 fa-view
   fa-modifier
-    fa-modifier(fa-origin="[.5, .5]", fa-align="[.5,.5]")
-      fa-surface(fa-size="[undefined,undefined]")
-        div(ng-click="login()",class="btn btn-primary") Login
+    fa-surface(fa-size="[320,undefined]")
+      .login-btn-wrap
+        h4(style="text-align:center;top:30%;position:absolute") Welcome to Simple
+        div.btn.action-button.login-btn(ng-click="login()") Login with AngelList
