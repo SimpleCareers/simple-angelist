@@ -95,6 +95,15 @@ gulp.task('images', function () {
         .pipe($.size());
 });
 
+gulp.task('libfonts', function () {
+    return gulp.src('app/fonts/**/*')
+        .pipe(plumber())
+        .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+        .pipe($.flatten())
+        .pipe(gulp.dest('dist/fonts'))
+        .pipe($.size());
+});
+
 gulp.task('fonts', function () {
     return $.bowerFiles()
         .pipe(plumber())
@@ -129,7 +138,7 @@ gulp.task('libs', function () {
         .pipe($.size());
 });
 
-gulp.task('build', ['html', 'libs', 'images', 'fonts', 'views', 'extras']);
+gulp.task('build', ['html', 'libs', 'images', 'libfonts', 'fonts', 'views', 'extras']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
