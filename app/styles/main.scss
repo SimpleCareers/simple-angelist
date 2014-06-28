@@ -1,15 +1,8 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+//$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 
+@import "./bootstrap.css";
 // bower:scss
-@import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
-@import "./font.scss";
-@import "./profile.scss";
-@import "./card.scss";
-@import "./apply.scss";
-@import "./question.scss";
-@import "./tutorial.scss";
-@import "./login.scss";
 
 /* Bitmap: */
 $primary-color: #ffffff;
@@ -51,6 +44,55 @@ body {
   @include filter(blur(25px) brightness(0.3));
 }
 
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus {
+  color: #333;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .65;
+}
+
 .action-button{
   border-radius: 40px;
   background-color: #4CC68A;
@@ -64,3 +106,63 @@ body {
   line-height: 40px;
   text-transform: uppercase;
 }
+//- 000-100   login
+//- 101-200   profile
+//- 201-300   job
+//- 301-400   tutorial
+//- 401-500   apply: like | applied | approved
+//- 501-600   menu
+//- 601-700   detail
+//- 701-800   question
+.login-surface{
+  z-index: 50;
+}
+.profile-surface{
+  z-index: 150;
+}
+.job-surface{
+  z-index: 250;
+}
+.tutorial-surface{
+  z-index: 350;
+}
+.apply-surface{
+  z-index: 450;
+}
+.menu-surface{
+  z-index: 550;
+}
+.detail-surface{
+  z-index: 650;
+}
+.question-surface{
+  z-index: 750;
+}
+
+.jobcard0{
+   z-index: 255;
+}
+.jobcard1{
+   z-index: 254;
+}
+.jobcard2{
+   z-index: 253;
+}
+.jobcard3{
+   z-index: 252;
+}
+div[class^="jobcard"] {
+   z-index: 251;
+}
+
+.no-wrap-text {
+  overflow: hidden;
+}
+
+@import "./font.scss";
+@import "./profile.scss";
+@import "./card.scss";
+@import "./apply.scss";
+@import "./question.scss";
+@import "./tutorial.scss";
+@import "./login.scss";

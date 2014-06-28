@@ -7,10 +7,10 @@
 .company-img{
   display:block;
   float: left;
-  margin: 10px;
+  margin: 0 10px;
   width: 60px;
   height: 60px;
-  background-image: url('/images/assets/Abacus.png');
+  background-image: url('/images/assets/abacus.png');
   background-size: cover;
   border-radius: 100%;
   -webkit-border-radius: 100%;
@@ -19,12 +19,17 @@
 .apply-content h4 {
   font-family: 'AvenirLTStd-Medium';
   color: #5A5A5A;
-  line-height: 16px;
-  font-size: 20px;
+  line-height: 20.5px;
+  font-size: 17px;
+  margin: 0;
 }
 .apply-content p {
   font-family: 'AvenirLTStd-Light';
   color: #A8A8A8;
-  line-height: 15px;
+  line-height: 15.5px;
   font-size: 13px;
+  margin: 5px;
+}
+.apply-media{
+  margin: 20px 0;
 }

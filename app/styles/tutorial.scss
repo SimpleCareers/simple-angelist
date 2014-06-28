@@ -62,11 +62,13 @@
 }
 img.leftarrow{
   width: 49px;
+  height: 4.5px;
   margin-left: 20px;
   margin-top: 10px;
 }
 img.rightarrow{
   width: 49px; 
+  height: 4.5px;
   margin-right: 20px; 
   margin-top: 10px;
 }
@@ -96,4 +98,7 @@ img.circleright{
   right: 17px;
   bottom: 17px;
   @extend img.circle;
+}
+.tutorialscreen{
+  // z-index: 299;
 }

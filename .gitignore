@@ -6,7 +6,6 @@ app/bower_components
 test/bower_components
 app/views/**/*.html
 app/views/*.html
-app/index.html
 app/scripts/**/*.js
 app/scripts/*.js
 .DS_Store

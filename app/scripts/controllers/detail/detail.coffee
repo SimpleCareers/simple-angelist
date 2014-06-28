@@ -16,5 +16,8 @@ class DetailCtrl extends Ctrl
         margin: 10000
       containerSurface:
         size: [320,568]
+        properties:
+          overflow: "hidden"
+          "z-index": 650
 
 angular.module('simplecareersApp').controller('DetailCtrl', DetailCtrl)

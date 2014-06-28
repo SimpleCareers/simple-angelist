@@ -1,19 +1,27 @@
+//- z-index 
+//- 000-100   login
+//- 101-200   profile
+//- 201-300   job
+//- 301-400   tutorial
+//- 401-500   apply: like | applied | approved
+//- 601-700   menu
+//- 501-600   detail
+//- 601-700   question
 fa-app.full-screen(fa-perspective="500")
   //- fa-modifier(fa-translate="[0,0,-60]", fa-origin="[.5, .5]", fa-align="[.5, .5]")
   //-   fa-surface.screen-background(fa-background-color="'rgba(0,0,0,0.5)'")
   fa-modifier(fa-origin="[.5, .5]", fa-size="[320, 568]")
-    fa-scroll-view(fa-start-index="0", fa-pipe-from="enginePipe", fa-options="options.mainScrollView")
-      fa-modifier(fa-translate="[0,0,0]")
-        div(ng-include="'./views/job/job.html'", ng-controller="JobCtrl")
-      fa-modifier(fa-translate="[0,0,0]")
-        div(ng-include="'./views/job/tutorial.html'", ng-controller="TutorialCtrl")
-      fa-modifier(fa-translate="[0,0,0]")
-        div(ng-include="'./views/detail/question.html'", ng-controller="QuestionCtrl")
-      fa-modifier(fa-translate="[0,0,0]")
-        div(ng-include="'./views/login/login.html'", ng-controller="LoginCtrl")
-      fa-modifier(fa-translate="[0,0,0]")
-        div(ng-include="'./views/profile/profile.html'", ng-controller="ProfileCtrl")
-      fa-modifier(fa-translate="[0,0,0]")
-        div(ng-include="'./views/apply/apply.html'", ng-controller="ApplyCtrl")
-      fa-modifier(fa-translate="[0,0,0]")
-        div(ng-include="'./views/detail/detail.html'", ng-controller="DetailCtrl")
+    fa-modifier(fa-translate="getPagePosition(0)")
+      div(ng-include="'./views/login/login.html'", ng-controller="LoginCtrl")
+    fa-modifier(fa-translate="getPagePosition(1)")
+      div(ng-include="'./views/profile/profile.html'", ng-controller="ProfileCtrl")
+    fa-modifier(fa-translate="getPagePosition(2)")
+      div(ng-include="'./views/job/job.html'", ng-controller="JobCtrl")
+    fa-modifier(fa-translate="getPagePosition(3)")
+      div(ng-include="'./views/apply/apply.html'", ng-controller="ApplyCtrl")
+    fa-modifier(fa-translate="getPagePosition(4)")
+      div(ng-include="'./views/detail/detail.html'", ng-controller="DetailCtrl")
+    fa-modifier(fa-translate="getPagePosition(5)")
+      div(ng-include="'./views/detail/question.html'", ng-controller="QuestionCtrl")
+    //- fa-modifier(fa-translate="[0,0,0]")
+    //-   div(ng-include="'./views/menu/menu.html'")

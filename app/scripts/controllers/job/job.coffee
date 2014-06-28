@@ -53,7 +53,10 @@ class JobCtrl extends Ctrl
 
   constructor: (@scope, @stateParams, @state, @timeout, @famous, @http) ->
     super @scope
-
+    @scope.tutorialPipe = new @EventHandler()
+    sync = new @GenericSync ["mouse","touch"]
+    @scope.tutorialPipe.pipe sync
+    
     @index = 0
     @page = 0
     @done = false
@@ -155,9 +158,18 @@ class JobCtrl extends Ctrl
   #       @scope.status = "fav"
   #     else
   #       @scope.status = "nochange"
-  
-  clickHelp: =>
-    @pass()
+    @scope.scrollPipe = @EventHandler()
+    @tutorialTimeline = new @Transitionable(0)
+  scrollYPosition: =>
+    return @tutorialTimeline.get()
+  closeTutorial: =>
+    @tutorialTimeline.set 0, duration: 1000
+    console.log "close"
+  openTutorial: =>
+    @tutorialTimeline.set 1, duration: 1000
+    console.log "open"
+    
+
   # getRotation: (idx)=>
   #   if idx != 0
   #     return [0,0,0]

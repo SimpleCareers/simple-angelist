@@ -11,9 +11,56 @@ class AppCtrl extends Ctrl
     @scope.options =
       mainScrollView:
         paginated: true
-        direction: 1
+        direction: 0
         speedLimit: 5
         margin: 10000
+    sync = new @GenericSync ['mouse', 'touch']
+    @scope.enginePipe.pipe sync
+    sync.on "start", (e)=>
+    sync.on "end", (e)=>
+      console.log e.velocity
+      vx = e.velocity[0]
+      if vx > 0.05
+        @prevPage()
+      else if vx < -0.05
+        @nextPage()
+    sync.on "update", (e)=>
+
+    @currentPage = 0
+    @numPages = 5
+    @pages = []
+    for i in [0..@numPages]
+      @pages.push 
+        pos: new @Transitionable [320*i,0,0]
+  prevPage: =>
+    if @currentPage<=0
+      return
+    i=0
+    while @currentPage+i<@numPages
+      nextPos = @pages[@currentPage+i].pos.get()
+      @pages[@currentPage+i].pos.set [nextPos[0]+320,nextPos[1],nextPos[2]], duration: 300, =>
+      i++
+    @currentPage--
+    i=0
+    while @currentPage-i>=0
+      nextPos = @pages[@currentPage-i].pos.get()
+      @pages[@currentPage-i].pos.set [nextPos[0],nextPos[1],nextPos[2]+100], duration: 300, =>
+      i++
+  nextPage: =>
+    if @currentPage>=@numPages-1
+      return
+    i=0
+    while @currentPage-i>=0
+      nextPos = @pages[@currentPage-i].pos.get()
+      @pages[@currentPage-i].pos.set [nextPos[0],nextPos[1],nextPos[2]-100], duration: 300, =>
+      i++
+    @currentPage++
+    i=0
+    while @currentPage+i<@numPages
+      nextPos = @pages[@currentPage+i].pos.get()
+      @pages[@currentPage+i].pos.set [nextPos[0]-320,nextPos[1],nextPos[2]], duration: 300, =>
+      i++
+    
   receiveMessage: (event) =>
     data = JSON.parse(event.data)
     window.accessToken = accessToken = data.accessToken
@@ -41,4 +88,7 @@ class AppCtrl extends Ctrl
     @checkpromise = @timeout @checkToken, 1000
     window.addEventListener "message", @receiveMessage, false
     return
+  getPagePosition: (i)=>
+    return @pages[i].pos.get();
+
 angular.module('simplecareersApp').controller('AppCtrl', AppCtrl)

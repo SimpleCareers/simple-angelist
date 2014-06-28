@@ -1,6 +1,14 @@
-fa-view
+fa-container-surface(fa-options="options.containerSurface")
   fa-modifier
-    fa-surface(fa-size="[320,undefined]")
-      .login-btn-wrap
-        h4(style="text-align:center;top:30%;position:absolute") Welcome to Simple
-        div.btn.action-button.login-btn(ng-click="login()") Login with AngelList
+    fa-surface(fa-pipe-to="loginPipe",fa-size="[undefined,undefined]",)
+      img.login-background-blur(src="/images/assets/loginbackground.png")
+      div.login-logo-wrapper
+        img.login-logo(src="/images/assets/logo.png")
+        div.login-text Minimize your job search’s effort
+      div.login-btn-wrapper
+        div.btn.action-button.login-btn(ng-click="login()") 
+          span.login-btn-text login 
+          span.login-btn-text-2 with 
+          span.login-btn-text angellist
+      .login-text-term-wrapper
+        .login-text-term By signing up, you have agreed with our Terms of Service

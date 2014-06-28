@@ -1,2 +1,74 @@
-fa-view
-  include job-detail
+fa-container-surface(fa-options="options.containerSurface")
+  fa-scroll-view.detail-scroll-view(fa-start-index="0", fa-pipe-from="detailScrollPipe", fa-options="options.detailScrollView")
+    fa-surface(fa-pipe-to="detailScrollPipe", fa-background-color="'white'", fa-size="[320,true]")
+      img.detail-card-hero(src="/images/assets/hero.png")
+      img.detail-card-logo(src="/images/assets/logosq.png")
+      .detail-card-title-grad
+      .detail-card-title
+        | Front End Engineer
+      .detail-card-subtitle
+        | Famo.us
+      div.detail-card-desc-wrapper
+        .detail-card-desc
+          | Famo.us is a free and open source JavaScript development framework back by a host of cloud services. Famo.us is a free and open source JavaScript development framework back by a host of cloud services. Famo.us is a free and open source JavaScript development framework back by a host of cloud services. Famo.us is a free and open source JavaScript development framework back by a host of cloud services. Famo.us is a free and open source JavaScript development framework back by a host of cloud services. 
+        .hline  
+        .detail-card-detail-2
+          ul
+            li.list-item 58 applicants
+            li.list-item Full-time
+            li.list-item $90K - $125K
+            li.list-item 0.05% - 0.4%
+            li.list-item 58 applicants
+            li.list-item Full-time
+            li.list-item $90K - $125K
+            li.list-item 0.05% - 0.4%
+        .hline  
+        h4.detail-card-section-header SKILLSETS
+        .detail-card-desc
+          p.
+            Javacsript • CAD • OpenGL • Processing • WebGL • Three.js • OOP • MVC • CAD • OpenGL • Processing • WebGL • Three.js • OOP • MVC 
+        .hline  
+        h4.detail-card-section-header COMPANY
+        .detail-card-detail
+          ul
+            li.list-item $4.1 Mil Serie A in 2013
+            li.list-item 11-50 employees
+            li.list-item San Francisco, CA
+        .hline  
+        h4.detail-card-section-header FOUNDER
+        .detail-card-desc
+          div.media
+            img.img-founder(src="/images/assets/SteveNewcomb.jpg")
+            div.media-body
+              .media-heading Steve Newcomb
+              | Founder/CEO and front end developer/designer at @Famo.us , also co-founded @PowerSet
+          div.media
+            img.img-founder(src="/images/assets/MarkLu.jpg")
+            div.media-body
+              .media-heading Mark Lu
+              | Founder/Engineer at @Famo.us • Studied at @Berkeley
+          div.media
+            img.img-founder(src="/images/assets/MarkLu.jpg")
+            div.media-body
+              .media-heading Mark Lu
+              | Founder/Engineer at @Famo.us • Studied at @Berkeley
+        .hline  
+        h4.detail-card-section-header PRODUCT
+        .detail-card-desc
+          p Famo.us is a free and open source JavaScript development framework back by a host of cloud services. Famo.us is currently in private beta and about to launch into open beta to over 80,000 developers. Famo.us enables application developers to build beautiful native speed based apps and games in HTML5 that take advantage of famo.us' 3D rendering, 3D physics, multi-screen and gesture engines. Designers can access the motion via the physics engine without coding, application developers can build quickly using app templates and widgets without worrying about performance and platform engineers can build their own primitives from scratch with direct source code access to the full power of the famo.us engines.
+          p Famo.us has build a JS library capable of rendering to HTML, Canvas and WebGL. It is powered by 4 core engines:
+            li a 3D rendering engine
+            li a 3D physics engine
+            li a gesture engine
+            li a multi-view engine
+
+          p Wrapped around these engines is the API layer that enables developers to quickly and easily build native quality apps and games.
+        .hline  
+        h4.detail-card-section-header WHY US?
+        .detail-card-desc
+          p. Famo.us is an an engineering centric company that is working on a complex front end engineering problem that requires only A+ engineers. We do not believe in hacking through code but rather we believe in elegant abstractions and well written code written correctly the first time. It is incredibly difficult to get into famo.us and only a very few engineers qualify through our interview process. However, once you are, you are among only the best.
+        .margin-bottom-100
+    
+  fa-modifier(fa-origin="[0.5,1]", fa-align="[0.5,1]", fa-translate="[0, -13.5, 1]")
+    fa-surface(fa-size="[true,true]")
+      .btn.action-button.apply-btn APPLY

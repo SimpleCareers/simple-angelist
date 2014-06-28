@@ -52,7 +52,7 @@ class JobCardCtrl extends Ctrl
     @pos.set [0,0,0],{duration : 300,curve : 'inSine'},=>
       @reset()
   animatePass: =>
-    @pos.set [-320*2,568*2,0],{duration : 300,curve : 'inSine'},=>
+    @pos.set [-320,568*2,0],{duration : 300,curve : 'inSine'},=>
       @reset()
       @commitPass()
   commitPass: =>
@@ -61,7 +61,7 @@ class JobCardCtrl extends Ctrl
       # @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
       # @scope.cards.push id:Math.round(1000*Math.random())
   animateFav: =>
-    @pos.set [320*2,568*2,0],{duration : 300,curve : 'inSine'},=>
+    @pos.set [320,568*2,0],{duration : 300,curve : 'inSine'},=>
       @reset()
       @commitFav()
   commitFav: =>

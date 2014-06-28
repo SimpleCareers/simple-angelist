@@ -17,6 +17,8 @@ class Ctrl
     @Easing = @famous["famous/transitions/Easing"]
     @TweenTransition = @famous["famous/transitions/TweenTransition"]
     @TweenTransition.registerCurve('inSine', @Easing.inSine)
+    @ContainerSurface = @famous["famous/surfaces/ContainerSurface"]
+    @ScrollView = @famous["famous/views/Scrollview"]
     @GenericSync.register
       mouse : @MouseSync
       touch : @TouchSync

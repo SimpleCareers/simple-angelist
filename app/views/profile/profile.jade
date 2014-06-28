@@ -1,24 +1,22 @@
-fa-view.profile-card
+fa-container-surface(fa-options="options.containerSurface")
   fa-modifier(fa-origin="[0.5,0]")
-    fa-image-surface(class="profile-background-blur",fa-translate="[0,0,0]", fa-pipe-to="swipePipe", fa-size="[true,auto]", fa-image-url="/images/assets/Troy.jpg")
-  fa-surface(class="profile-content" ,fa-translate="[0,0,0]" )
+    fa-image-surface.profile-background-blur(fa-image-url="/images/assets/Troy.jpg")
+  fa-surface.profile-surface
     .profile-logo
-    div.media
-      img.profile-img
-      div.media-body
-        h4.name
+    .profile-content
+      .col-xs-3
+        img.profile-img(src='/images/assets/Troy.jpg')
+      .col-xs-9
+        h4.profile-name
           | Troy Do
-        p.bio
-          | Founder @Spyke, @Hitch Lab • Worked at @Bank of America Merrill Lynch • Studied at @Ohio Wesleyan, @Berkeley
-        p.skill
+        p.profile-bio
+          | Founder 
+          span.profile-link @Spyke
+          | ,
+          span.profile-link @Hitch Lab  
+          | • Worked at @Bank of America Merrill Lynch 
+          | • Studied at @Ohio Wesleyan, @Berkeley
+        p.profile-skill
           | San Francisco · Sales · Product Manager · Angel · University of California, Berkeley · Ohio Wesleyan University
-        p.signout
-          | Signout
-
-  fa-modifier(fa-align="[0,.85]")
-    fa-surface(class="profile-footer", fa-translate="[0,0,2]", fa-pipe-to="swipePipe", fa-size="[auto,64]")
-      .row
-        .col-xs-4.col-xs-offset-4
-          img.profile-icon(src="/images/assets/profile.png")
-        .col-xs-4
-          img.profile-nav(src="/images/assets/nav-arrow.png")
+        p.profile-signout
+          | Sign Out

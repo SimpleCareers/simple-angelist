@@ -1,25 +1,23 @@
-fa-view
-  fa-modifier
-    fa-surface(fa-background-color="'rgba(0,0,0,0.9)'", fa-size="[320,undefined]")
-      img.xbutton(src="/images/assets/xbutton.png")
-      div.headline-block
-        span.headline-text With 
-        span.logo-text Simple, 
-        span.headline-text the job searching has become a joyful task.
-      div.swiperight-block
-        div.instruction-text See a job you like?
-        div.action-text Swipe right
-        img.rightarrow(src="/images/assets/arrowright.png")
-      div.swipeleft-block
-        div.instruction-text Not so much?
-        div.action-text Swipe left
-        img.leftarrow(src="/images/assets/arrowleft.png")
-      div.application-block
-        div.instruction-text Just swipe, don’t bother the details. We won’t send anything until you
-        div.action-text Start your application
-        img.rightdownarrow(src="/images/assets/arrowdownright.png")
-      div.profile-block
-        div.action-text Access your profile
-        img.leftdownarrow(src="/images/assets/arrowdownleft.png")
-      img.circleleft(src="/images/assets/circle.png")
-      img.circleright(src="/images/assets/circle.png")
+fa-surface.tutorial-surface.tutorialscreen(fa-pipe-to="tutorialPipe", fa-background-color="'rgba(0,0,0,0.9)'", fa-size="[320,undefined]")
+  img.xbutton(src="/images/assets/xbutton.png", ng-click="closeTutorial()")
+  div.headline-block
+    span.headline-text With 
+    span.logo-text Simple, 
+    span.headline-text the job searching has become a joyful task.
+  div.swiperight-block
+    div.instruction-text See a job you like?
+    div.action-text Swipe right
+    img.rightarrow(src="/images/assets/arrowright.png")
+  div.swipeleft-block
+    div.instruction-text Not so much?
+    div.action-text Swipe left
+    img.leftarrow(src="/images/assets/arrowleft.png")
+  div.application-block
+    div.instruction-text Just swipe, don’t bother the details. We won’t send anything until you
+    div.action-text Start your application
+    img.rightdownarrow(src="/images/assets/arrowdownright.png")
+  div.profile-block
+    div.action-text Access your profile
+    img.leftdownarrow(src="/images/assets/arrowdownleft.png")
+  img.circleleft(src="/images/assets/circle.png")
+  img.circleright(src="/images/assets/circle.png")

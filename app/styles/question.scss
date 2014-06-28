@@ -1,3 +1,4 @@
+
 .outter-box{
   border-radius: 4px;
   background: #FFFFFF;
@@ -46,7 +47,7 @@
 
 .background-blur{
   @extend .blur;
-  z-index: -1 !important;
+  // z-index: -1 !important;
 }
 
 img.xbutton{

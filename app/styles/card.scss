@@ -1,7 +1,14 @@
+// job has // z-index of 200-300
+
+
 $width: 300px;
 $detailcardwidth: 320px;
 $heroheight: 200px;
 
+.job-background-blur{
+  @extend .blur;
+  // z-index: 200;
+}
 .hline{
   border: 1px solid #E1E1E1;
 }
@@ -48,7 +55,7 @@ li.list-item:before {
   width: $width;
   height: $heroheight;
   overflow: hidden;
-  z-index: 240;
+  // z-index: 240;
   max-width:100%;
   border-radius: 10px 10px 0 0;  
 }
@@ -57,7 +64,7 @@ li.list-item:before {
   min-width: 100%;
   min-height: $heroheight;
   overflow: hidden;
-  z-index: 240;
+  // z-index: 240;
   border-radius: 10px 10px 0 0;  
 }
 .card-title{
@@ -79,7 +86,7 @@ li.list-item:before {
   position: absolute;
   left:90px;
   top:180px;
-  z-index: 260;
+   z-index: 260;
   color: #fff;
   overflow: hidden;
 
@@ -95,7 +102,7 @@ li.list-item:before {
   top:150px;
   width: 65px;
   height: 65px;
-  z-index: 260;
+   z-index: 260;
   border-radius: 100%;
   border: 1px solid #e1e1e1;
 }
@@ -131,6 +138,7 @@ li.list-item:before {
   color: #AFAFAF;
   ul{
     padding-left: 0;
+    margin: 0;
   }
 }
 .card-detail{
@@ -141,34 +149,18 @@ li.list-item:before {
 }
 
 .card-tutorial-btn{
-  z-index: 280;
+   z-index: 280;
 }
 .card-overlay-wrapper{
   position: absolute;
   top: 0;
-  z-index: 1001;
+  // z-index: 1001;
   width: 300px;
   height: 415px;
   img{
     width:100%;
     height: 415px;
   }
-}
-
-div[class^="jobcard"] {
-  z-index: 176;
-}
-.jobcard0{
-  z-index: 180;
-}
-.jobcard1{
-  z-index: 179;
-}
-.jobcard2{
-  z-index: 178;
-}
-.jobcard3{
-  z-index: 177;
 }
 
 h4.detail-card-section-header {
@@ -189,47 +181,47 @@ h4.detail-card-section-header {
   padding-top:240px;
 }
 .detail-card-hero{
-  z-index: 250;
+  z-index: 650;
   border-radius: 0;  
   @extend .card-hero;
   width: $detailcardwidth;
   height: 240px;
 }
 .detail-card-logo{
-  z-index: 270;
+  z-index: 670;
   @extend .card-logo;
   top:190px;
 }
 .detail-card-title-grad{
-  z-index: 260;
+  z-index: 660;
   @extend .card-title-grad;
   width: $detailcardwidth;
   top: 150px;
 }
 .detail-card-title{
-  z-index: 270;
+  z-index: 670;
   @extend .card-title;
   width: $detailcardwidth;
   top:195px;
 }
 .detail-card-subtitle{
-  z-index: 270;
+  z-index: 670;
   @extend .card-subtitle;
   width: $detailcardwidth;
   top:220px;
 }
 .detail-card-desc{
-  z-index: 240;
+  z-index: 640;
   @extend .card-desc;
   height: auto;
 }
 .detail-card-detail-2{
-  z-index: 240;
+  z-index: 640;
   @extend .card-detail-2;
   height: auto;
 }
 .detail-card-detail{
-  z-index: 240;
+  z-index: 640;
   @extend .card-detail;
   height: auto;
 }
@@ -255,14 +247,26 @@ img.img-founder {
   font-weight: 800;
 }
 .detail-scroll-view{
-  z-index: 500 !important;
+  // z-index: 500 !important;
 }
 .margin-bottom-100{
   margin-bottom: 100px;
 }
 .apply-btn{
   width: 290px;
-  z-index: 1000 !important;
+  z-index: 670 !important;
 }
 
+.media{
+  clear:both;
+  margin: 0 10px 10px 10px;
+}
+
+.media-body{
+  font-family: 'AvenirLTStd-Light';
+  font-size: 15px;
+  color: #5A5A5A;
+  line-height: 20px;
+  /* Co-founder / CTO @Ka: */
+}
 

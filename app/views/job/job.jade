@@ -1,6 +1,6 @@
-fa-modifier(fa-size="[320,568]")
-  fa-modifier(fa-translate="[0,0,-100]")
-    fa-image-surface.blur(fa-pipe-to="", fa-image-url="{{currentImage}}")
+fa-view
+  fa-modifier(fa-translate="[0,0,-1]")
+    fa-image-surface.job-background-blur(fa-image-url="{{currentImage}}")
   fa-view(ng-repeat="card in cards track by card.index", ng-controller="JobCardCtrl")
     fa-modifier(fa-translate="getPosition(card.index,curIdx)")
       fa-modifier(fa-translate="[320/2,568/2-38]")
@@ -8,4 +8,9 @@ fa-modifier(fa-size="[320,568]")
           fa-modifier(fa-origin="[0.5, 0.5]", fa-align="[0,0]")
             include job-card
   fa-modifier(fa-origin="[.5, .5]", fa-align="[1, 0]", fa-translate="[-37,37]")
-    fa-image-surface.card-tutorial-btn(fa-image-url="/images/assets/help.png", fa-size="[40,40]", fa-click="clickHelp()")
+    fa-image-surface.card-tutorial-btn(fa-pipe-to="tutorialPipe", fa-image-url="/images/assets/help.png", fa-size="[40,40]", fa-click="openTutorial()")
+  fa-modifier#tutorialMod
+    div(ng-include="'./views/job/tutorial.html'", ng-controller="TutorialCtrl")
+  fa-animation(timeline="scrollYPosition")
+    animate(targetmodselector="#tutorialMod", field="translate", startvalue="[0,0,-2]", endvalue="[0,0,1]")
+    animate(targetmodselector="#tutorialMod", field="opacity", startvalue="0", endvalue="1")
