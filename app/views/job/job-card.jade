@@ -1,4 +1,4 @@
-fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa-size="[300,430]")
+fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa-size="[true,true]")
   .card-background
     div
       img.card-logo(ng-src="{{card.startup.thumb_url}}")
@@ -31,9 +31,15 @@ fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa
           li.list-item
             | {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
   .card-overlay-wrapper(ng-show="status=='pass'")
-    img(src="/images/assets/overlay-pass.png")
+    .card-overlay-pass
+    .card-overlay-text-wrapper 
+      span.card-overlay-text PASS
+    //- img(src="/images/assets/overlay-pass.png")
   .card-overlay-wrapper(ng-show="status=='fav'")
-    img(src="/images/assets/overlay-fav.png")
+    .card-overlay-fav
+    .card-overlay-text-wrapper 
+      span.card-overlay-text LIKE
+    //- img(src="/images/assets/overlay-fav.png")
   //- .card-overlay-wrapper
   //-   img(src="/images/assets/overlay-pass.png")
   //- .card-overlay-wrapper

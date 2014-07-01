@@ -14,6 +14,7 @@ body {
     margin: 0;
     font-family: 'AvenirLTStd-Light';
     font-weight: 300;
+    background-color: 'black';
 }
 
 .full-screen {
@@ -22,6 +23,9 @@ body {
     top: 0;
     left: 0;
     right: 0;
+}
+.famous-angular-container{
+  background-color: black;
 }
 
 @mixin filter($filter) {
@@ -105,6 +109,10 @@ fieldset[disabled] .btn {
   color: #FFFFFF;
   line-height: 40px;
   text-transform: uppercase;
+  opacity: 0.9;
+//  background-blend-mode: multiply, multiply;
+//  -webkit-background-blend-mode: multiply, multiply;
+  
 }
 //- 000-100   login
 //- 101-200   profile

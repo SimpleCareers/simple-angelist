@@ -1,14 +1,13 @@
 'use strict'
 
 Ctrl = require "../ctrl.coffee"
-data = require "./data"
 async = require "async"
 
 class JobCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "$timeout", "$famous", "$http"]
   
   filter: (card, cb)=>
-    p = @http.get "#{@baseUrl}/startups/#{card.startup.id}/", cache:true
+    p = @http.get "#{@baseUrl}/angel/startups/#{card.startup.id}/", cache:true
     p.success (startup)=>
       card.startup = startup
       card.location = startup.locations?[0]?.display_name
@@ -19,24 +18,29 @@ class JobCtrl extends Ctrl
         cb? null
     p.error =>
       cb? null
-  process: =>
-    @dataBuffer.splice(0,4).forEach (card)=>
+  process: (n)=>
+    if n <= 0
+      return
+    @dataBuffer.splice(0,n).forEach (card)=>
       card.index = @index++
       @scope.cards.push card
+      @loadBackground()
+      
   loadMore: =>
     if @loading or @done
       return
+    @process(4-@scope.cards.length)
     if @dataBuffer.length < 20
       @loading = true
       @loadPage =>
-        @process()
+        @process(4-@scope.cards.length)
         @loading = false
       return
-    @process()
 
   loadPage: (cb)=>
-    p = @http.get "#{@baseUrl}/jobs?page=#{@page++}"
+    p = @http.get "#{@baseUrl}/angel/jobs?page=#{@page++}"
     # https://api.angel.co/1/tags/14781/jobs
+    ocb = _.throttle cb
     p.error (err)=>
     p.success (data)=>
       if data.page == data.last_page
@@ -45,18 +49,30 @@ class JobCtrl extends Ctrl
         @filter card, (card)=>
           if card
             @dataBuffer.push card
+            ocb?()
           cb()
       , =>
-        cb?()
+        ocb?()
       , =>
-        cb?()
+        ocb?()
 
+  loadBackground: =>
+    if @scope.cards[0]
+      @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
+    if @scope.cards[1]
+      @scope.nextImage = @scope.cards[1].startup.screenshots[0]?.thumb
   constructor: (@scope, @stateParams, @state, @timeout, @famous, @http) ->
     super @scope
     @scope.tutorialPipe = new @EventHandler()
     sync = new @GenericSync ["mouse","touch"]
     @scope.tutorialPipe.pipe sync
-    
+    @scope.options = 
+      containerSurface:
+        size: [320,568]
+        properties:
+          overflow: "hidden"
+          "z-index": 201
+          
     @index = 0
     @page = 0
     @done = false
@@ -65,7 +81,9 @@ class JobCtrl extends Ctrl
     # @scope.cards = []
     # @loadMore()
     
+    # TODO: remove
     @scope.cards = []
+    data = require "./data"
     data.forEach (card)=>
       card.index = @index++
       @scope.cards.push card
@@ -81,13 +99,15 @@ class JobCtrl extends Ctrl
     @scope.threshold = 100
     @scope.cardSpacing = 10
     @scope.curIdx = 0
+    @loadMore()
+    @loadBackground()
+    @scope.$on "scroll", (e,v)=>
+      @backgroundTimeline.set v 
     @scope.$on "next", =>
       @scope.curIdx++
       @scope.cards.shift()
-      if @scope.cards[0]
-        @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
-      if @scope.cards.length < 4
-        @loadMore()
+      @loadMore()
+      @loadBackground()
     
     # @pos = new @Transitionable([0, 0])
     # @rot = new @Transitionable([0, 0, 0])
@@ -160,13 +180,16 @@ class JobCtrl extends Ctrl
   #       @scope.status = "nochange"
     @scope.scrollPipe = @EventHandler()
     @tutorialTimeline = new @Transitionable(0)
+    @backgroundTimeline = new @Transitionable(0)
+  scrollXPosition: =>
+    return 1-@backgroundTimeline.get()
   scrollYPosition: =>
     return @tutorialTimeline.get()
   closeTutorial: =>
-    @tutorialTimeline.set 0, duration: 1000
+    @tutorialTimeline.set 0, duration: 400
     console.log "close"
   openTutorial: =>
-    @tutorialTimeline.set 1, duration: 1000
+    @tutorialTimeline.set 1, duration: 400
     console.log "open"
     
 

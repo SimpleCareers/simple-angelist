@@ -24,7 +24,7 @@ class Ctrl
       touch : @TouchSync
       rotate: @RotateSync
       pinch : @PinchSync
-    @baseUrl = "https://simplecareers-test.apigee.net/angel"
+    @baseUrl = "https://simplecareers-test.apigee.net"
   pass:=>
     console.log "Not Yet Implemented"
 

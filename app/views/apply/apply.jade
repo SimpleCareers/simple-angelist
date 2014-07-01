@@ -1,41 +1,45 @@
 fa-container-surface(fa-options="options.containerSurface")
-  fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipe", fa-options="options.applyScrollView")
-    fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipeLike", fa-options="options.listScrollView")
-      fa-surface(class="apply-content", fa-pipe-to="listPipe",fa-size="[320.5,true]", ng-repeat="menu in rows track by $index")
+  fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipe", fa-options="options.listScrollView")
+    fa-surface(class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,true]")
+      div(ng-repeat="like in likes")
         div.apply-media
           img.company-img
           div.media-body
             h4.title
-              | Front-end Engineer
+              | {{like.title}}
             p.subtitle
-              | Abacus • New York City
+              | {{card.startup.name}} 
+              span(ng-if="card.location")
+                | • {{card.location}}
             p.description
-              | Full Time • $80K - 120K • 0.0% - 2.0%
+              | {{card.job_type.capitalize()}} • 
+              | ${{(card.salary_min/1000|| 0) | number}}K - ${{(card.salary_max/1000|| 0) | number}}K • 
+              | {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
         .hline
         .margin-bottom-100(ng-if="$index==rows.length-1")
-    fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipeApplied", fa-options="options.listScrollView")
-      fa-surface(class="apply-content", fa-pipe-to="listPipe",fa-size="[320.5,true]", ng-repeat="menu in rows track by $index")
-        div.apply-media
-          img.company-img
-          div.media-body
-            h4.title
-              | Front-end Engineer
-            p.subtitle
-              | Abacus • New York City
-            p.description
-              | Full Time • $80K - 120K • 0.0% - 2.0%
-        .hline
-        .margin-bottom-100(ng-if="$index==rows.length-1")
-    fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipeApproved", fa-options="options.listScrollView")
-      fa-surface(class="apply-content", fa-pipe-to="listPipe",fa-size="[320.5,true]", ng-repeat="menu in rows track by $index")
-        div.apply-media
-          img.company-img
-          div.media-body
-            h4.title
-              | Front-end Engineer
-            p.subtitle
-              | Abacus • New York City
-            p.description
-              | Full Time • $80K - 120K • 0.0% - 2.0%
-        .hline
-        .margin-bottom-100(ng-if="$index==rows.length-1")
+    //- fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipeApplied", fa-options="options.listScrollView")
+    //-   fa-surface(class="apply-content", fa-pipe-to="listPipeApplied",fa-size="[320.5,true]", ng-repeat="apply in applies")
+    //-     div.apply-media
+    //-       img.company-img
+    //-       div.media-body
+    //-         h4.title
+    //-           | Front-end Engineer
+    //-         p.subtitle
+    //-           | Abacus • New York City
+    //-         p.description
+    //-           | Full Time • $80K - 120K • 0.0% - 2.0%
+    //-     .hline
+    //-     .margin-bottom-100(ng-if="$index==rows.length-1")
+    //- fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipeApproved", fa-options="options.listScrollView")
+    //-   fa-surface(class="apply-content", fa-pipe-to="listPipeApproved",fa-size="[320.5,true]", ng-repeat="approve in approves")
+    //-     div.apply-media
+    //-       img.company-img
+    //-       div.media-body
+    //-         h4.title
+    //-           | Front-end Engineer
+    //-         p.subtitle
+    //-           | Abacus • New York City
+    //-         p.description
+    //-           | Full Time • $80K - 120K • 0.0% - 2.0%
+    //-     .hline
+    //-     .margin-bottom-100(ng-if="$index==rows.length-1")

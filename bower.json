@@ -10,7 +10,13 @@
     "lodash": "~2.4.1",
     "angular-resource": "~1.2.18",
     "angular-local-storage": "~0.0.5",
-    "normalize-css": "~3.0.1"
+    "normalize-css": "~3.0.1",
+    "ionic": "~0.9.27",
+    "ionic-contrib-frosted-glass": "*"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "~1.2.18",
+    "angular-ui-router": "~0.2.10"
+  }
 }

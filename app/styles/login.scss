@@ -34,9 +34,11 @@
   margin: 0 auto;
 }
 .login-background-blur{
-  width: 100%;
-  height: 100%;
+  width: 110%;
+  height: 115%;
   @include filter(blur(5px) brightness(0.3));
+  margin:-12.5% -5% -5% -2.5%;
+// padding:5px;
 }
 .login-text{
   font-family: 'AvenirLTStd-Light';
@@ -58,6 +60,7 @@
   line-height: 12.5px;
   width: 150px;  
   margin: 0 auto;
+  cursor: pointer;
   /* By signing up, you h: */
 }
 .margin-top-5{

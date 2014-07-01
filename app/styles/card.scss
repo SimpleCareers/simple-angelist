@@ -4,10 +4,14 @@
 $width: 300px;
 $detailcardwidth: 320px;
 $heroheight: 200px;
-
+$borderradius: 10px;
 .job-background-blur{
-  @extend .blur;
-  // z-index: 200;
+//  @extend .blur;
+  @include filter(blur(15px) brightness(0.5));
+  z-index: 201;
+  min-width: 120%;
+  min-height: 120%;
+  margin: -10%;
 }
 .hline{
   border: 1px solid #E1E1E1;
@@ -57,7 +61,7 @@ li.list-item:before {
   overflow: hidden;
   // z-index: 240;
   max-width:100%;
-  border-radius: 10px 10px 0 0;  
+  border-radius: $borderradius $borderradius 0 0;  
 }
 .card-hero{
   position:absolute;
@@ -65,7 +69,7 @@ li.list-item:before {
   min-height: $heroheight;
   overflow: hidden;
   // z-index: 240;
-  border-radius: 10px 10px 0 0;  
+  border-radius: $borderradius $borderradius 0 0;  
 }
 .card-title{
   position: absolute;
@@ -122,7 +126,7 @@ li.list-item:before {
   position: relative;
   background: #fff;
   width: $width;
-  border-radius: 10px;
+  border-radius: $borderradius;
   border-bottom: 1px solid #E1E1E1;
   height: 415px;
 }
@@ -149,20 +153,46 @@ li.list-item:before {
 }
 
 .card-tutorial-btn{
-   z-index: 280;
+   z-index: 300;
 }
 .card-overlay-wrapper{
   position: absolute;
   top: 0;
-  // z-index: 1001;
-  width: 300px;
-  height: 415px;
-  img{
-    width:100%;
-    height: 415px;
-  }
+  z-index: 299;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
-
+.card-overlay{
+  position: absolute;
+  border-radius: $borderradius;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+.card-overlay-pass{
+  background-color: #e5432e;
+  @extend .card-overlay;
+}
+.card-overlay-text{
+  font-family: 'AvenirLTStd-Medium';
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 20px rgba(100,100,100,1);
+}
+.card-overlay-text-wrapper{
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  color: white;
+  font-size: 30px;
+  text-transform: uppercase;
+  text-align: center; 
+}
+.card-overlay-fav{
+  background-color: #38ac7f;
+  @extend .card-overlay;
+}
 h4.detail-card-section-header {
   color: #DD4F3C;
   font-size: 14px;

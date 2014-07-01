@@ -1,10 +1,16 @@
-fa-image-surface.background-blur(fa-image-url="/images/assets/troy.jpg")
-fa-surface
-  img.xbutton(src="/images/assets/xbutton.png")
-  .question
-    | What excites you about us? Why would you be a good fit?
-  .outter-box
-    .inner-box
-      textarea 
-    .btn.action-button.submit-btn SUBMIT
-  
+//- fa-modifier(fa-translate="[0,0,-cardSpacing*2-1]")
+//-   fa-container-surface(fa-options="options.containerSurface")
+//-     fa-image-surface.background-blur(fa-image-url="/images/assets/troy.jpg")
+
+fa-container-surface(fa-options="options.containerSurface")
+  fa-modifier#backgroundModNext(fa-opacity="0.9")
+    fa-surface(fa-size="[undefined,undefined]")
+      img.job-background-blur(ng-src="{{currentImage || '/images/assets/dummybackground.png'}}")
+  fa-surface
+    img.xbutton(src="/images/assets/xbutton.png")
+    .question
+      | What excites you about us? Why would you be a good fit?
+    .outter-box
+      .inner-box
+        textarea 
+      .btn.action-button.submit-btn SUBMIT

@@ -1,6 +1,6 @@
 /**
  * famous-angular - Bring structure to your Famo.us apps with the power of AngularJS. Famo.us/Angular integrates seamlessly with existing Angular and Famo.us apps.
- * @version v0.0.16
+ * @version v0.0.17
  * @link https://github.com/Famous/famous-angular
  * @license MPL v2.0
  */
@@ -1046,7 +1046,7 @@ angular.module('famous.angular')
             
             element.append('<div class="famous-angular-container"></div>');
             isolate.context = Engine.createContext(element[0].querySelector('.famous-angular-container'));
-
+            
             attrs.$observe("faPerspective",function(){
               var candidate = $parse(attrs["faPerspective"]);
               if(candidate instanceof Function) candidate = candidate();
@@ -3078,12 +3078,19 @@ angular.module('famous.angular')
             var ScrollView = $famous["famous/views/Scrollview"];
             var ViewSequence = $famous['famous/core/ViewSequence'];
             var Surface = $famous['famous/core/Surface'];
-
+            
             var _children = [];
 
             var options = scope.$eval(attrs.faOptions) || {};
             isolate.renderNode = new ScrollView(options);
 
+            // isolate.renderNode.on("pageChange", function(data){
+            //   isolate.change = scope.$eval(attrs.pageChange);
+            //   if(isolate.change instanceof Function){
+            //     isolate.change(data);
+            //   }
+            // });
+            
             var updateScrollview = function(init){
               //$timeout hack used here because the
               //updateScrollview function will get called
@@ -3095,7 +3102,7 @@ angular.module('famous.angular')
               $timeout(function(){
                 _children.sort(function(a, b){
                   return a.index - b.index;
-                }); 
+                });
 
                 var options = {
                   array: function(_children) {

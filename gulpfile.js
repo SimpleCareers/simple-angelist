@@ -199,9 +199,9 @@ gulp.task('watch', ['connect', 'serve'], function () {
         server.changed(file.path);
     });
 
-    gulp.watch('app/views/**/*.jade', ['html']);
+    gulp.watch('app/views/**/*.jade', ['templates']);
     gulp.watch('app/styles/**/*.scss', ['styles']);
-    gulp.watch('app/scripts/**/*.coffee', ['scripts']);
+    gulp.watch('app/scripts/**/*.coffee', ['coffee']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('bower.json', ['wiredep']);

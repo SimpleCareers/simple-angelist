@@ -3,8 +3,8 @@
 Ctrl = require "../ctrl.coffee"
 
 class JobCardCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "$timeout", "$famous", "$http"]
-  constructor: (@scope, @stateParams, @state, @timeout, @famous, @http) ->
+  @$inject: ['$scope', '$stateParams', '$state', "$timeout", "$famous", "$http", "localStorageService", "Restangular"]
+  constructor: (@scope, @stateParams, @state, @timeout, @famous, @http, @localStorageService, @Restangular) ->
     super @scope
     
     @scope.card.pos = @pos = new @Transitionable([0, 0, 0])
@@ -55,9 +55,25 @@ class JobCardCtrl extends Ctrl
     @pos.set [-320,568*2,0],{duration : 300,curve : 'inSine'},=>
       @reset()
       @commitPass()
+  saveLike: (card)=>
+    console.log "save"
+    sessionToken = @localStorageService.get "sessionToken"
+    userId = @localStorageService.get "userId"
+    if sessionToken and userId
+      user = @Restangular.one("users",userId)
+      user.likes =
+        "__op":"AddUnique"
+        "objects":[card.id]
+      user.put({},
+        "X-Parse-Session-Token": sessionToken
+      ).then (user)=>
+        console.log "liked! #{card.id}"
+      , =>
+        console.log "error"
   commitPass: =>
     @timeout =>
       @scope.$emit "next"
+      
       # @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
       # @scope.cards.push id:Math.round(1000*Math.random())
   animateFav: =>
@@ -67,6 +83,8 @@ class JobCardCtrl extends Ctrl
   commitFav: =>
     @timeout =>
       @scope.$emit "next"
+      @saveLike(@scope.card)
+      
       # @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
       # @scope.cards.push id:Math.round(1000*Math.random())
   checkStatus: (newX)=>
@@ -86,7 +104,9 @@ class JobCardCtrl extends Ctrl
     return rot
   scrollXPosition: =>
     pos = @scope.cards[0].pos.get()
-    return Math.max(0,Math.min(1-Math.abs(pos[0]/@scope.threshold),1))
+    v = Math.max(0,Math.min(1-Math.abs(pos[0]/@scope.threshold),1))
+    @scope.$emit "scroll", v
+    return v
   getPosition: (idx,curIdx)=>
     pos = @pos.get()
     position = pos

@@ -1,22 +1,34 @@
 fa-container-surface(fa-options="options.containerSurface")
-  fa-modifier(fa-origin="[0.5,0]")
-    fa-image-surface.profile-background-blur(fa-image-url="/images/assets/Troy.jpg")
-  fa-surface.profile-surface
-    .profile-logo
-    .profile-content
-      .col-xs-3
-        img.profile-img(src='/images/assets/Troy.jpg')
-      .col-xs-9
-        h4.profile-name
-          | Troy Do
-        p.profile-bio
-          | Founder 
-          span.profile-link @Spyke
-          | ,
-          span.profile-link @Hitch Lab  
-          | • Worked at @Bank of America Merrill Lynch 
-          | • Studied at @Ohio Wesleyan, @Berkeley
-        p.profile-skill
-          | San Francisco · Sales · Product Manager · Angel · University of California, Berkeley · Ohio Wesleyan University
-        p.profile-signout
-          | Sign Out
+  fa-modifier(fa-align="[0.5,0.5]")
+    fa-modifier(fa-origin="[0.5,0.5]")
+      fa-surface(fa-size="[true,true]")
+        img.profile-background-blur(ng-src="{{user.image || '/images/assets/profile.png'}}")
+  fa-scroll-view(fa-start-index="0",fa-options="options.profileScrollView",fa-pipe-from="profilePipe")
+    fa-surface.profile-surface(fa-size="[undefined, true]",fa-pipe-to="profilePipe")
+      .profile-logo
+      .profile-content(ng-if="status=='loading'")
+        .profile-notavailable Loading...
+      .profile-content(ng-if="status=='notavailable'")
+        .profile-notavailable User's information is not available
+      .profile-content(ng-if="status=='loaded'")
+        .col-xs-3
+          img.profile-img(ng-src="{{user.image  || '/images/assets/profile.png'}}")
+        .col-xs-9
+          h4.profile-name
+            | {{user.name}} 
+          p.profile-email
+            | {{user.email}}
+          p.profile-bio
+            | {{user.bio}}
+            //- | Founder
+            //- span.profile-link @Spyke
+            //- | ,
+            //- span.profile-link @Hitch Lab
+            //- | • Worked at @Bank of America Merrill Lynch
+            //- | • Studied at @Ohio Wesleyan, @Berkeley
+          p.profile-skill
+            span(ng-repeat="location in user.locations") {{location.display_name}} {{$last ? '' : '• '}}
+          p.profile-skill
+            span(ng-repeat="skill in user.skills") {{skill.display_name}} {{$last ? '' : '• '}}
+          p.profile-signout(ng-click="signOut()")
+            | Sign Out
