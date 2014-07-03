@@ -55,21 +55,7 @@ class JobCardCtrl extends Ctrl
     @pos.set [-320,568*2,0],{duration : 300,curve : 'inSine'},=>
       @reset()
       @commitPass()
-  saveLike: (card)=>
-    console.log "save"
-    sessionToken = @localStorageService.get "sessionToken"
-    userId = @localStorageService.get "userId"
-    if sessionToken and userId
-      user = @Restangular.one("users",userId)
-      user.likes =
-        "__op":"AddUnique"
-        "objects":[card.id]
-      user.put({},
-        "X-Parse-Session-Token": sessionToken
-      ).then (user)=>
-        console.log "liked! #{card.id}"
-      , =>
-        console.log "error"
+
   commitPass: =>
     @timeout =>
       @scope.$emit "next"
@@ -83,7 +69,7 @@ class JobCardCtrl extends Ctrl
   commitFav: =>
     @timeout =>
       @scope.$emit "next"
-      @saveLike(@scope.card)
+      @scope.saveLike(@scope.card)
       
       # @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
       # @scope.cards.push id:Math.round(1000*Math.random())

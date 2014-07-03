@@ -1,0 +1,19 @@
+.menu-background{
+  /* Background: */
+  background: rgba(0,0,0,0.70);
+//  @include filter(blur(1px) brightness(0.3));
+}
+.menu-icon{
+  height: 18px;
+  margin: 23px 23px;
+}
+.menu-text{
+  font-family: 'AvenirLTStd-Black';
+  color: white;
+  height: 18px;
+  margin: 23px 23px;
+  text-shadow: 0px 0px 20px rgba(0,0,0,1);
+}
+.menu-icon-wrapper{
+  height: 64px;
+}

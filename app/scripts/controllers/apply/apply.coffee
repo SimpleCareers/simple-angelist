@@ -1,6 +1,7 @@
 'use strict'
 
 Ctrl = require "../ctrl.coffee"
+async = require "async"
 
 class ApplyCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "localStorageService", "$http"]
@@ -8,8 +9,19 @@ class ApplyCtrl extends Ctrl
     super @scope
     
     @scope.listPipe = new @EventHandler()
-    @scope.listPipe.pipe @scope.enginePipe
-
+    # @scope.listPipe.pipe @scope.enginePipe
+    # @scope.listPipe.addListener "touchstart", =>
+    #   # @scope.nextPage()
+    #   # console.log "click"
+    # @scope.listPipe.addListener "touchend", =>
+    #   console.log "click"
+    #   # @scope.nextPage()
+    # @scope.listPipe.addListener "mouseup", =>
+    #   # @scope.nextPage()
+    #   # console.log "click"
+    # @scope.listPipe.addListener "mousedown", =>
+    #   console.log "click"
+    #   # @scope.nextPage()
     @scope.options = 
       applyScrollView:
         paginated: true
@@ -24,55 +36,43 @@ class ApplyCtrl extends Ctrl
     # @scope.likes = [0..20]
     # @scope.applies = [0..20]
     # @scope.approves = [0..20]
-    @scope.likes= []
-    data = require "./data"
-    @index = 0
-    console.log data
-    data.forEach (card)=>
-      card.index = @index++
-      card.startup = 
-        name: "Simple.Careers"
-      @scope.likes.push card  
-
+    # @scope.likes= []
+    # data = require "./data"
+    # @index = 0
+    # console.log data
+    # data.forEach (card)=>
+    #   card.index = @index++
+    #   @scope.likes.push card
+    
+    @scope.mode = "Like"
+    @scope.$on "modeChange", (e,mode)=>
+      @scope.mode = mode
+      # if mode == "Like"
+      #   @scope.list = @likes
+      # else if mode == "Applied"
+      #   @scope.list = @applies
+      # else if mode == "Approved"
+      #   @scope.list = @approves
     @scope.$on "pageChange", (e,from,to)=>
-      console.log from,to
-      if to == 3
+      if to>from and to == 3
+        console.log "getuser"
+        @scope.getUser (err,user)=>
+          console.log "user.likes", user.likes
+          @scope.user = user
+        
         # @loadLikes()
-        console.log "loadlikes"
+        # @loadApplies()
+        # @loadApproves()
+        # console.log "loadlikes"
         # TODO: remove
+    # @scope.likes=[]
+    # @scope.applies=[]
+    # @scope.approves=[]
+  showDetail: (like)=>
+    console.log "showDetail",like
+    @scope.goToPage(4,like)
   pageChange: =>
-    console.log(arguments...);
-  loadLikes: =>
-    userId = @storage.get "userId"
-    sessionToken = @storage.get "sessionToken"
-    user = @Restangular.one("users",userId)
-    user.get({},
-      "X-Parse-Session-Token": sessionToken
-    ).then (user)=>
-      if (not user) or (not user.likes)
-        return
-      @scope.likes = []
-      for likeId in user.likes
-        p = @http.get "#{@baseUrl}/angel/jobs/#{likeId}"
-        p.error (err)=>
-        p.success (data)=>
-          @scope.likes.push data
-          console.log @scope.likes      
+    console.log "pageChange"
     
-  saveApplied: (card)=>
-    console.log "save"
-    sessionToken = @localStorageService.get "sessionToken"
-    userId = @localStorageService.get "userId"
-    if sessionToken and userId
-      user = @Restangular.one("users",userId)
-      user.applies =
-        "__op":"AddUnique"
-        "objects":[card.id]
-      user.put({},
-        "X-Parse-Session-Token": sessionToken
-      ).then (user)=>
-        console.log "applied! #{card.id}"
-      , =>
-        console.log "error"
-    
+
 angular.module('simplecareersApp').controller('ApplyCtrl', ApplyCtrl)

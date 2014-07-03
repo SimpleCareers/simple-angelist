@@ -91,14 +91,14 @@ img.circle{
 }
 img.circleleft{
   left: 17px;
-  bottom: 17px;
+  bottom: 24px;
   @extend img.circle;
 }
 img.circleright{
   right: 17px;
-  bottom: 17px;
+  bottom: 24px;
   @extend img.circle;
 }
 .tutorialscreen{
-  // z-index: 299;
+//   z-index: 601;
 }

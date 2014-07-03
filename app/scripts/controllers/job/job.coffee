@@ -2,21 +2,13 @@
 
 Ctrl = require "../ctrl.coffee"
 async = require "async"
-
 class JobCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "$timeout", "$famous", "$http"]
   
   filter: (card, cb)=>
-    p = @http.get "#{@baseUrl}/angel/startups/#{card.startup.id}/", cache:true
-    p.success (startup)=>
-      card.startup = startup
-      card.location = startup.locations?[0]?.display_name
-      card.screenshot = startup.screenshots?[0]?.thumb or startup.logo_url
-      if card.description and card.startup.product_desc and startup.screenshots?[0]?.thumb
-        cb? card
-      else
-        cb? null
-    p.error =>
+    if card and card.description and card.startup and card.startup.product_desc and card.startup.screenshots?[0]?.thumb
+      cb? card
+    else
       cb? null
   process: (n)=>
     if n <= 0
@@ -38,19 +30,28 @@ class JobCtrl extends Ctrl
       return
 
   loadPage: (cb)=>
-    p = @http.get "#{@baseUrl}/angel/jobs?page=#{@page++}"
+    if @dataBuffer.length > 50
+      cb?()
+      return
+    p = @http.get "#{@baseUrl}/angel/jobs?page=#{@page++}",{},cache:true
     # https://api.angel.co/1/tags/14781/jobs
-    ocb = _.throttle cb
+    if cb
+      ocb = _.throttle cb
     p.error (err)=>
+      ocb?()
     p.success (data)=>
       if data.page == data.last_page
         @done = true
+      if (not data) or not (data.jobs)
+        ocb?()
+        return
       async.each data.jobs, (card,cb)=>
-        @filter card, (card)=>
-          if card
-            @dataBuffer.push card
-            ocb?()
-          cb()
+        @scope.processCard card,(card)=>
+          @filter card, (card)=>
+            if card
+              @dataBuffer.push card
+              ocb?()
+            cb()
       , =>
         ocb?()
       , =>
@@ -72,6 +73,7 @@ class JobCtrl extends Ctrl
         properties:
           overflow: "hidden"
           "z-index": 201
+          "background-color": "black"
           
     @index = 0
     @page = 0
@@ -108,7 +110,6 @@ class JobCtrl extends Ctrl
       @scope.cards.shift()
       @loadMore()
       @loadBackground()
-    
     # @pos = new @Transitionable([0, 0])
     # @rot = new @Transitionable([0, 0, 0])
     # sync = new @GenericSync(['mouse', 'touch'])

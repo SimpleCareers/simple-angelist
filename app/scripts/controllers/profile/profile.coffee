@@ -7,6 +7,7 @@ class ProfileCtrl extends Ctrl
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous,@http,@localStorageService) ->
     super @scope
     @scope.profilePipe = new @EventHandler
+    @scope.profilePipe.pipe @scope.enginePipe
     @scope.options = 
       profileScrollView:
         paginated: false
@@ -19,20 +20,23 @@ class ProfileCtrl extends Ctrl
           overflow: "hidden"
           "z-index": 150
     @scope.status = "notavailable"  
+    @loadUser()
     @scope.$on "pageChange", (e,from,to)=>
       if to == 1
         if not @scope.user
           @loadUser()
-    @scope.$on "pageChange", (e,from,to)=>
       if to == 0
         @signOut()
   signOut:=>
     @scope.status = "notavailable"
     @localStorageService.clearAll()
     @scope.user = undefined
-    @scope.prevPage()
+    @scope.goToPage(0)
   loadUser:=>
+    @scope.getUser()
     accessToken = @localStorageService.get "accessToken"
+    if not accessToken
+      return
     @scope.status = "loading"
     p = @http.get "#{@baseUrl}/myangel",
       headers:

@@ -1,8 +1,18 @@
 @font-face {
+  font-family: 'AvenirLTStd-Black';
+  src: url('/fonts/AvenirLTStd-Black.eot');
+  /* IE9 Compat Modes */
+  src: url('/fonts/AvenirLTStd-Black.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Black.woff') format("woff"), url('/fonts/AvenirLTStd-Black.ttf') format("truetype"), url('/fonts/AvenirLTStd-Black.svg') format("svg");
+  /* Legacy iOS */
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
   font-family: 'AvenirLTStd-Heavy';
   src: url('/fonts/AvenirLTStd-Heavy.eot');
   /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Heavy.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Heavy.woff') format("woff"), url('/fonts/AvenirLTStd-Heavy.ttf') format("truetype"), url('/fonts/AvenirLTStd-Heavy.svg#2d55e36446b90be6f85f84e74f83cb6c') format("svg");
+  src: url('/fonts/AvenirLTStd-Heavy.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Heavy.woff') format("woff"), url('/fonts/AvenirLTStd-Heavy.ttf') format("truetype"), url('/fonts/AvenirLTStd-Heavy.svg') format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: 500;
@@ -12,7 +22,7 @@
   font-family: 'AvenirLTStd-Medium';
   src: url('/fonts/AvenirLTStd-Medium.eot');
   /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Medium.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Medium.woff') format("woff"), url('/fonts/AvenirLTStd-Medium.ttf') format("truetype"), url('/fonts/AvenirLTStd-Medium.svg#2d55e36446b90be6f85f84e74f83cb6c') format("svg");
+  src: url('/fonts/AvenirLTStd-Medium.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Medium.woff') format("woff"), url('/fonts/AvenirLTStd-Medium.ttf') format("truetype"), url('/fonts/AvenirLTStd-Medium.svg') format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: 400;
@@ -23,7 +33,7 @@
   font-family: 'AvenirLTStd-Light';
   src: url('/fonts/AvenirLTStd-Light.eot');
   /* IE9 Compat Modes */
-  src: url('/fonts/AvenirLTStd-Light.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Light.woff') format("woff"), url('/fonts/AvenirLTStd-Light.ttf') format("truetype"), url('/fonts/AvenirLTStd-Light.svg#a3894d49b0c62da6d619d8a85ab36753') format("svg");
+  src: url('/fonts/AvenirLTStd-Light.eot?#iefix') format("embedded-opentype"), url('/fonts/AvenirLTStd-Light.woff') format("woff"), url('/fonts/AvenirLTStd-Light.ttf') format("truetype"), url('/fonts/AvenirLTStd-Light.svg') format("svg");
   /* Legacy iOS */
   font-style: normal;
   font-weight: 300;

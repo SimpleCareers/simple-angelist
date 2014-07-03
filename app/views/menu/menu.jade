@@ -1,7 +1,70 @@
-fa-modifier(fa-align="[0,1]",fa-origin="[0,1]")
-  fa-surface.menu-surface(class="profile-footer", fa-pipe-to="swipePipe", fa-size="[auto,64]")
-    .row
-      .col-xs-4.col-xs-offset-4
-        img.profile-icon(src="/images/assets/profile.png")
-      .col-xs-4
-        img.profile-nav(src="/images/assets/nav-arrow.png")
+fa-modifier
+  fa-surface.menu-surface.menu-background(fa-size="[auto,64]")
+fa-modifier#signoutIconMod2
+  fa-modifier#signoutIconMod
+    fa-modifier(fa-opacity="0.5")
+      fa-modifier(fa-translate="[320/2-32-125,0,0]")
+        fa-surface.menu-surface(fa-click="goToPage(0)")
+          .menu-icon-wrapper
+            div.menu-text SIGN OUT
+fa-modifier#profileIconMod2
+  fa-modifier#profileIconMod
+    fa-modifier(fa-translate="[320/2-32,0,0]")
+      fa-surface.menu-surface(fa-click="goToPage(1)")
+        .menu-icon-wrapper
+          img.menu-icon(src="/images/assets/profile.png")
+fa-modifier#jobIconMod2
+  fa-modifier#jobIconMod
+    fa-modifier(fa-translate="[320/2+125-32,0,0]")
+      fa-surface.menu-surface(fa-click="goToPage(2)")
+        .menu-icon-wrapper
+          img.menu-icon(src="/images/assets/jobs.png")
+fa-modifier#applicationIconMod2
+  fa-modifier#applicationIconMod
+    fa-modifier(fa-translate="[320/2+125*2-32,0,0]")
+      fa-surface.menu-surface(fa-click="goToPage(3)")
+        .menu-icon-wrapper
+          img.menu-icon(src="/images/assets/application.png")
+fa-modifier(fa-opacity="getButtonOpacity('Like')")
+  fa-modifier#likeIconMod
+    fa-modifier(fa-translate="[320/2+125*2-32,0,0]")
+      fa-surface.menu-surface(fa-click="switchTo('Like')")
+        .menu-icon-wrapper
+          div.menu-text LIKE
+fa-modifier(fa-opacity="getButtonOpacity('Applied')")
+  fa-modifier#applyIconMod
+    fa-modifier(fa-translate="[320/2+125*2-32,0,0]")
+      fa-surface.menu-surface(fa-click="switchTo('Applied')")
+        .menu-icon-wrapper
+          div.menu-text APPLIED
+fa-modifier(fa-opacity="getButtonOpacity('Approved')")
+  fa-modifier#approveIconMod
+    fa-modifier(fa-translate="[320/2+125*2-32,0,0]")
+      fa-surface.menu-surface(fa-click="switchTo('Approved')")
+        .menu-icon-wrapper
+          div.menu-text APPROVED
+fa-animation(timeline="profileIconScroll")
+  animate(targetmodselector="#profileIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+  animate(targetmodselector="#profileIconMod", field="opacity", startvalue=".4", endvalue="1")
+  animate(targetmodselector="#signoutIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+fa-animation(timeline="jobIconScroll")
+  animate(targetmodselector="#jobIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+  animate(targetmodselector="#jobIconMod", field="opacity", startvalue="1", endvalue=".4")
+fa-animation(timeline="applyIconScroll")
+  animate(targetmodselector="#applicationIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+fa-animation(timeline="profileIconScroll2")
+  animate(targetmodselector="#profileIconMod2", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+  animate(targetmodselector="#signoutIconMod2", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+fa-animation(timeline="jobIconScroll2")
+  animate(targetmodselector="#jobIconMod2", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+  animate(targetmodselector="#jobIconMod2", field="opacity", startvalue=".4", endvalue="1")
+fa-animation(timeline="applyIconScroll2")
+  animate(targetmodselector="#applicationIconMod2", field="translate", endvalue="[0,0,0]", startvalue="[-125,0,0]")
+  animate(targetmodselector="#applicationIconMod2", field="opacity", startvalue="0", endvalue=".4")
+fa-animation(timeline="applyIconScroll2")
+  animate(targetmodselector="#likeIconMod", field="opacity", startvalue="1", endvalue="0")
+  animate(targetmodselector="#likeIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-125-130-50,0,0]")
+  animate(targetmodselector="#applyIconMod", field="opacity", startvalue="1", endvalue="0")
+  animate(targetmodselector="#applyIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-125-75-50,0,0]")
+  animate(targetmodselector="#approveIconMod", field="opacity", startvalue="1", endvalue="0")
+  animate(targetmodselector="#approveIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-125-0-50,0,0]")

@@ -10,7 +10,8 @@
   margin: 0 10px;
   width: 60px;
   height: 60px;
-  background-image: url('/images/assets/abacus.png');
+//  background-image: url('/images/assets/abacus.png');
+  border: 1px solid #e1e1e1;
   background-size: cover;
   border-radius: 100%;
   -webkit-border-radius: 100%;
@@ -22,6 +23,10 @@
   line-height: 20.5px;
   font-size: 17px;
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 5px;
 }
 .apply-content p {
   font-family: 'AvenirLTStd-Light';
@@ -32,4 +37,8 @@
 }
 .apply-media{
   margin: 20px 0;
+  height: 60px;
+}
+.empty{
+  text-align: center;
 }

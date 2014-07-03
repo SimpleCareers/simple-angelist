@@ -30,5 +30,5 @@ fa-container-surface(fa-options="options.containerSurface")
             span(ng-repeat="location in user.locations") {{location.display_name}} {{$last ? '' : '• '}}
           p.profile-skill
             span(ng-repeat="skill in user.skills") {{skill.display_name}} {{$last ? '' : '• '}}
-          p.profile-signout(ng-click="signOut()")
-            | Sign Out
+          //- p.profile-signout(ng-click="signOut()")
+            //- | Sign Out

@@ -20,15 +20,11 @@ class LoginCtrl extends Ctrl
     sessionToken = @localStorageService.get "sessionToken"
     userId = @localStorageService.get "userId"
     if accessToken and sessionToken and userId
-      @Restangular.one("users",userId).get({},
-        "X-Parse-Session-Token": sessionToken
-      ).then (user)=>
-        @scope.parseUser = user
-        @localStorageService.set "user",@scope.parseUser
-        @scope.nextPage()
-      , =>
-        console.log "error"
-
+      @scope.getUser()
+      @scope.goToPage(1)
+    @scope.$on "pageChange", (e,from,to)=>
+      if from==0 and to == 1
+        @login()
   receiveMessage: (event) =>
     @scope.status = "normal"
     data = JSON.parse(event.data)
@@ -38,20 +34,21 @@ class LoginCtrl extends Ctrl
     @localStorageService.set "accessToken", data.accessToken
     @localStorageService.set "userId", data.userId
     @localStorageService.set "sessionToken", data.sessionToken
-
-    userId = @localStorageService.get("userId")
-    sessionToken = @localStorageService.get("sessionToken")
-    @Restangular.one("users",userId).get({},
-      "X-Parse-Session-Token": sessionToken
-    ).then (user)=>
-      @scope.parseUser = user
-    , =>
-      console.log "error"
+    
+    @scope.getUser()
+    # userId = @localStorageService.get("userId")
+    # sessionToken = @localStorageService.get("sessionToken")
+    # @Restangular.one("users",userId).get({},
+    #   "X-Parse-Session-Token": sessionToken
+    # ).then (user)=>
+    #   @scope.parseUser = user
+    # , =>
+    #   console.log "error"
     
     @timeout.cancel(@checkpromise)
     @popup?.close()
     window.removeEventListener "message", @receiveMessage
-    @scope.nextPage()
+    @scope.goToPage(1)
   checkToken: (cb)=>
     @popup?.postMessage "getToken", "http://simplecareers.parseapp.com"
     @timeout.cancel(@checkpromise)
