@@ -1,42 +1,26 @@
 fa-container-surface(fa-options="options.containerSurface")
   fa-surface(class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,undefined]")
-    .margin-bottom-200
     .empty
       h4 There's nothing here yet.
   fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipe", fa-options="options.listScrollView")
-    fa-surface(ng-if="mode=='Like'",class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,true]", fa-click="showDetail(like)", ng-repeat="like in user.likes")
-      div.apply-media
-        img.company-img(ng-src="{{like.startup.thumb_url}}")
-        div.media-body
-          h4.title
-            | {{like.title}}
-          p.subtitle
-            | {{like.startup.name}} 
-            span(ng-if="like.location")
-              | • {{like.location}}
-          p.description
-            | {{like.job_type.capitalize()}} • 
-            | ${{(like.salary_min/1000|| 0) | number}}K - ${{(like.salary_max/1000|| 0) | number}}K • 
-            | {{(like.equity_min || 0) | number:1}}% - {{(like.equity_max || 0) | number:1}}%
-      .hline
-      .margin-bottom-64(ng-if="$last")
-    fa-surface(ng-if="mode=='Applied'",class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,true]", fa-click="showDetail(like)", ng-repeat="like in user.applies")
-      div.apply-media
-        img.company-img(ng-src="{{like.startup.thumb_url}}")
-        div.media-body
-          h4.title
-            | {{like.title}}
-          p.subtitle
-            | {{like.startup.name}}
-            span(ng-if="like.location")
-              | • {{like.location}}
-          p.description
-            | {{like.job_type.capitalize()}} •
-            | ${{(like.salary_min/1000|| 0) | number}}K - ${{(like.salary_max/1000|| 0) | number}}K •
-            | {{(like.equity_min || 0) | number:1}}% - {{(like.equity_max || 0) | number:1}}%
-      .hline
-      .margin-bottom-64(ng-if="$last")
-    fa-surface(ng-if="mode=='Approved'",class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,true]", fa-click="showDetail(like)", ng-repeat="like in user.approves")
+    fa-surface(ng-if="mode=='Like'",class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,true]", )
+      div(ng-repeat="like in user.likes track by like.id",ng-click="showDetail(like)")
+        div.apply-media
+          img.company-img(ng-src="{{like.startup.thumb_url}}")
+          div.media-body
+            h4.title
+              | {{like.title}}
+            p.subtitle
+              | {{like.startup.name}} 
+              span(ng-if="like.location")
+                | • {{like.location}}
+            p.description
+              | {{like.job_type.capitalize()}} • 
+              | ${{(like.salary_min/1000|| 0) | number}}K - ${{(like.salary_max/1000|| 0) | number}}K • 
+              | {{(like.equity_min || 0) | number:1}}% - {{(like.equity_max || 0) | number:1}}%
+        .hline
+        .margin-bottom-64(ng-if="$last")
+    fa-surface(ng-if="mode=='Applied'",class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,true]", fa-click="showDetail(like)", ng-repeat="like in user.applies track by like.id")
       div.apply-media
         img.company-img(ng-src="{{like.startup.thumb_url}}")
         div.media-body
@@ -52,6 +36,22 @@ fa-container-surface(fa-options="options.containerSurface")
             | {{(like.equity_min || 0) | number:1}}% - {{(like.equity_max || 0) | number:1}}%
       .hline
       .margin-bottom-64(ng-if="$last")
+    //- fa-surface(ng-if="mode=='Approved'",class="apply-content", fa-pipe-to="listPipe", fa-size="[undefined,true]", fa-click="showDetail(like)", ng-repeat="like in user.approves")
+    //-   div.apply-media
+    //-     img.company-img(ng-src="{{like.startup.thumb_url}}")
+    //-     div.media-body
+    //-       h4.title
+    //-         | {{like.title}}
+    //-       p.subtitle
+    //-         | {{like.startup.name}}
+    //-         span(ng-if="like.location")
+    //-           | • {{like.location}}
+    //-       p.description
+    //-         | {{like.job_type.capitalize()}} •
+    //-         | ${{(like.salary_min/1000|| 0) | number}}K - ${{(like.salary_max/1000|| 0) | number}}K •
+    //-         | {{(like.equity_min || 0) | number:1}}% - {{(like.equity_max || 0) | number:1}}%
+    //-   .hline
+    //-   .margin-bottom-64(ng-if="$last")
 
     //- fa-scroll-view(fa-start-index="0", fa-pipe-from="listPipeApplied", fa-options="options.listScrollView")
     //-   fa-surface(class="apply-content", fa-pipe-to="listPipeApplied",fa-size="[320.5,true]", ng-repeat="apply in applies")

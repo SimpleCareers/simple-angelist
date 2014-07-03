@@ -188,10 +188,10 @@ class JobCtrl extends Ctrl
     return @tutorialTimeline.get()
   closeTutorial: =>
     @tutorialTimeline.set 0, duration: 400
-    console.log "close"
+    # console.log "close"
   openTutorial: =>
     @tutorialTimeline.set 1, duration: 400
-    console.log "open"
+    # console.log "open"
     
 
   # getRotation: (idx)=>

@@ -8,6 +8,7 @@ class DetailCtrl extends Ctrl
     super @scope
     # @scope.cards = ["1","2","3","4"]
     @scope.detailScrollPipe = new @EventHandler()
+    @scope.detailScrollPipe.pipe @scope.enginePipe
     @scope.options =
       detailScrollView:
         paginated: false
@@ -21,7 +22,7 @@ class DetailCtrl extends Ctrl
           "z-index": 650
     
     @scope.$on "pageChange", (e,from,to,data)=>
-      console.log to
+      # console.log to
       if to==4 and data
         @scope.card = data
         @closeQuestion()
@@ -40,7 +41,7 @@ class DetailCtrl extends Ctrl
       headers:
         Authorization: "Bearer #{accessToken}"
     p.success (data)=>
-      console.log data
+      # console.log data
       @scope.status = "done"
     p.error (err)=>
       @scope.status = "error"

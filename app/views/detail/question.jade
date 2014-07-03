@@ -13,5 +13,5 @@ fa-container-surface(fa-options="options.containerSurface")
         | What excites you about us? Why would you be a good fit?
       .outter-box
         .inner-box
-          textarea 
-        .btn.action-button.submit-btn(ng-click="apply(card)") SUBMIT
+          textarea(ng-model="note")
+        .btn.action-button.submit-btn(ng-click="apply(card, note)") SUBMIT

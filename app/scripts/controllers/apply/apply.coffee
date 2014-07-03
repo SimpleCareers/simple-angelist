@@ -55,9 +55,9 @@ class ApplyCtrl extends Ctrl
       #   @scope.list = @approves
     @scope.$on "pageChange", (e,from,to)=>
       if to>from and to == 3
-        console.log "getuser"
+        # console.log "getuser"
         @scope.getUser (err,user)=>
-          console.log "user.likes", user.likes
+          # console.log "user.likes", user.likes
           @scope.user = user
         
         # @loadLikes()
@@ -69,10 +69,10 @@ class ApplyCtrl extends Ctrl
     # @scope.applies=[]
     # @scope.approves=[]
   showDetail: (like)=>
-    console.log "showDetail",like
+    # console.log "showDetail",like
     @scope.goToPage(4,like)
   pageChange: =>
-    console.log "pageChange"
+    # console.log "pageChange"
     
 
 angular.module('simplecareersApp').controller('ApplyCtrl', ApplyCtrl)

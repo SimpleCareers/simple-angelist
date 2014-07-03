@@ -2,6 +2,7 @@
 
 Ctrl = require "./ctrl.coffee"
 async = require "async"
+homo = require "triangle-homography"
 
 class AppCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "$window", "$http", "localStorageService"]
@@ -87,9 +88,6 @@ class AppCtrl extends Ctrl
       user.put({},
         "X-Parse-Session-Token": sessionToken
       ).then (user)=>
-        console.log "applies! #{card.id}"
-      , =>
-        console.log "error"
   saveLike: (card)=>
     @scope.parseUser?.likes?=[]
     @scope.parseUser?.likes.push card
@@ -106,9 +104,6 @@ class AppCtrl extends Ctrl
       user.put({},
         "X-Parse-Session-Token": sessionToken
       ).then (user)=>
-        console.log "liked! #{card.id}"
-      , =>
-        console.log "error"
   processCard: (card, cb)=>
     p = @http.get "#{@baseUrl}/angel/startups/#{card.startup.id}/",{},cache:true
     p.success (startup)=>
@@ -121,6 +116,13 @@ class AppCtrl extends Ctrl
       cb? null
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @window, @http, @storage) ->
     super @scope
+    
+    # genM = homo([[1184,461,0],[899,1479,0],[227,1326,0]])
+    # results = genM([[640,0,0],[640, 568*2,0],[0,568*2,0]])
+    # a = []
+    # for r in results
+    #   a = a.concat r
+    # @scope.tArr = a
     
     @scope.menuScrollT = new @Transitionable(1)
     @scope.profileIconScrollT = new @Transitionable(1)

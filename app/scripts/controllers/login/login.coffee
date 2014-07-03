@@ -24,7 +24,11 @@ class LoginCtrl extends Ctrl
       @scope.goToPage(1)
     @scope.$on "pageChange", (e,from,to)=>
       if from==0 and to == 1
-        @login()
+        accessToken = @localStorageService.get "accessToken"
+        sessionToken = @localStorageService.get "sessionToken"
+        userId = @localStorageService.get "userId"
+        if not (accessToken and sessionToken and userId)
+          @login()
   receiveMessage: (event) =>
     @scope.status = "normal"
     data = JSON.parse(event.data)

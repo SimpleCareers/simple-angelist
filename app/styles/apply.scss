@@ -17,6 +17,9 @@
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
 }
+.apply-content{
+  background-color: white;
+}
 .apply-content h4 {
   font-family: 'AvenirLTStd-Medium';
   color: #5A5A5A;
@@ -41,4 +44,5 @@
 }
 .empty{
   text-align: center;
+  padding-top: 100px;
 }

@@ -25,8 +25,8 @@ class ProfileCtrl extends Ctrl
       if to == 1
         if not @scope.user
           @loadUser()
-      if to == 0
-        @signOut()
+      # if to == 0
+      #   @signOut()
   signOut:=>
     @scope.status = "notavailable"
     @localStorageService.clearAll()
