@@ -61,7 +61,6 @@
     <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
     <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
     <!-- endbower-->
-    <link rel="stylesheet" href="bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass.css" />
     <link rel="stylesheet" href="libs/famous-angular/famous-angular.css">
     <!-- endbuild-->
     <!-- build:css styles/main.css-->
@@ -81,7 +80,18 @@
       | to improve your experience.
       
     -->
-    <div ui-view="main" autoscroll="false"></div>
+    <div ng-controller="AppCtrl">
+      <div ui-view="main" autoscroll="false"></div>
+      <fa-app class="menu-screen", ng-if="currentPage!=0">
+        <fa-modifier fa-align="[0, 1]", fa-origin="[0, 1]" fa-size="[screenWidth, 64]">
+          <div ng-include="'./views/menu/menu.html'"></div>
+        </fa-modifier>
+        <!-- <fa-animation timeline="menuScroll">
+        <animate targetmodselector="#menuMod" field="translate" startvalue="[-320,0,0]" endvalue="[0,0,0]"></animate>
+        </fa-animation> -->
+      </fa-app>
+      
+    </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -100,8 +110,11 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/ionic/release/js/ionic.js"></script>
     <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
     <!-- endbower-->
     <script src="bower_components/ionic-contrib-frosted-glass/ionic.contrib.frostedGlass.js"></script>
     <script src="libs/requirejs/require.js"></script>

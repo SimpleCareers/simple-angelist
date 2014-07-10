@@ -33,7 +33,6 @@
 - FIX `Scrollview` `groupScroll` option
 - FIX `ContextualView` `DEFAULT_OPTIONS` inheritance
 
-
 ## 0.2.0
 
 **famous/core:**
@@ -113,5 +112,3 @@
 - Initial release
 
 ## 0.1.1
-
-- Initial release

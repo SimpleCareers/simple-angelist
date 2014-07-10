@@ -5,7 +5,7 @@ async = require "async"
 homo = require "triangle-homography"
 
 class AppCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "$window", "$http", "localStorageService"]
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "$window", "$http", "localStorageService", "preloader"]
   loadCard: (id,cb)=>
     p = @http.get "#{@baseUrl}/angel/jobs/#{id}",{},cache:true
     p.error (err)=>
@@ -114,8 +114,19 @@ class AppCtrl extends Ctrl
       cb? card
     p.error =>
       cb? null
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @window, @http, @storage) ->
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @window, @http, @storage, @preloader) ->
     super @scope
+    
+    @scope.screenWidth = $(window).width()
+    @scope.screenHeight = $(window).height()
+    
+    # @scope.sync = true
+    # @scope.speed = 500
+    # @scope.mainViewStyle = 'anim-fade'
+    # @scope.pageLoginStyle = 'anim-fade'
+    # @scope.pageProfileStyle = 'anim-fade'
+    # @scope.pageJobStyle = 'anim-fade'
+    # @scope.pageDetailStyle = 'anim-fade'
     
     # genM = homo([[1184,461,0],[899,1479,0],[227,1326,0]])
     # results = genM([[640,0,0],[640, 568*2,0],[0,568*2,0]])
@@ -147,12 +158,12 @@ class AppCtrl extends Ctrl
     pageSync.on "start", @pageSyncStart
     pageSync.on "end", @pageSyncEnd
     pageSync.on "update", @pageSyncUpdate
-    @currentPage = 0
+    @scope.currentPage = 0
     @numPages = 5
     @pages = []
     for i in [0..@numPages]
       @pages.push 
-        pos: new @Transitionable [320*i,0,0]
+        pos: new @Transitionable [@scope.screenWidth*i,0,0]
     @zSeparation = 50
     @mode = "scale"
     @applicationMode = "Like"
@@ -189,39 +200,39 @@ class AppCtrl extends Ctrl
     delta = e.delta[0]
     pos = e.position[0]
     offset = e.offsetX
-    for i in [@currentPage...@numPages]
+    for i in [@scope.currentPage...@numPages]
       curPos = @pages[i].pos.get()
       # pages before the current page 
-      # if i < @currentPage
-      #   diff = @currentPage-i
+      # if i < @scope.currentPage
+      #   diff = @scope.currentPage-i
       #   z = @clamp curPos[2]+delta, -@zSeparation*(diff), -@zSeparation*(diff-1)
       #   @pages[i].pos.set [curPos[0],curPos[1],z]
       # #pages after the current page
-      # else if i==@currentPage
-      if i==@currentPage
+      # else if i==@scope.currentPage
+      if i==@scope.currentPage
         if @mode == "scale"
           z = @clamp curPos[2]+delta, -@zSeparation, 0
           if z == 0
             @mode = "translate"
           @setPagePos i,[curPos[0],curPos[1],z]
         else
-          x = @clamp curPos[0]+delta,0,(if @currentPage==0 then 0 else 320)
+          x = @clamp curPos[0]+delta,0,(if @scope.currentPage==0 then 0 else @scope.screenWidth)
           if x == 0
             @mode = "scale"
           @setPagePos i,[x,curPos[1],curPos[2]]
-      if i == @currentPage+1
-        x = @clamp(curPos[0]+delta,320*(i-@currentPage-1),320*(i-@currentPage+1))
+      if i == @scope.currentPage+1
+        x = @clamp(curPos[0]+delta,@scope.screenWidth*(i-@scope.currentPage-1),@scope.screenWidth*(i-@scope.currentPage+1))
         @setPagePos i,[x,curPos[1],curPos[2]]
   setPagePos: (i,pos,op,cb)=>
-    if i==1 and pos[0]<=320
-      @scope.menuScrollT.set pos[0]/320,op,cb
-    if i==2 and pos[0]<=320
-      x = (pos[0])/320
+    if i==1 and pos[0]<=@scope.screenWidth
+      @scope.menuScrollT.set pos[0]/@scope.screenWidth,op,cb
+    if i==2 and pos[0]<=@scope.screenWidth
+      x = (pos[0])/@scope.screenWidth
       @scope.profileIconScrollT.set x,op,cb
       @scope.jobIconScrollT.set x,op,cb
       @scope.applyIconScrollT.set x,op,cb
-    if i==3 and pos[0]<=320
-      x = (pos[0])/320
+    if i==3 and pos[0]<=@scope.screenWidth
+      x = (pos[0])/@scope.screenWidth
       @scope.profileIconScrollT2.set x,op,cb
       @scope.jobIconScrollT2.set x,op,cb
       @scope.applyIconScrollT2.set x,op,cb
@@ -230,11 +241,11 @@ class AppCtrl extends Ctrl
     for i in [0...@numPages]
       curPos = @pages[i].pos.get()
       #current pages and pages before the current page 
-      if i <= @currentPage
-        z = -@zSeparation*(@currentPage-i)
+      if i <= @scope.currentPage
+        z = -@zSeparation*(@scope.currentPage-i)
         @setPagePos i, [0,0,z], duration: 300, =>
       else
-        x = 320*(i-@currentPage)
+        x = @scope.screenWidth*(i-@scope.currentPage)
         @setPagePos i, [x,0,0], duration: 300, =>
   menuScroll: =>
     return @scope.menuScrollT.get();
@@ -264,50 +275,75 @@ class AppCtrl extends Ctrl
       else
         v.set 0.5,duration:300,=>
     @scope.$broadcast "modeChange", mode
+  changePageTo:(page)=>
+    @timeout =>
+      switch page
+        when 0
+          @state.go "login"
+        when 1
+          @state.go "profile"
+        when 2
+          @state.go "job"
+        when 3
+          @state.go "apply"
+        when 4
+          @state.go "detail"
   goToPage: (page, data)=>
-    while @currentPage<page
+    while @scope.currentPage<page
       @nextPage(data)
-    while @currentPage>page
+    while @scope.currentPage>page
       @prevPage(data)
   prevPage: (data)=>
-    if @currentPage<=0
+    # if @scope.currentPage<=0
+    #   return false
+    # @scope.currentPage--
+    # console.log "@scope.currentPage",@scope.currentPage
+    # @scope.$broadcast "pageChange", @scope.currentPage+1,@scope.currentPage,data
+    if @scope.currentPage<=0
       return false
     i=0
     #current pages and pages after the current page
-    # while @currentPage+i<@numPages
-    pIdx = @currentPage+i
+    # while @scope.currentPage+i<@numPages
+    pIdx = @scope.currentPage+i
     nextPos = @pages[pIdx].pos.get()
-    @setPagePos pIdx,[(i+1)*320,nextPos[1],0], duration: 300, =>
+    @setPagePos pIdx,[(i+1)*@scope.screenWidth,nextPos[1],0], duration: 300, =>
+      @changePageTo @scope.currentPage
+      @scope.$broadcast "pageChange", @scope.currentPage+1,@scope.currentPage,data
     i++
-    @currentPage--
+    @scope.currentPage--
     i=0
     #pages before the current page
-    while @currentPage-i>=0
-      pIdx = @currentPage-i
+    while @scope.currentPage-i>=0
+      pIdx = @scope.currentPage-i
       nextPos = @pages[pIdx].pos.get()
       @setPagePos pIdx,[0,nextPos[1],-@zSeparation*(i)], duration: 300, =>
       i++
-    @scope.$broadcast "pageChange", @currentPage+1,@currentPage,data
     return true
   nextPage: (data)=>
-    if @currentPage>=@numPages-1
+    # if @scope.currentPage>=@numPages-1
+    #   return false
+    # @scope.currentPage++
+    # console.log "@scope.currentPage",@scope.currentPage
+    # @scope.$broadcast "pageChange", @scope.currentPage-1,@scope.currentPage,data
+    if @scope.currentPage>=@numPages-1
       return false
     i=0
     #current pages before the current page
-    # while (@currentPage-i)>=0
-    pIdx = @currentPage-i
+    # while (@scope.currentPage-i)>=0
+    pIdx = @scope.currentPage-i
     nextPos = @pages[pIdx].pos.get()
     @setPagePos pIdx,[0,nextPos[1],-@zSeparation*(i+1)], duration: 300, =>
+      @changePageTo @scope.currentPage
+      @scope.$broadcast "pageChange", @scope.currentPage-1,@scope.currentPage,data
     i++
-    @currentPage++
+    @scope.currentPage++
     i=0
     #pages after the current page
-    while (@currentPage+i)<@numPages
-      pIdx = @currentPage+i
+    while (@scope.currentPage+i)<@numPages
+      pIdx = @scope.currentPage+i
       nextPos = @pages[pIdx].pos.get()
-      @setPagePos pIdx,[(i)*320,nextPos[1],0], duration: 300, =>
+      @setPagePos pIdx,[(i)*@scope.screenWidth,nextPos[1],0], duration: 300, =>
       i++
-    @scope.$broadcast "pageChange", @currentPage-1,@currentPage,data
     return true
   getPagePosition: (i)=>
     return @pages[i].pos.get();

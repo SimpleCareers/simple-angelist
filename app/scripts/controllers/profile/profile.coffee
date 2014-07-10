@@ -7,7 +7,7 @@ class ProfileCtrl extends Ctrl
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous,@http,@localStorageService) ->
     super @scope
     @scope.profilePipe = new @EventHandler
-    @scope.profilePipe.pipe @scope.enginePipe
+    # @scope.profilePipe.pipe @scope.enginePipe
     @scope.options = 
       profileScrollView:
         paginated: false

@@ -2,16 +2,14 @@
 //-   fa-container-surface(fa-options="options.containerSurface")
 //-     fa-image-surface.background-blur(fa-image-url="/images/assets/troy.jpg")
 
-fa-container-surface(fa-options="options.containerSurface")
-  fa-modifier#backgroundModNext(fa-opacity="0.9")
-    fa-surface(fa-size="[undefined,undefined]",fa-click="closeQuestion()")
-      img.job-background-blur(ng-src="{{currentImage || '/images/assets/dummybackground.png'}}")
-  fa-modifier(fa-translate="[0,66,0]")
-    fa-surface(fa-size="[true,true]")
-      //- img.xbutton(src="/images/assets/xbutton.png")
+fa-modifier(fa-opacity="0.9",ng-controller="QuestionCtrl")
+  fa-image-surface.question-background-blur(fa-size="[undefined,undefined]",fa-image-url="{{card.screenshot || '/images/assets/dummybackground.png'}}")
+  fa-modifier(fa-origin="[0.5,0.5]",fa-align="[0.5,0.5]")
+    fa-surface(fa-size="[undefined,undefined]")
+      img.xbutton(src="/images/assets/xbutton.png", ng-click="closeQuestion()")
       .question
         | What excites you about us? Why would you be a good fit?
       .outter-box
         .inner-box
-          textarea(ng-model="note")
+          textarea(ng-model="note",sync-focus-with="isTextAreaFocused")
         .btn.action-button.submit-btn(ng-click="apply(card, note)") SUBMIT

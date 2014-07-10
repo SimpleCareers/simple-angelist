@@ -2,8 +2,9 @@
 
 Ctrl = require "../ctrl.coffee"
 async = require "async"
+Queue = require "../../extensions/Queue.js"
 class JobCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "$timeout", "$famous", "$http"]
+  @$inject: ['$scope', '$stateParams', '$state', "$timeout", "$famous", "$http", "preloader"]
   
   filter: (card, cb)=>
     if card and card.description and card.startup and card.startup.product_desc and card.startup.screenshots?[0]?.thumb
@@ -11,35 +12,54 @@ class JobCtrl extends Ctrl
     else
       cb? null
   process: (n)=>
-    if n <= 0
-      return
-    @dataBuffer.splice(0,n).forEach (card)=>
-      card.index = @index++
-      @scope.cards.push card
-      @loadBackground()
+    # @dataBuffer.splice(0,n).forEach (card)=>
+    #   card.index = @index++
+    #   if @index % 10 == 5
+    #     # Hack to remove surfaces
+    #     angular.element(".jobcard0").slice(0,-1).remove()
+    #   @preloader.preloadImages([card.screenshot, card.startup.logo_url]).then =>
+    #     console.log "preloaded"
+    #   @scope.cards.push card
+    #   @loadBackground()
+    while n>0
+      card = @dataBuffer.dequeue()
+      if card
+        card.index = @index++
+        if @index % 10 == 5
+          # Hack to remove unused job card surfaces once in a while
+          angular.element(".jobcard0").slice(0,-1).remove()
+        @preloader.preloadImages([card.screenshot, card.startup.logo_url]).then =>
+        @scope.cards.push card
+        @loadBackground()
+        n--
       
   loadMore: =>
-    if @loading or @done
+    # bufferLength = @dataBuffer.length
+    bufferLength = @dataBuffer.getLength()
+    if bufferLength > 0
+      @process(4-@scope.cards.length)
+    if @done
       return
-    @process(4-@scope.cards.length)
-    if @dataBuffer.length < 20
-      @loading = true
+    if (not @loading) and bufferLength  < 10
       @loadPage =>
         @process(4-@scope.cards.length)
-        @loading = false
+        
       return
 
   loadPage: (cb)=>
-    if @dataBuffer.length > 50
+    if @loading
       cb?()
       return
+    @loading = true
     p = @http.get "#{@baseUrl}/angel/jobs?page=#{@page++}",{},cache:true
     # https://api.angel.co/1/tags/14781/jobs
     if cb
       ocb = _.throttle cb
     p.error (err)=>
+      @loading = false
       ocb?()
     p.success (data)=>
+      @loading = false
       if data.page == data.last_page
         @done = true
       if (not data) or not (data.jobs)
@@ -49,7 +69,8 @@ class JobCtrl extends Ctrl
         @scope.processCard card,(card)=>
           @filter card, (card)=>
             if card
-              @dataBuffer.push card
+              @dataBuffer.enqueue card
+              # @dataBuffer.push card
               ocb?()
             cb()
       , =>
@@ -58,12 +79,16 @@ class JobCtrl extends Ctrl
         ocb?()
 
   loadBackground: =>
-    if @scope.cards[0]
-      @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
-    if @scope.cards[1]
-      @scope.nextImage = @scope.cards[1].startup.screenshots[0]?.thumb
-  constructor: (@scope, @stateParams, @state, @timeout, @famous, @http) ->
+    if @scope.cards[0] and @scope.cards[1]
+      if @odd
+        @scope.currentImage = @scope.cards[0].screenshot
+        @scope.nextImage = @scope.cards[1].screenshot
+      else
+        @scope.nextImage = @scope.cards[0].screenshot
+        @scope.currentImage = @scope.cards[1].screenshot
+  constructor: (@scope, @stateParams, @state, @timeout, @famous, @http, @preloader) ->
     super @scope
+    @scope.showTutorial = false
     @scope.tutorialPipe = new @EventHandler()
     sync = new @GenericSync ["mouse","touch"]
     @scope.tutorialPipe.pipe sync
@@ -79,7 +104,7 @@ class JobCtrl extends Ctrl
     @page = 0
     @done = false
     @loading = false
-    @dataBuffer = []
+    @dataBuffer = new Queue()
     # @scope.cards = []
     # @loadMore()
     
@@ -101,11 +126,16 @@ class JobCtrl extends Ctrl
     @scope.threshold = 100
     @scope.cardSpacing = 10
     @scope.curIdx = 0
+    @odd = true
     @loadMore()
     @loadBackground()
     @scope.$on "scroll", (e,v)=>
-      @backgroundTimeline.set v 
+      if @odd
+        @backgroundTimeline.set v 
+      else
+        @backgroundTimeline.set 1-v 
     @scope.$on "next", =>
+      @odd = not @odd
       @scope.curIdx++
       @scope.cards.shift()
       @loadMore()
@@ -151,10 +181,10 @@ class JobCtrl extends Ctrl
   #   @pos.set [0,0]
   #   @rot.set [0,0,0]
   # animateNoChange: =>
-  #   @pos.set [0,0],{duration : 300,curve : 'inSine'},=>
+  #   @pos.set [0,0],{duration : 300,curve : 'easeInOut'},=>
   #     @reset()
   # animatePass: =>
-  #   @pos.set [-@threshold,568*2],{duration : 300,curve : 'inSine'},=>
+  #   @pos.set [-@threshold,568*2],{duration : 300,curve : 'easeInOut'},=>
   #     @reset()
   #     @commitPass()
   # commitPass: =>
@@ -163,7 +193,7 @@ class JobCtrl extends Ctrl
   #     @scope.currentImage = @scope.cards[0].startup.screenshots[0]?.thumb
   #     # @scope.cards.push id:Math.round(1000*Math.random())
   # animateFav: =>
-  #   @pos.set [@threshold,568*2],{duration : 300,curve : 'inSine'},=>
+  #   @pos.set [@threshold,568*2],{duration : 300,curve : 'easeInOut'},=>
   #     @reset()
   #     @commitFav()
   # commitFav: =>
@@ -183,13 +213,16 @@ class JobCtrl extends Ctrl
     @tutorialTimeline = new @Transitionable(0)
     @backgroundTimeline = new @Transitionable(0)
   scrollXPosition: =>
-    return 1-@backgroundTimeline.get()
+    return @backgroundTimeline.get()
   scrollYPosition: =>
     return @tutorialTimeline.get()
   closeTutorial: =>
-    @tutorialTimeline.set 0, duration: 400
+    @tutorialTimeline.set 0, duration: 400, =>
+      @timeout =>
+        @scope.showTutorial = false
     # console.log "close"
   openTutorial: =>
+    @scope.showTutorial = true
     @tutorialTimeline.set 1, duration: 400
     # console.log "open"
     

@@ -67,5 +67,6 @@ class LoginCtrl extends Ctrl
 
   clickTerm: =>
     window.open "http://www.simple.careers/terms"
+    return
 
 angular.module('simplecareersApp').controller('LoginCtrl', LoginCtrl)

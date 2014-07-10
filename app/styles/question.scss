@@ -39,15 +39,20 @@
   font-size: 18px;
   color: #FFFFFF;
   line-height: 22px;
-  margin-top: 0px;
+  margin-top: 66px;
   margin-bottom: 21px;
   margin-left: 17.5px;
   margin-right: 17.5px;
+  text-align: center;
 }
 
 .background-blur{
   @extend .blur;
   // z-index: -1 !important;
+}
+.question-background-blur{
+  @extend .blur;
+   z-index: 0;
 }
 
 img.xbutton{

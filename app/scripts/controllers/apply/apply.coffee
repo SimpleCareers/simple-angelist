@@ -53,11 +53,14 @@ class ApplyCtrl extends Ctrl
       #   @scope.list = @applies
       # else if mode == "Approved"
       #   @scope.list = @approves
+    @scope.getUser (err,user)=>
+      console.log "user.likes", user.likes
+      @scope.user = user
+
     @scope.$on "pageChange", (e,from,to)=>
       if to>from and to == 3
         # console.log "getuser"
         @scope.getUser (err,user)=>
-          # console.log "user.likes", user.likes
           @scope.user = user
         
         # @loadLikes()

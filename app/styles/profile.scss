@@ -2,11 +2,11 @@
 .profile-background-blur{
 //  @extend .blur;
   // z-index: 100;
-  min-width: 110%;
-  min-height: 110%;
+  min-width: 100%;
+  min-height: 100%;
   @include filter(blur(50px) brightness(0.4));
-  margin: -5% -5% -5% -5%;
-  z-index: 101;
+//  margin: -5% -5% -5% -5%;
+  z-index: 0;
   background-color: #fff;
 }
 .profile-content {

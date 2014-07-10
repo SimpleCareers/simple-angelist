@@ -70,8 +70,9 @@ define(function(require, exports, module) {
             ratio = ratios[i];
             node = this._nodes[i];
 
-            if (typeof ratio !== 'number')
-                flexLength -= node.getSize()[direction] || 0;
+            if (typeof ratio !== 'number') {
+                if(node.getSize()) flexLength -= node.getSize()[direction] || 0;
+            }
             else
                 ratioSum += ratio;
         }
@@ -80,9 +81,13 @@ define(function(require, exports, module) {
             node = this._nodes[i];
             ratio = ratios[i];
 
-            length = (typeof ratio === 'number')
-                ? flexLength * ratio / ratioSum
-                : node.getSize()[direction];
+            length = undefined;
+            if (typeof ratio === 'number') {
+                length = flexLength * ratio / ratioSum;
+            }
+            else {
+                if (node.getSize()) length = node.getSize()[direction];
+            }
 
             currTransform = (direction === FlexibleLayout.DIRECTION_X)
                 ? Transform.translate(translation, 0, 0)
@@ -93,6 +98,15 @@ define(function(require, exports, module) {
 
             translation += length;
         }
+    }
+
+    function _checkTrueSizeSections() {
+        var direction = this.options.direction;
+        for (var i = 0; i < this._nodes.length; i++) {
+            if (this._nodes[i].getSize() && this._cachedLengths[i] !== this._nodes[i].getSize()[direction]) return true;
+        }
+
+        return false;
     }
 
     /**
@@ -167,7 +181,7 @@ define(function(require, exports, module) {
         var length = parentSize[direction];
         var size;
 
-        if (length !== this._cachedTotalLength || this._ratiosDirty || this._ratios.isActive() || direction !== this._cachedDirection) {
+        if (length !== this._cachedTotalLength || this._ratiosDirty || this._ratios.isActive() || direction !== this._cachedDirection || _checkTrueSizeSections.call(this)) {
             _reflow.call(this, ratios, length, direction);
 
             if (length !== this._cachedTotalLength) this._cachedTotalLength = length;

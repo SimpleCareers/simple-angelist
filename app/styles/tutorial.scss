@@ -75,13 +75,13 @@ img.rightarrow{
 img.leftdownarrow{
   width: 28px;
   height: 37.5px;
-  margin-left: 47.5px; 
+  margin-left: 11%; 
   margin-top: 10px; 
 }
 img.rightdownarrow{
-  width: 45px; 
+  width: 45px;
   height: 80px; 
-  margin-right: 44px; 
+  margin-right: 40%; 
   margin-top: 10px; 
 }
 img.circle{
@@ -90,13 +90,13 @@ img.circle{
   height: 42px;
 }
 img.circleleft{
-  left: 17px;
-  bottom: 24px;
+  left: 5%;
+  bottom: 16px;
   @extend img.circle;
 }
 img.circleright{
-  right: 17px;
-  bottom: 24px;
+  right: 5%;
+  bottom: 16px;
   @extend img.circle;
 }
 .tutorialscreen{

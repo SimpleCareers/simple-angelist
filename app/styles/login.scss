@@ -34,10 +34,10 @@
   margin: 0 auto;
 }
 .login-background-blur{
-  width: 110%;
-  height: 115%;
+  min-width: 100%;
+  min-height: 100%;
   @include filter(blur(5px) brightness(0.3));
-  margin:-12.5% -5% -5% -2.5%;
+//  margin:-12.5% -5% -5% -2.5%;
 // padding:5px;
 }
 .login-text{

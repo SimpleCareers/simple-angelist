@@ -285,7 +285,7 @@ define(function(require, exports, module) {
 
      //  Apply to document all changes from removeClass() since last setup().
     function _cleanupClasses(target) {
-        for (var i = 0; i < this._dirtyClasses.length; i++) target.classList.remove(this._dirtyClasses[i]);
+        for (var i = 0; i < this._dirtyClasses.length; i++) target.classList.remove(this._dirtyClasses[i].split(" "));
         this._dirtyClasses = [];
     }
 
@@ -580,7 +580,7 @@ define(function(require, exports, module) {
      */
     Surface.prototype.getSize = function getSize(actual) {
         return this._size;
-        // return actual ? this._size : (this.size || this._size);
+        return actual ? this._size : (this.size || this._size);
     };
 
     /**

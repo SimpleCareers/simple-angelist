@@ -1026,7 +1026,7 @@ body {
     margin: 0;
     font-family: 'AvenirLTStd-Light';
     font-weight: 300;
-    background-color: 'black';
+//    background-color: 'black';
 }
 
 .full-screen {
@@ -1036,8 +1036,9 @@ body {
     left: 0;
     right: 0;
 }
-.famous-angular-container{
-  background-color: black;
+.main-content .famous-angular-container{
+    background-color: black;
+    -webkit-perspective: 500;
 }
 
 @mixin filter($filter) {
@@ -1178,7 +1179,22 @@ div[class^="jobcard"] {
 .no-wrap-text {
   overflow: hidden;
 }
+.menu-screen{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+}
+.help-icon{
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  width: 40px;
+  height: 40px;
+}
 
+@import "./anim-in-out.css";
 @import "./font.scss";
 @import "./profile.scss";
 @import "./card.scss";

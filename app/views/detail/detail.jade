@@ -1,105 +1,106 @@
-fa-container-surface(fa-options="options.containerSurface")
-  fa-scroll-view.detail-scroll-view(fa-start-index="0", fa-pipe-from="detailScrollPipe", fa-options="options.detailScrollView")
-    fa-surface(fa-pipe-to="detailScrollPipe", fa-background-color="'white'", fa-size="[320,true]")
-      div(ng-show="card")
-        .detail-card-hero-wrapper
-          img.detail-card-hero(ng-src="{{card.screenshot}}")
-        img.detail-card-logo(ng-src="{{card.startup.thumb_url}}")
-        .detail-card-title-grad
-        .detail-card-title
-          | {{card.title}}
-        .detail-card-subtitle
-          | {{card.startup.name}} 
-          span(ng-if="card.location")
-            | • 
-            span(ng-repeat="tag in card.tags | filter:'LocationTag'")
-              | {{tag.display_name}} {{$last ? '' : '• '}}
-        div.detail-card-desc-wrapper
-          .detail-card-desc(ng-if="card.startup.high_concept")
-            | {{card.startup.high_concept}}
-          .hline  
-          .detail-card-detail-2
-            ul
-              li.list-item(ng-if="card.job_type") {{card.job_type.capitalize()}}
-              li.list-item(ng-if="card.salary_max") ${{(card.salary_min/1000|| 0) | number}}K - ${{(card.salary_max/1000|| 0) | number}}K
-              li.list-item(ng-if="card.startup.equity_min && card.startup.equity_max") {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
-          .hline  
-          div(ng-if="card.startup.quality")
-            h4.detail-card-section-header RANK
-            .detail-card-detail
-              .score
-                .front-score(ng-style="{'width':card.startup.quality*10+'%'}")
-                .back-score
-            .hline 
-          div(ng-if="card.description")
-            h4.detail-card-section-header DESCRIPTION
-            .detail-card-desc
-              | {{card.description}}
+fa-app.full-screen.main-content
+  fa-modifier(fa-translate="getPagePosition(4)")
+    fa-scroll-view.detail-scroll-view(fa-start-index="0", fa-pipe-from="detailScrollPipe", fa-options="options.detailScrollView")
+      fa-surface(fa-pipe-to="detailScrollPipe", fa-background-color="'white'", fa-size="[undefined,true]")
+        div(ng-show="card")
+          .detail-card-hero-wrapper
+            img.detail-card-hero(ng-src="{{card.screenshot}}")
+          img.detail-card-logo(ng-src="{{card.startup.thumb_url}}")
+          .detail-card-title-grad
+          .detail-card-title
+            | {{card.title}}
+          .detail-card-subtitle
+            | {{card.startup.name}} 
+            span(ng-if="card.location")
+              | • 
+              span(ng-repeat="tag in card.tags | filter:'LocationTag'")
+                | {{tag.display_name}} {{$last ? '' : '• '}}
+          div.detail-card-desc-wrapper
+            .detail-card-desc(ng-if="card.startup.high_concept")
+              | {{card.startup.high_concept}}
             .hline  
-          div(ng-if="card.roles.length>0")
-            h4.detail-card-section-header ROLES
-            .detail-card-desc
-              p
-                span(ng-repeat="tag in card.roles = (card.tags | filter:'RoleTag')") {{tag.display_name}} {{$last ? '' : '• '}}
-            .hline
-          div(ng-if="card.skills.length>0")
-            h4.detail-card-section-header SKILLSETS
-            .detail-card-desc
-              p
-                span(ng-repeat="tag in card.skills = (card.tags | filter:'SkillTag')") {{tag.display_name}} {{$last ? '' : '• '}}
-            .hline
-          h4.detail-card-section-header COMPANY
-          .detail-card-detail
-            ul
-              li.list-item(ng-if="card.startup.company_type && card.startup.company_type.length > 0") {{card.startup.company_type[0].display_name}}
-              li.list-item {{card.startup.company_size}} employees
-              li.list-item(ng-if="card.locations.length > 0")
-                span(ng-repeat="tag in card.locations = (card.tags | filter:'LocationTag')")
-                  | {{tag.display_name}} {{$last ? '' : '• '}}
-          .hline  
-          div(ng-if="card.founders.length > 0")
-            h4.detail-card-section-header FOUNDER
-            .detail-card-desc
-              div.media(ng-repeat="user in card.founders")
-                img.img-founder(ng-src="{{user.tagged.image}}")
-                div.media-body
-                  .media-heading {{user.tagged.name}}
-                  | {{user.tagged.bio}}
-            .hline
-          div(ng-if="card.startup.product_desc")
-            h4.detail-card-section-header PRODUCT
-            .detail-card-desc
-              p {{card.startup.product_desc}}
-            .hline
-          div(ng-if="card.investors")
-            h4.detail-card-section-header INVESTORS
-            .detail-card-desc
-              div.media(ng-repeat="user in card.investors")
-                img.img-founder(ng-src="{{user.tagged.image}}")
-                div.media-body
-                  .media-heading {{user.tagged.name}}
-                  | {{user.tagged.bio}}
-            .hline
-          div(ng-if="card.advisors")
-            h4.detail-card-section-header ADVISORS
-            .detail-card-desc
-              div.media(ng-repeat="user in card.advisors")
-                img.img-founder(ng-src="{{user.tagged.image}}")
-                div.media-body
-                  .media-heading {{user.tagged.name}}
-                  | {{user.tagged.bio}}
-            .hline
-          .margin-bottom-100
-          //- h4.detail-card-section-header WHY US?
-          //- .detail-card-desc
-          //-   p. Famo.us is an an engineering centric company that is working on a complex front end engineering problem that requires only A+ engineers. We do not believe in hacking through code but rather we believe in elegant abstractions and well written code written correctly the first time. It is incredibly difficult to get into famo.us and only a very few engineers qualify through our interview process. However, once you are, you are among only the best.
+            .detail-card-detail-2
+              ul
+                li.list-item(ng-if="card.job_type") {{card.job_type.capitalize()}}
+                li.list-item(ng-if="card.salary_max") ${{(card.salary_min/1000|| 0) | number}}K - ${{(card.salary_max/1000|| 0) | number}}K
+                li.list-item(ng-if="card.startup.equity_min && card.startup.equity_max") {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
+            .hline  
+            div(ng-if="card.startup.quality")
+              h4.detail-card-section-header RANK
+              .detail-card-detail
+                .score
+                  .front-score(ng-style="{'width':card.startup.quality*10+'%'}")
+                  .back-score
+              .hline 
+            div(ng-if="card.description")
+              h4.detail-card-section-header DESCRIPTION
+              .detail-card-desc
+                | {{card.description}}
+              .hline  
+            div(ng-if="card.roles.length>0")
+              h4.detail-card-section-header ROLES
+              .detail-card-desc
+                p
+                  span(ng-repeat="tag in card.roles = (card.tags | filter:'RoleTag')") {{tag.display_name}} {{$last ? '' : '• '}}
+              .hline
+            div(ng-if="card.skills.length>0")
+              h4.detail-card-section-header SKILLSETS
+              .detail-card-desc
+                p
+                  span(ng-repeat="tag in card.skills = (card.tags | filter:'SkillTag')") {{tag.display_name}} {{$last ? '' : '• '}}
+              .hline
+            h4.detail-card-section-header COMPANY
+            .detail-card-detail
+              ul
+                li.list-item(ng-if="card.startup.company_type && card.startup.company_type.length > 0") {{card.startup.company_type[0].display_name}}
+                li.list-item {{card.startup.company_size}} employees
+                li.list-item(ng-if="card.locations.length > 0")
+                  span(ng-repeat="tag in card.locations = (card.tags | filter:'LocationTag')")
+                    | {{tag.display_name}} {{$last ? '' : '• '}}
+            .hline  
+            div(ng-if="card.founders.length > 0")
+              h4.detail-card-section-header FOUNDER
+              .detail-card-desc
+                div.media(ng-repeat="user in card.founders")
+                  img.img-founder(ng-src="{{user.tagged.image}}")
+                  div.media-body
+                    .media-heading {{user.tagged.name}}
+                    | {{user.tagged.bio}}
+              .hline
+            div(ng-if="card.startup.product_desc")
+              h4.detail-card-section-header PRODUCT
+              .detail-card-desc
+                p {{card.startup.product_desc}}
+              .hline
+            div(ng-if="card.investors")
+              h4.detail-card-section-header INVESTORS
+              .detail-card-desc
+                div.media(ng-repeat="user in card.investors")
+                  img.img-founder(ng-src="{{user.tagged.image}}")
+                  div.media-body
+                    .media-heading {{user.tagged.name}}
+                    | {{user.tagged.bio}}
+              .hline
+            div(ng-if="card.advisors")
+              h4.detail-card-section-header ADVISORS
+              .detail-card-desc
+                div.media(ng-repeat="user in card.advisors")
+                  img.img-founder(ng-src="{{user.tagged.image}}")
+                  div.media-body
+                    .media-heading {{user.tagged.name}}
+                    | {{user.tagged.bio}}
+              .hline
+            .margin-bottom-100
+            //- h4.detail-card-section-header WHY US?
+            //- .detail-card-desc
+            //-   p. Famo.us is an an engineering centric company that is working on a complex front end engineering problem that requires only A+ engineers. We do not believe in hacking through code but rather we believe in elegant abstractions and well written code written correctly the first time. It is incredibly difficult to get into famo.us and only a very few engineers qualify through our interview process. However, once you are, you are among only the best.
         
     
-  fa-modifier(fa-origin="[0.5,1]", fa-align="[0.5,1]", fa-translate="[0, -13.5, 1]")
-    fa-surface(fa-size="[true,true]", fa-click="openQuestion()")
-      .btn.action-button.apply-btn APPLY
-  fa-modifier#questionMod
-    div(ng-include="'./views/detail/question.html'", ng-controller="QuestionCtrl")
-  fa-animation(timeline="scrollYPosition")
-    animate(targetmodselector="#questionMod", field="translate", startvalue="[0,0,-100]", endvalue="[0,0,1]")
-    animate(targetmodselector="#questionMod", field="opacity", startvalue="0", endvalue="1")
+    fa-modifier(fa-origin="[0.5,1]", fa-align="[0.5,1]", fa-translate="[0, -13.5, 1]")
+      fa-surface(fa-size="[true,true]", fa-click="openQuestion()")
+        .btn.action-button.apply-btn APPLY
+    fa-modifier#questionMod
+      include question
+    fa-animation(timeline="scrollYPosition")
+      animate(targetmodselector="#questionMod", field="translate", startvalue="[0,0,-100]", endvalue="[0,0,1]")
+      animate(targetmodselector="#questionMod", field="opacity", startvalue="0", endvalue="1")

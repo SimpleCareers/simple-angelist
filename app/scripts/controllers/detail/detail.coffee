@@ -48,8 +48,10 @@ class DetailCtrl extends Ctrl
 
     @scope.saveApplies card
   closeQuestion: =>
+    @scope.isTextAreaFocused = false
     @questionTimeline.set 0, duration:300 
   openQuestion: =>
+    @scope.isTextAreaFocused = true
     @questionTimeline.set 1, duration:300
   scrollYPosition: =>
     return @questionTimeline.get()

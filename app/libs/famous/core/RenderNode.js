@@ -129,7 +129,7 @@ define(function(require, exports, module) {
             var id = prevKeys[i];
             if (this._resultCache[id] === undefined) {
                 var object = Entity.get(id);
-                if (object.cleanup) object.cleanup(context.allocator);
+                // if (object.cleanup) object.cleanup(context.allocator);
             }
         }
 

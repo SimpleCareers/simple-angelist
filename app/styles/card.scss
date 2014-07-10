@@ -9,9 +9,9 @@ $borderradius: 10px;
 //  @extend .blur;
   @include filter(blur(15px) brightness(0.5));
   z-index: 201;
-  min-width: 120%;
-  min-height: 120%;
-  margin: -10%;
+//  min-width: 120%;
+//  min-height: 120%;
+//  margin: -10%;
 }
 .hline{
   border: 1px solid #E1E1E1;
@@ -156,12 +156,19 @@ li.list-item:before {
    z-index: 300;
 }
 .card-overlay-wrapper{
-  position: absolute;
-  top: 0;
+  position: relative;
+//  background: #fff;
+  width: $width;
+  border-radius: $borderradius;
+  border-bottom: 1px solid #E1E1E1;
+  height: 415px;
+  
+//  position: absolute;
+//  top: 0;
   z-index: 299;
-  width: 100%;
-  height: 100%;
+//  width: 300px;
   text-align: center;
+//  height: 415px;
 }
 .card-overlay{
   position: absolute;
@@ -219,7 +226,7 @@ h4.detail-card-section-header {
   z-index: 601;
   border-radius: 0;  
   @extend .card-hero;
-  min-width: $detailcardwidth;
+  min-width: 100%;
   min-height: 240px;
 }
 .detail-card-logo{

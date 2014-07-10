@@ -30,17 +30,19 @@ fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa
             | {{card.startup.company_size}} empl.
           li.list-item
             | {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
-  .card-overlay-wrapper(ng-show="status=='pass'")
-    .card-overlay-pass
-    .card-overlay-text-wrapper 
-      span.card-overlay-text PASS
-    //- img(src="/images/assets/overlay-pass.png")
-  .card-overlay-wrapper(ng-show="status=='fav'")
-    .card-overlay-fav
-    .card-overlay-text-wrapper 
-      span.card-overlay-text LIKE
-    //- img(src="/images/assets/overlay-fav.png")
-  //- .card-overlay-wrapper
-  //-   img(src="/images/assets/overlay-pass.png")
-  //- .card-overlay-wrapper
-  //-   img(src="/images/assets/overlay-fav.png")
+fa-modifier#passMod
+  fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa-size="[true,true]")
+    .card-overlay-wrapper
+      .card-overlay-pass
+      .card-overlay-text-wrapper 
+        span.card-overlay-text PASS
+fa-modifier#favMod
+  fa-surface(class="{{'jobcard'+(card.index-curIdx)}}", fa-pipe-to="swipePipe", fa-size="[true,true]", fa-origin="[0.5,0.5]", fa-align="[0.5,0.5]")
+    .card-overlay-wrapper
+      .card-overlay-fav
+      .card-overlay-text-wrapper 
+        span.card-overlay-text LIKE
+fa-animation(timeline="scrollPositionFav")
+  animate(targetmodselector="#favMod", field="opacity", startvalue="0", endvalue="1")
+fa-animation(timeline="scrollPositionPass")
+  animate(targetmodselector="#passMod", field="opacity", startvalue="0", endvalue="1")

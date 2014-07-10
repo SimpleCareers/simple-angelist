@@ -1,13 +1,18 @@
 'use strict'
 
 require "./extensions/capitalize.coffee"
+require "./modules/preloader.coffee"
+require "./modules/syncfocus.coffee"
 
 angular
   .module('simplecareersApp', [
     'ui.router',
     'restangular',
     'famous.angular',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'preloader',
+    'syncFocusWith',
+    # 'anim-in-out'
   ])
   .config([
     '$locationProvider'
@@ -16,6 +21,7 @@ angular
     '$urlRouterProvider'
   	($locationProvider, RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
       $locationProvider.html5Mode(false);        
+      
       RestangularProvider.setRestangularFields
         id: "objectId"
       RestangularProvider.setBaseUrl "https://api.parse.com/1/"
@@ -26,15 +32,71 @@ angular
         if operation=="getList"
           return data.results
         return data
-      $urlRouterProvider.otherwise "/app"
+      
+      # Deal with missing trailing slash
+      # $urlRouterProvider.rule ($injector, $location) ->
+      #   path = $location.path()
+      #   search = $location.search()
+      #   if path[path.length - 1] isnt "/"
+      #     if Object.keys(search).length is 0
+      #       path + "/"
+      #     else
+      #       params = []
+      #       angular.forEach search, (v, k) ->
+      #         params.push k + "=" + v
+      #         return
+      #
+      #       path + "/?" + params.join("&")
+    
+      $urlRouterProvider.otherwise "/login"
       $stateProvider
-      .state('app',
-        url: "/app",
+      .state('login',
+        url: "/login",
         views: 
           {
             'main': {
-              templateUrl: "/views/app.html",
-              controller: "AppCtrl"
+              templateUrl: "/views/login/login.html",
+              controller: "LoginCtrl"
+            }
+          }
+      )
+      .state('profile',
+        url: "/profile",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/profile/profile.html",
+              controller: "ProfileCtrl"
+            }
+          }
+      )
+      .state('job',
+        url: "/job",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/job/job.html",
+              controller: "JobCtrl"
+            }
+          }
+      )
+      .state('apply',
+        url: "/apply",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/apply/apply.html",
+              controller: "ApplyCtrl"
+            }
+          }
+      )
+      .state('detail',
+        url: "/detail",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/detail/detail.html",
+              controller: "DetailCtrl"
             }
           }
       )
