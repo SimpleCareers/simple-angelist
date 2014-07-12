@@ -1,59 +1,75 @@
 'use strict'
 
 Ctrl = require "../ctrl.coffee"
+async = require "async"
 
 class DetailCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "$http", "localStorageService"]
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @http, @storage) ->
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "localStorageService", "$http", "localStorageService"]
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @storage, @http, @localStorageService) ->
     super @scope
-    # @scope.cards = ["1","2","3","4"]
-    @scope.detailScrollPipe = new @EventHandler()
-    @scope.detailScrollPipe.pipe @scope.enginePipe
-    @scope.options =
-      detailScrollView:
-        paginated: false
-        direction: 1
-        speedLimit: 5
-        margin: 10000
-      containerSurface:
-        size: [320,568]
-        properties:
-          overflow: "hidden"
-          "z-index": 650
     
-    @scope.$on "pageChange", (e,from,to,data)=>
-      # console.log to
-      if to==4 and data
-        @scope.card = data
-        @closeQuestion()
-    @questionTimeline = new @Transitionable(0)
-  apply: (card, note)=>
-    @closeQuestion()
+    @scope.$emit "showMenu"
+    @scope.$emit "page", 3
 
-    accessToken = @storage.get "accessToken"
-    if not accessToken
+    if not @scope.isLogin()
+      @scope.changePageTo 0
       return
-    @scope.status = "loading"
-    p = @http.post "#{@baseUrl}/angel/intros",
-      startup_id: 383073 #card.startup.id
-      note: note
-    , 
-      headers:
-        Authorization: "Bearer #{accessToken}"
-    p.success (data)=>
-      # console.log data
-      @scope.status = "done"
-    p.error (err)=>
-      @scope.status = "error"
+        
+    @scope.listPipe = new @EventHandler()
 
-    @scope.saveApplies card
-  closeQuestion: =>
-    @scope.isTextAreaFocused = false
-    @questionTimeline.set 0, duration:300 
-  openQuestion: =>
-    @scope.isTextAreaFocused = true
-    @questionTimeline.set 1, duration:300
-  scrollYPosition: =>
-    return @questionTimeline.get()
+    @scope.mode = "Like"
+    
+    @scope.likes = []
+    @scope.approves = []
+    @scope.applies = []
+    
+    @scope.$on "modeChange", (e,mode)=>
+      @scope.mode = mode
+        
+    @scope.getUser (err,user)=>
+      @loadLikes(user.likes.reverse())
+
+      accessToken = @localStorageService.get "accessToken"
+      p = @http.get "#{@baseUrl}/myangel/talent/startups",
+        headers:
+          Authorization: "Bearer #{accessToken}"
+      , cache: true
+      p.success (data)=>
+        @scope.approvesBuffer = data.matched
+        @loadApplies(user.applies.reverse())
+      p.error (err)=>
+        @loadApplies(user.applies.reverse())
+        
+  addApprove: (card)=>
+    if card.startup.id in @scope.approvesBuffer
+      @scope.approves.push card
+  loadApplies: (applies)=>
+    @scope.appliesBuffer = applies
+    async.map @scope.appliesBuffer, (id,cb)=>
+      @scope.loadCard id, (err,card)=>
+        (cb();return) if err or not card
+        @addApprove(card)
+        cb(null,card)
+    ,(err,cards)=>
+      cards.forEach (card)=>
+        @scope.applies.push(card) if card
+  loadLikes: (likes)=>
+    @scope.likesBuffer = likes
+    async.map @scope.likesBuffer, (id,cb)=>
+      @scope.loadCard id, (err,card)=>
+        (cb();return) if err or not card
+        cb(null,card)
+    ,(err,cards)=>
+      cards.forEach (card)=>
+        @scope.likes.push(card) if card
+  showDetail: (like)=>
+    # console.log "showDetail",like
+    # @scope.goToPage(4,like)
+    @scope.card = like
+  hideDetail: =>
+    @scope.card = undefined
+  pageChange: =>
+    # console.log "pageChange"
+    
 
 angular.module('simplecareersApp').controller('DetailCtrl', DetailCtrl)

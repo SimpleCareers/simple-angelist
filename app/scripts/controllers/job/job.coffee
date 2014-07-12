@@ -21,17 +21,20 @@ class JobCtrl extends Ctrl
     #     console.log "preloaded"
     #   @scope.cards.push card
     #   @loadBackground()
-    while n>0
-      card = @dataBuffer.dequeue()
-      if card
-        card.index = @index++
-        if @index % 10 == 5
-          # Hack to remove unused job card surfaces once in a while
-          angular.element(".jobcard0").slice(0,-1).remove()
-        @preloader.preloadImages([card.screenshot, card.startup.logo_url]).then =>
-        @scope.cards.push card
-        @loadBackground()
-        n--
+    if n<=0
+      return
+    card = @dataBuffer.dequeue()
+    if not card
+      @process n-1
+      return
+    card.index = @index++
+    if @index % 10 == 5
+      # Hack to remove unused job card surfaces once in a while
+      angular.element(".jobcard0").slice(0,-1).remove()
+    @preloader.preloadImages([card.screenshot, card.startup.logo_url]).then =>
+    @scope.cards.push card
+    @loadBackground()
+    @process n-1
       
   loadMore: =>
     # bufferLength = @dataBuffer.length
@@ -65,7 +68,7 @@ class JobCtrl extends Ctrl
       if (not data) or not (data.jobs)
         ocb?()
         return
-      async.each data.jobs, (card,cb)=>
+      async.eachLimit data.jobs, 4, (card,cb)=>
         @scope.processCard card,(card)=>
           @filter card, (card)=>
             if card
@@ -88,6 +91,10 @@ class JobCtrl extends Ctrl
         @scope.currentImage = @scope.cards[1].screenshot
   constructor: (@scope, @stateParams, @state, @timeout, @famous, @http, @preloader) ->
     super @scope
+    
+    @scope.$emit "showMenu"
+    @scope.$emit "page", 2
+
     @scope.showTutorial = false
     @scope.tutorialPipe = new @EventHandler()
     sync = new @GenericSync ["mouse","touch"]
@@ -110,10 +117,10 @@ class JobCtrl extends Ctrl
     
     # TODO: remove
     @scope.cards = []
-    data = require "./data"
-    data.forEach (card)=>
-      card.index = @index++
-      @scope.cards.push card
+    # data = require "./data"
+    # data.forEach (card)=>
+    #   card.index = @index++
+    #   @scope.cards.push card
     
     # p = @http.get "#{@baseUrl}jobs?page=10"
     # # https://api.angel.co/1/tags/14781/jobs

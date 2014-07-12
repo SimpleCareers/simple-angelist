@@ -5,7 +5,12 @@ async = require "async"
 homo = require "triangle-homography"
 
 class AppCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "$window", "$http", "localStorageService", "preloader"]
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "$window", "$http", "localStorageService", "preloader", "$famousState"]
+  isLogin: =>
+    accessToken = @localStorageService.get "accessToken"
+    sessionToken = @localStorageService.get "sessionToken"
+    userId = @localStorageService.get "userId"
+    return accessToken and sessionToken and userId
   loadCard: (id,cb)=>
     p = @http.get "#{@baseUrl}/angel/jobs/#{id}",{},cache:true
     p.error (err)=>
@@ -56,30 +61,31 @@ class AppCtrl extends Ctrl
   getUser: (cb)=>
     if @scope.parseUser
       cb? null,@scope.parseUser
-    userId = @storage.get "userId"
-    sessionToken = @storage.get "sessionToken"
+      return
+    userId = @localStorageService.get "userId"
+    sessionToken = @localStorageService.get "sessionToken"
     user = @Restangular.one("users",userId)
     user.get({},
       "X-Parse-Session-Token": sessionToken
     ).then (user)=>
-      async.parallel [(cb)=>
-        @loadLikes(user,cb)
-      ,(cb)=>
-        @loadApplies(user,cb)
-      ,(cb)=>
-        @loadApproves(user,cb)
-      ],=>
-        @scope.parseUser = user
-        cb? null,user
+      # async.parallel [(cb)=>
+      #   @loadLikes(user,cb)
+      # ,(cb)=>
+      #   @loadApplies(user,cb)
+      # ,(cb)=>
+      #   @loadApproves(user,cb)
+      # ],=>
+      @scope.parseUser = user
+      cb? null,user
     , (err)=>
       cb? err
   saveApplies: (card)=>
     @scope.parseUser?.applies?=[]
-    results = _.where @scope.parseUser?.applies,id:card.id
+    results = _.where @scope.parseUser?.applies,card.id
     if results.length == 0
-      @scope.parseUser?.applies.push card
-    sessionToken = @storage.get "sessionToken"
-    userId = @storage.get "userId"
+      @scope.parseUser?.applies.push card.id
+    sessionToken = @localStorageService.get "sessionToken"
+    userId = @localStorageService.get "userId"
     if sessionToken and userId
       user = @Restangular.one("users",userId)
       user.applies =
@@ -89,13 +95,24 @@ class AppCtrl extends Ctrl
         "X-Parse-Session-Token": sessionToken
       ).then (user)=>
   saveLike: (card)=>
+    # accessToken = @localStorageService.get "accessToken"
+    # p = @http.post "#{@baseUrl}/myangel/talent/star",
+    #   startup_id: card.startup.id
+    #   star: 1
+    # ,
+    #   headers:
+    #     Authorization: "Bearer #{accessToken}"
+    # , cache: true
+    # p.success (data)=>
+    #   console.log data
+    # p.error (err)=>
+
     @scope.parseUser?.likes?=[]
-    @scope.parseUser?.likes.push card
-    results = _.where @scope.parseUser?.likes,id:card.id
+    results = _.where @scope.parseUser?.likes,card.id
     if results.length == 0
-      @scope.parseUser?.likes.push card
-    sessionToken = @storage.get "sessionToken"
-    userId = @storage.get "userId"
+      @scope.parseUser?.likes.push card.id
+    sessionToken = @localStorageService.get "sessionToken"
+    userId = @localStorageService.get "userId"
     if sessionToken and userId
       user = @Restangular.one("users",userId)
       user.likes =
@@ -114,12 +131,25 @@ class AppCtrl extends Ctrl
       cb? card
     p.error =>
       cb? null
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @window, @http, @storage, @preloader) ->
+  signOut:=>
+    @scope.status = "notavailable"
+    @localStorageService.clearAll()
+    @scope.user = undefined
+    @scope.goToPage(0)
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @window, @http, @localStorageService, @preloader, @famousState) ->
     super @scope
+    
+    @scope.showMenu = false
+    @scope.$on "showMenu", =>
+      @scope.showMenu = true
+    @scope.$on "hideMenu", =>
+      @scope.showMenu = false
+    @scope.$on "page", (e,page)=>
+      @scope.goToPage(page)
     
     @scope.screenWidth = $(window).width()
     @scope.screenHeight = $(window).height()
-    
+    # @famousState.go "job"
     # @scope.sync = true
     # @scope.speed = 500
     # @scope.mainViewStyle = 'anim-fade'
@@ -171,16 +201,22 @@ class AppCtrl extends Ctrl
       "Like": new @Transitionable 1
       "Applied": new @Transitionable .5
       "Approved": new @Transitionable .5
+      
+    # @scope.inTransitionFunction = (cb)=>
+    #   console.log "in"
+    # @scope.outTransitionFunction = (cb)=>
+    #   console.log "out"
+  
   pageSyncStart:(e)=>
     
   pageSyncUpdate:(e)=>
-    # if (not @storage.get("accessToken"))
+    # if (not @localStorageService.get("accessToken"))
     #   return
     px = e.position[0]
     if Math.abs(px) > 40
       @movePage e
   pageSyncEnd:(e)=>
-    # if (not @storage.get("accessToken"))
+    # if (not @localStorageService.get("accessToken"))
     #   return
     vx = e.velocity[0]
     px = e.position[0]
@@ -276,17 +312,20 @@ class AppCtrl extends Ctrl
         v.set 0.5,duration:300,=>
     @scope.$broadcast "modeChange", mode
   changePageTo:(page)=>
+    @scope.currentPage = page
     @timeout =>
       switch page
         when 0
+          # @famousState.go "login"
           @state.go "login"
         when 1
+          # @famousState.go "profile"
           @state.go "profile"
         when 2
+          # @famousState.go "job"
           @state.go "job"
         when 3
-          @state.go "apply"
-        when 4
+          # @famousState.go "apply"
           @state.go "detail"
   goToPage: (page, data)=>
     while @scope.currentPage<page
@@ -294,58 +333,78 @@ class AppCtrl extends Ctrl
     while @scope.currentPage>page
       @prevPage(data)
   prevPage: (data)=>
+    currentPage = @scope.currentPage
     # if @scope.currentPage<=0
     #   return false
     # @scope.currentPage--
     # console.log "@scope.currentPage",@scope.currentPage
     # @scope.$broadcast "pageChange", @scope.currentPage+1,@scope.currentPage,data
-    if @scope.currentPage<=0
+    if currentPage<=0
       return false
     i=0
     #current pages and pages after the current page
     # while @scope.currentPage+i<@numPages
-    pIdx = @scope.currentPage+i
+    pIdx = currentPage+i
     nextPos = @pages[pIdx].pos.get()
+    @changePageTo currentPage-1
+    @scope.$broadcast "pageChange", currentPage,currentPage-1,data
     @setPagePos pIdx,[(i+1)*@scope.screenWidth,nextPos[1],0], duration: 300, =>
-      @changePageTo @scope.currentPage
-      @scope.$broadcast "pageChange", @scope.currentPage+1,@scope.currentPage,data
     i++
-    @scope.currentPage--
+    currentPage--
     i=0
     #pages before the current page
-    while @scope.currentPage-i>=0
-      pIdx = @scope.currentPage-i
+    while currentPage-i>=0
+      pIdx = currentPage-i
       nextPos = @pages[pIdx].pos.get()
       @setPagePos pIdx,[0,nextPos[1],-@zSeparation*(i)], duration: 300, =>
       i++
     return true
   nextPage: (data)=>
+    currentPage = @scope.currentPage
     # if @scope.currentPage>=@numPages-1
     #   return false
     # @scope.currentPage++
     # console.log "@scope.currentPage",@scope.currentPage
     # @scope.$broadcast "pageChange", @scope.currentPage-1,@scope.currentPage,data
-    if @scope.currentPage>=@numPages-1
+    if currentPage>=@numPages-1
       return false
     i=0
     #current pages before the current page
     # while (@scope.currentPage-i)>=0
-    pIdx = @scope.currentPage-i
+    pIdx = currentPage-i
     nextPos = @pages[pIdx].pos.get()
+    @changePageTo currentPage+1
+    @scope.$broadcast "pageChange", currentPage,currentPage+1,data
     @setPagePos pIdx,[0,nextPos[1],-@zSeparation*(i+1)], duration: 300, =>
-      @changePageTo @scope.currentPage
-      @scope.$broadcast "pageChange", @scope.currentPage-1,@scope.currentPage,data
     i++
-    @scope.currentPage++
+    currentPage++
     i=0
     #pages after the current page
-    while (@scope.currentPage+i)<@numPages
-      pIdx = @scope.currentPage+i
+    while (currentPage+i)<@numPages
+      pIdx = currentPage+i
       nextPos = @pages[pIdx].pos.get()
       @setPagePos pIdx,[(i)*@scope.screenWidth,nextPos[1],0], duration: 300, =>
       i++
     return true
   getPagePosition: (i)=>
     return @pages[i].pos.get();
+  loadAngelUser:(cb)=>
+    if @scope.user
+      cb? null,@scope.user
+      return
+    @scope.getUser =>
+      accessToken = @localStorageService.get "accessToken"
+      if not accessToken
+        return
+      p = @http.get "#{@baseUrl}/myangel/me",
+        headers:
+          Authorization: "Bearer #{accessToken}"
+      , cache: true
+      # https://api.angel.co/1/tags/14781/jobs
+      p.success (data)=>
+        @scope.user = data
+        cb? null,@scope.user
+      p.error (err)=>
+        cb?(err)
 
 angular.module('simplecareersApp').controller('AppCtrl', AppCtrl)

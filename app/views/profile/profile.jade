@@ -1,36 +1,36 @@
 fa-app.full-screen.main-content
-  fa-modifier(fa-translate="getPagePosition(1)")
-    fa-modifier(fa-align="[0.5,0.5]")
-      fa-modifier(fa-origin="[0.5,0.5]")
-        fa-image-surface.profile-background-blur(fa-image-url="{{user.image || '/images/assets/profile.png'}}")
-        fa-surface.profile-surface(fa-size="[undefined,undefined]")
-          //- img.profile-background-blur(ng-src="{{user.image || '/images/assets/profile.png'}}")
-    fa-scroll-view(fa-start-index="0",fa-options="options.profileScrollView",fa-pipe-from="profilePipe")
-      fa-surface.profile-surface(fa-size="[undefined, true]",fa-pipe-to="profilePipe")
-        .profile-logo
-        .profile-content(ng-if="status=='loading'")
-          .profile-notavailable Loading...
-        .profile-content(ng-if="status=='notavailable'")
-          .profile-notavailable User's information is not available
-        .profile-content(ng-if="status=='loaded'")
-          .col-xs-3
-            img.profile-img(ng-src="{{user.image  || '/images/assets/profile.png'}}")
-          .col-xs-9
-            h4.profile-name
-              | {{user.name}} 
-            p.profile-email
-              | {{user.email}}
-            p.profile-bio
-              | {{user.bio}}
-              //- | Founder
-              //- span.profile-link @Spyke
-              //- | ,
-              //- span.profile-link @Hitch Lab
-              //- | • Worked at @Bank of America Merrill Lynch
-              //- | • Studied at @Ohio Wesleyan, @Berkeley
-            p.profile-skill
-              span(ng-repeat="location in user.locations") {{location.display_name}} {{$last ? '' : '• '}}
-            p.profile-skill
-              span(ng-repeat="skill in user.skills") {{skill.display_name}} {{$last ? '' : '• '}}
-            //- p.profile-signout(ng-click="signOut()")
-            //-   | Sign Out
+  //- fa-modifier(fa-translate="getPagePosition(1)")
+  fa-modifier(fa-align="[0.5,0.5]")
+    fa-modifier(fa-origin="[0.5,0.5]")
+      fa-image-surface.profile-background-blur(fa-image-url="{{user.image || '/images/assets/profile.png'}}")
+      fa-surface.profile-surface(fa-size="[undefined,undefined]")
+        //- img.profile-background-blur(ng-src="{{user.image || '/images/assets/profile.png'}}")
+  fa-scroll-view(fa-start-index="0",fa-options="options.profileScrollView",fa-pipe-from="profilePipe")
+    fa-surface.profile-surface(fa-size="[undefined, true]",fa-pipe-to="profilePipe")
+      .profile-logo
+      .profile-content(ng-if="status=='loading'")
+        .profile-notavailable Loading...
+      .profile-content(ng-if="status=='notavailable'")
+        .profile-notavailable User's information is not available
+      .profile-content(ng-if="status=='loaded'")
+        .col-xs-3
+          img.profile-img(ng-src="{{user.image  || '/images/assets/profile.png'}}")
+        .col-xs-9
+          h4.profile-name
+            | {{user.name}} 
+          p.profile-email
+            | {{user.email}}
+          p.profile-bio
+            | {{user.bio}}
+            //- | Founder
+            //- span.profile-link @Spyke
+            //- | ,
+            //- span.profile-link @Hitch Lab
+            //- | • Worked at @Bank of America Merrill Lynch
+            //- | • Studied at @Ohio Wesleyan, @Berkeley
+          p.profile-skill
+            span(ng-repeat="location in user.locations") {{location.display_name}} {{$last ? '' : '• '}}
+          p.profile-skill
+            span(ng-repeat="skill in user.skills") {{skill.display_name}} {{$last ? '' : '• '}}
+          //- p.profile-signout(ng-click="signOut()")
+          //-   | Sign Out

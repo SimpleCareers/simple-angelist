@@ -1,0 +1,15 @@
+div.apply-media
+  img.company-img(ng-src="{{card.startup.thumb_url}}")
+  div.media-body
+    h4.title
+      | {{card.title}}
+    p.subtitle
+      | {{card.startup.name}} 
+      span(ng-if="card.location")
+        | • {{card.location}}
+    p.description
+      | {{card.job_type.capitalize()}} • 
+      | ${{(card.salary_min/1000|| 0) | number}}K - ${{(card.salary_max/1000|| 0) | number}}K • 
+      | {{(card.equity_min || 0) | number:1}}% - {{(card.equity_max || 0) | number:1}}%
+.hline
+.margin-bottom-64(ng-if="$last")

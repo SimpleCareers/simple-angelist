@@ -3,9 +3,13 @@
 Ctrl = require "../ctrl.coffee"
 
 class LoginCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "localStorageService"]
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @localStorageService) ->
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous", "localStorageService", "$http"]
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous, @localStorageService, @http) ->
     super @scope
+    
+    @scope.$emit "hideMenu"
+    @scope.$emit "page", 0    
+    
     @scope.loginPipe = new @EventHandler()
     sync = new @GenericSync ["mouse","touch"]
     @scope.loginPipe.pipe sync
@@ -16,19 +20,18 @@ class LoginCtrl extends Ctrl
           overflow: "hidden"
           "z-index": 50
     @scope.status = "normal"
-    accessToken = @localStorageService.get "accessToken"
-    sessionToken = @localStorageService.get "sessionToken"
-    userId = @localStorageService.get "userId"
-    if accessToken and sessionToken and userId
+    if @scope.isLogin()
       @scope.getUser()
       @scope.goToPage(1)
-    @scope.$on "pageChange", (e,from,to)=>
-      if from==0 and to == 1
-        accessToken = @localStorageService.get "accessToken"
-        sessionToken = @localStorageService.get "sessionToken"
-        userId = @localStorageService.get "userId"
-        if not (accessToken and sessionToken and userId)
-          @login()
+
+    # @scope.$on "pageChange", (e,from,to)=>
+    #   console.log "pagechange"
+    #   if from==0 and to == 1
+    #     accessToken = @localStorageService.get "accessToken"
+    #     sessionToken = @localStorageService.get "sessionToken"
+    #     userId = @localStorageService.get "userId"
+    #     if not (accessToken and sessionToken and userId)
+    #       @login()
   receiveMessage: (event) =>
     @scope.status = "normal"
     data = JSON.parse(event.data)
@@ -54,15 +57,34 @@ class LoginCtrl extends Ctrl
     window.removeEventListener "message", @receiveMessage
     @scope.goToPage(1)
   checkToken: (cb)=>
-    @popup?.postMessage "getToken", "http://simplecareers.parseapp.com"
-    @timeout.cancel(@checkpromise)
-    if not @popup.closed
+    # @popup?.postMessage "getToken", "http://simplecareers.parseapp.com"
+    # @timeout.cancel(@checkpromise)
+    p = @http.get "http://simplecareers.parseapp.com/check?itoken=#{@itoken}"
+    p.success (data)=>
+      if not data or not data.access or not data.session or not data.user
+        @checkpromise = @timeout @checkToken, 1000
+        return
+      @timeout.cancel(@checkpromise)
+      @localStorageService.set "accessToken", data.access
+      @localStorageService.set "userId", data.user
+      @localStorageService.set "sessionToken", data.session
+      @scope.getUser()
+      @scope.goToPage(1)
+      
+    p.error =>
       @checkpromise = @timeout @checkToken, 1000
+  uuid: =>
+    S4 = ->
+      (((1 + Math.random()) * 0x10000) | 0).toString(16).substring 1
+
+    S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4()
   login: (cb)=>
+    console.log "login"
     @scope.status = "logging"
-    @popup = window.open "http://simplecareers.parseapp.com/authorize"
+    @itoken = @uuid()
+    @popup = window.open "http://simplecareers.parseapp.com/authorize?itoken=#{@itoken}"
     @checkpromise = @timeout @checkToken, 1000
-    window.addEventListener "message", @receiveMessage, false
+    # window.addEventListener "message", @receiveMessage, false
     return
 
   clickTerm: =>

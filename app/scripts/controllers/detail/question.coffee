@@ -13,5 +13,6 @@ class QuestionCtrl extends Ctrl
           overflow: "hidden"
           "z-index": 750
           opacity: 0.1
-    
+    @scope.questionScrollPipe = new @EventHandler()
+
 angular.module('simplecareersApp').controller('QuestionCtrl', QuestionCtrl)

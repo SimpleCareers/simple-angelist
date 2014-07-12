@@ -82,7 +82,8 @@
     -->
     <div ng-controller="AppCtrl">
       <div ui-view="main" autoscroll="false"></div>
-      <fa-app class="menu-screen", ng-if="currentPage!=0">
+      <!-- <div fa-router></div> -->
+      <fa-app class="menu-screen", ng-if="showMenu">
         <fa-modifier fa-align="[0, 1]", fa-origin="[0, 1]" fa-size="[screenWidth, 64]">
           <div ng-include="'./views/menu/menu.html'"></div>
         </fa-modifier>

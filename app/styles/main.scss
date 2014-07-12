@@ -1022,6 +1022,20 @@ $secondary-color: #5A5A5A;
 $decor-color: #AFAFAF;
 $bg-color: #e1e1e1;
 
+@mixin filter($filter) {
+  -webkit-filter: $filter;
+  -moz-filter: $filter;
+  -ms-filter: $filter;
+  -o-filter: $filter;
+  filter: $filter;
+}
+
+@mixin box-shadow($filter) {
+  -webkit-box-shadow: $filter;
+  -moz-box-shadow: $filter;
+  box-shadow: $filter;
+}
+
 body {
     margin: 0;
     font-family: 'AvenirLTStd-Light';
@@ -1040,19 +1054,12 @@ body {
     background-color: black;
     -webkit-perspective: 500;
 }
-
-@mixin filter($filter) {
-  -webkit-filter: $filter;
-  -moz-filter: $filter;
-  -ms-filter: $filter;
-  -o-filter: $filter;
-  filter: $filter;
-}
-
-@mixin box-shadow($filter) {
-  -webkit-box-shadow: $filter;
-  -moz-box-shadow: $filter;
-  box-shadow: $filter;
+.detail-content {
+  z-index:700;
+  .famous-angular-container{
+    background-color: rgba(0,0,0,0.5);
+//    @include filter(blur(10px) brightness(0.3));
+  }
 }
 
 .blur{
@@ -1112,20 +1119,28 @@ fieldset[disabled] .btn {
 
 .action-button{
   border-radius: 40px;
-  background-color: #4CC68A;
-  background-image: -o-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
-  background-image: -moz-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
-  background-image: -ms-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
-  background-image: linear-gradient(-176deg, #4CC68A 0%, #30B071 100%);
   font-family: 'AvenirLTStd-Medium';
   font-size: 15px;
   color: #FFFFFF;
   line-height: 40px;
   text-transform: uppercase;
   opacity: 0.9;
-//  background-blend-mode: multiply, multiply;
-//  -webkit-background-blend-mode: multiply, multiply;
-  
+}
+.action-button-green{
+  @extend .action-button;
+  background-color: #4CC68A;
+  background-image: -o-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
+  background-image: -moz-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
+  background-image: -ms-linear-gradient(-86deg, #4CC68A 0%, #30B071 100%);
+  background-image: linear-gradient(-176deg, #4CC68A 0%, #30B071 100%);
+}
+.action-button-red{
+  @extend .action-button;
+  background-color: #DD4F3C;
+  background-image: -o-linear-gradient(-86deg, #DD4F3C 0%, #DD4F3C 100%);
+  background-image: -moz-linear-gradient(-86deg, #DD4F3C 0%, #DD4F3C 100%);
+  background-image: -ms-linear-gradient(-86deg, #DD4F3C 0%, #DD4F3C 100%);
+  background-image: linear-gradient(-176deg, #DD4F3C 0%, #DD4F3C 100%);
 }
 //- 000-100   login
 //- 101-200   profile
@@ -1193,12 +1208,21 @@ div[class^="jobcard"] {
   width: 40px;
   height: 40px;
 }
+.slider-bg{
+  padding-left: 20px;
+  padding-right: 20px;
+  .inner{
+    background-color: #e0e0e0;
+    width:100%;
+    height:10px;
+  }
+}
 
 @import "./anim-in-out.css";
 @import "./font.scss";
 @import "./profile.scss";
 @import "./card.scss";
-@import "./apply.scss";
+@import "./detail.scss";
 @import "./question.scss";
 @import "./tutorial.scss";
 @import "./login.scss";

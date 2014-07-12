@@ -19,7 +19,9 @@ angular
     'RestangularProvider'
   	'$stateProvider'
     '$urlRouterProvider'
-  	($locationProvider, RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
+    '$famousStateProvider'
+    '$famousUrlRouterProvider'
+  	($locationProvider, RestangularProvider, $stateProvider, $urlRouterProvider, $famousStateProvider, $famousUrlRouterProvider, config) ->
       $locationProvider.html5Mode(false);        
       
       RestangularProvider.setRestangularFields
@@ -49,10 +51,40 @@ angular
       #       path + "/?" + params.join("&")
     
       $urlRouterProvider.otherwise "/login"
+
+      # $famousUrlRouterProvider.when "/login","login"
+      # $famousUrlRouterProvider.when "/profile","profile"
+      # $famousUrlRouterProvider.when "/job","job"
+      # $famousUrlRouterProvider.otherwise "login"
+      #
+      # $famousStateProvider
+      # .state("login", {
+      #   url: "/login",
+      #   templateUrl: "views/login/login.html",
+      #   controller: "LoginCtrl",
+      #   inTransitionFrom : "inTransitionFunction($callback)",
+      #   outTransitionTo: "outTransitionFunction($callback)"
+      # })
+      # .state("profile", {
+      #   url: "/profile",
+      #   templateUrl: "views/profile/profile.html",
+      #   controller: "ProfileCtrl",
+      #   inTransitionFrom : "inTransitionFunction",
+      #   outTransitionTo: "outTransitionFunction"
+      # })
+      # .state("job", {
+      #   url: "/job",
+      #   templateUrl: "views/job/job.html",
+      #   controller: "JobCtrl",
+      #   inTransitionFrom : "inTransitionFunction($callback)",
+      #   outTransitionTo: "outTransitionFunction($callback)"
+      # })
+      
+      
       $stateProvider
       .state('login',
         url: "/login",
-        views: 
+        views:
           {
             'main': {
               templateUrl: "/views/login/login.html",
@@ -62,7 +94,7 @@ angular
       )
       .state('profile',
         url: "/profile",
-        views: 
+        views:
           {
             'main': {
               templateUrl: "/views/profile/profile.html",
@@ -72,7 +104,7 @@ angular
       )
       .state('job',
         url: "/job",
-        views: 
+        views:
           {
             'main': {
               templateUrl: "/views/job/job.html",
@@ -80,19 +112,9 @@ angular
             }
           }
       )
-      .state('apply',
-        url: "/apply",
-        views: 
-          {
-            'main': {
-              templateUrl: "/views/apply/apply.html",
-              controller: "ApplyCtrl"
-            }
-          }
-      )
       .state('detail',
         url: "/detail",
-        views: 
+        views:
           {
             'main': {
               templateUrl: "/views/detail/detail.html",
@@ -100,13 +122,23 @@ angular
             }
           }
       )
+      # .state('detail',
+      #   url: "/detail",
+      #   views:
+      #     {
+      #       'main': {
+      #         templateUrl: "/views/detail/detail.html",
+      #         controller: "DetailCtrl"
+      #       }
+      #     }
+      # )
   ])
 
 require "./controllers/app.coffee"
 require "./controllers/login/login.coffee"
 require "./controllers/profile/profile.coffee"
-require "./controllers/apply/apply.coffee"
 require "./controllers/detail/detail.coffee"
+require "./controllers/detail/card.coffee"
 require "./controllers/detail/question.coffee"
 require "./controllers/job/job.coffee"
 require "./controllers/job/jobcard.coffee"
