@@ -53,14 +53,14 @@ class JobCardCtrl extends Ctrl
     @pos.set [0,0,0],{duration : 300,curve : 'easeInOut'},=>
       @reset()
   animatePass: =>
-    @pos.set [-320,568*2,0],{duration : 300,curve : 'easeInOut'},=>
+    @pos.set [-@scope.screenWidth,@scope.screenHeight*2,0],{duration : 300,curve : 'easeInOut'},=>
       @reset()
       @commitPass()
   commitPass: =>
     @timeout =>
       @scope.$emit "next"
   animateFav: =>
-    @pos.set [320,568*2,0],{duration : 300,curve : 'easeInOut'},=>
+    @pos.set [@scope.screenWidth,@scope.screenHeight*2,0],{duration : 300,curve : 'easeInOut'},=>
       @reset()
       @commitFav()
   commitFav: =>

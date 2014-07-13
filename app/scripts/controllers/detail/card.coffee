@@ -38,15 +38,16 @@ class DetailCardCtrl extends Ctrl
     sync.on "end", (event)=>
       pos = @scope.sliderPosX.get()
       if pos>@threshold
-        @apply()
+        @openQuestion()
       else if pos<-@threshold
-        @pass()
+        @timeout =>
+          @scope.hideDetail()
       @scope.sliderPosX.set 0, duration: 300
       return
     sync.on "update", (event)=>
       pos = @scope.sliderPosX.get()
       @scope.sliderPosX.set Math.max(Math.min(@max,pos+event.delta[0]),-@max)
-      
+    
   submitAnswer: (card, note)=>
     
     accessToken = @storage.get "accessToken"
@@ -80,13 +81,18 @@ class DetailCardCtrl extends Ctrl
   closeQuestion: =>
     @scope.isTextAreaFocused = false
     @questionTimeline.set 0, duration:300
-  apply: =>
-    @openQuestion()
-  pass:=>
-    @timeout =>
-      @scope.hideDetail()
+  clickApply: =>
+    @scope.sliderPosX.set @threshold, duration: 300,=>
+      @openQuestion()
+      @scope.sliderPosX.set 0, duration: 300
+  clickPass:=>
+    @scope.sliderPosX.set -@threshold, duration: 300,=>
+      @timeout =>
+        @scope.hideDetail()
+      @scope.sliderPosX.set 0, duration: 300
   openQuestion: =>
-    @scope.isTextAreaFocused = true
+    @timeout =>
+      @scope.isTextAreaFocused = true
     @questionTimeline.set 1, duration:300
   scrollYesPosition: =>
     pos = @scope.sliderPosX.get()

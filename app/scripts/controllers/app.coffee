@@ -18,36 +18,6 @@ class AppCtrl extends Ctrl
     p.success (data)=>
       @processCard data,=>
         cb? null,data
-  loadApplies: (user,cb)=>
-    if (not user) or (not user.applies)
-      cb? null
-      return
-    async.map user.applies, (id, cb)=>
-      @loadCard id,cb
-    , (err,applies)=>
-      user.applies = applies
-      cb? err,applies
-
-  loadApproves: (user,cb)=>
-    if (not user) or (not user.approves)
-      cb? null
-      return
-    async.map user.approves, (id, cb)=>
-      @loadCard id,cb
-    , (err,approves)=>
-      user.approves = approves
-      cb? err,approves
-  
-  loadLikes: (user,cb)=>
-    if (not user) or (not user.likes)
-      cb? null
-      return
-    async.map user.likes, (id, cb)=>
-      @loadCard id,cb
-    , (err,likes)=>
-      user.likes = _.filter likes, (like)=> like
-      cb? err,likes
-        
   loadRoles: (card)=>
     p = @http.get "#{@baseUrl}/angel/startups/#{card.startup.id}/roles",{},cache:true
     p.success (data)=>
@@ -68,13 +38,6 @@ class AppCtrl extends Ctrl
     user.get({},
       "X-Parse-Session-Token": sessionToken
     ).then (user)=>
-      # async.parallel [(cb)=>
-      #   @loadLikes(user,cb)
-      # ,(cb)=>
-      #   @loadApplies(user,cb)
-      # ,(cb)=>
-      #   @loadApproves(user,cb)
-      # ],=>
       @scope.parseUser = user
       cb? null,user
     , (err)=>
@@ -95,18 +58,6 @@ class AppCtrl extends Ctrl
         "X-Parse-Session-Token": sessionToken
       ).then (user)=>
   saveLike: (card)=>
-    # accessToken = @localStorageService.get "accessToken"
-    # p = @http.post "#{@baseUrl}/myangel/talent/star",
-    #   startup_id: card.startup.id
-    #   star: 1
-    # ,
-    #   headers:
-    #     Authorization: "Bearer #{accessToken}"
-    # , cache: true
-    # p.success (data)=>
-    #   console.log data
-    # p.error (err)=>
-
     @scope.parseUser?.likes?=[]
     results = _.where @scope.parseUser?.likes,card.id
     if results.length == 0
@@ -152,22 +103,6 @@ class AppCtrl extends Ctrl
     $( window ).resize =>
       @scope.screenWidth = $(window).width()
       @scope.screenHeight = $(window).height()
-      
-    # @famousState.go "job"
-    # @scope.sync = true
-    # @scope.speed = 500
-    # @scope.mainViewStyle = 'anim-fade'
-    # @scope.pageLoginStyle = 'anim-fade'
-    # @scope.pageProfileStyle = 'anim-fade'
-    # @scope.pageJobStyle = 'anim-fade'
-    # @scope.pageDetailStyle = 'anim-fade'
-    
-    # genM = homo([[1184,461,0],[899,1479,0],[227,1326,0]])
-    # results = genM([[640,0,0],[640, 568*2,0],[0,568*2,0]])
-    # a = []
-    # for r in results
-    #   a = a.concat r
-    # @scope.tArr = a
     
     @scope.menuScrollT = new @Transitionable(1)
     @scope.profileIconScrollT = new @Transitionable(1)
@@ -176,7 +111,6 @@ class AppCtrl extends Ctrl
     @scope.profileIconScrollT2 = new @Transitionable(1)
     @scope.jobIconScrollT2 = new @Transitionable(1)
     @scope.applyIconScrollT2 = new @Transitionable(1)
-
 
     @scope.enginePipe = new @EventHandler()
     @Engine.pipe(@scope.enginePipe)
@@ -206,22 +140,13 @@ class AppCtrl extends Ctrl
       "Applied": new @Transitionable .5
       "Approved": new @Transitionable .5
       
-    # @scope.inTransitionFunction = (cb)=>
-    #   console.log "in"
-    # @scope.outTransitionFunction = (cb)=>
-    #   console.log "out"
-  
   pageSyncStart:(e)=>
     
   pageSyncUpdate:(e)=>
-    # if (not @localStorageService.get("accessToken"))
-    #   return
     px = e.position[0]
     if Math.abs(px) > 40
       @movePage e
   pageSyncEnd:(e)=>
-    # if (not @localStorageService.get("accessToken"))
-    #   return
     vx = e.velocity[0]
     px = e.position[0]
     if Math.abs(px) < 40
@@ -242,13 +167,6 @@ class AppCtrl extends Ctrl
     offset = e.offsetX
     for i in [@scope.currentPage...@numPages]
       curPos = @pages[i].pos.get()
-      # pages before the current page 
-      # if i < @scope.currentPage
-      #   diff = @scope.currentPage-i
-      #   z = @clamp curPos[2]+delta, -@zSeparation*(diff), -@zSeparation*(diff-1)
-      #   @pages[i].pos.set [curPos[0],curPos[1],z]
-      # #pages after the current page
-      # else if i==@scope.currentPage
       if i==@scope.currentPage
         if @mode == "scale"
           z = @clamp curPos[2]+delta, -@zSeparation, 0
@@ -320,16 +238,12 @@ class AppCtrl extends Ctrl
     @timeout =>
       switch page
         when 0
-          # @famousState.go "login"
           @state.go "login"
         when 1
-          # @famousState.go "profile"
           @state.go "profile"
         when 2
-          # @famousState.go "job"
           @state.go "job"
         when 3
-          # @famousState.go "apply"
           @state.go "detail"
   goToPage: (page, data)=>
     while @scope.currentPage<page
@@ -338,16 +252,9 @@ class AppCtrl extends Ctrl
       @prevPage(data)
   prevPage: (data)=>
     currentPage = @scope.currentPage
-    # if @scope.currentPage<=0
-    #   return false
-    # @scope.currentPage--
-    # console.log "@scope.currentPage",@scope.currentPage
-    # @scope.$broadcast "pageChange", @scope.currentPage+1,@scope.currentPage,data
     if currentPage<=0
       return false
     i=0
-    #current pages and pages after the current page
-    # while @scope.currentPage+i<@numPages
     pIdx = currentPage+i
     nextPos = @pages[pIdx].pos.get()
     @changePageTo currentPage-1
@@ -356,7 +263,6 @@ class AppCtrl extends Ctrl
     i++
     currentPage--
     i=0
-    #pages before the current page
     while currentPage-i>=0
       pIdx = currentPage-i
       nextPos = @pages[pIdx].pos.get()
@@ -365,16 +271,9 @@ class AppCtrl extends Ctrl
     return true
   nextPage: (data)=>
     currentPage = @scope.currentPage
-    # if @scope.currentPage>=@numPages-1
-    #   return false
-    # @scope.currentPage++
-    # console.log "@scope.currentPage",@scope.currentPage
-    # @scope.$broadcast "pageChange", @scope.currentPage-1,@scope.currentPage,data
     if currentPage>=@numPages-1
       return false
     i=0
-    #current pages before the current page
-    # while (@scope.currentPage-i)>=0
     pIdx = currentPage-i
     nextPos = @pages[pIdx].pos.get()
     @changePageTo currentPage+1
@@ -383,7 +282,6 @@ class AppCtrl extends Ctrl
     i++
     currentPage++
     i=0
-    #pages after the current page
     while (currentPage+i)<@numPages
       pIdx = currentPage+i
       nextPos = @pages[pIdx].pos.get()
@@ -404,7 +302,6 @@ class AppCtrl extends Ctrl
         headers:
           Authorization: "Bearer #{accessToken}"
       , cache: true
-      # https://api.angel.co/1/tags/14781/jobs
       p.success (data)=>
         @scope.user = data
         cb? null,@scope.user

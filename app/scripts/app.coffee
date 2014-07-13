@@ -11,8 +11,7 @@ angular
     'famous.angular',
     'LocalStorageModule',
     'preloader',
-    'syncFocusWith',
-    # 'anim-in-out'
+    'syncFocusWith'
   ])
   .config([
     '$locationProvider'
@@ -122,16 +121,6 @@ angular
             }
           }
       )
-      # .state('detail',
-      #   url: "/detail",
-      #   views:
-      #     {
-      #       'main': {
-      #         templateUrl: "/views/detail/detail.html",
-      #         controller: "DetailCtrl"
-      #       }
-      #     }
-      # )
   ])
 
 require "./controllers/app.coffee"

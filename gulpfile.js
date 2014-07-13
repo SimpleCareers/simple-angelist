@@ -11,6 +11,7 @@ var browserify = require('gulp-browserify');
 var rename = require('gulp-rename');
 
 var jade = require('gulp-jade');
+var uglify = require('gulp-uglifyjs');
 
 gulp.task('templates', function() {
   var YOUR_LOCALS = {};
@@ -19,7 +20,7 @@ gulp.task('templates', function() {
     .pipe(plumber())
     .pipe(jade({
       locals: YOUR_LOCALS,
-      pretty: true
+      pretty: false
     }))
     .pipe(gulp.dest('app/'))
   
@@ -27,7 +28,7 @@ gulp.task('templates', function() {
     .pipe(plumber())
     .pipe(jade({
       locals: YOUR_LOCALS,
-      pretty: true
+      pretty: false
     }))
     .pipe(gulp.dest('app/views/'))
 });
@@ -41,6 +42,7 @@ gulp.task('coffee', function() {
     }))
     .pipe(rename('main.js'))
     .pipe(gulp.dest('app/scripts/'))
+    .pipe($.size());
 });
 
 gulp.task('styles', function () {

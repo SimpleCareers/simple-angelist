@@ -43,6 +43,7 @@ fa-modifier(fa-opacity="getButtonOpacity('Approved')")
       fa-surface.menu-surface(fa-click="switchTo('Approved')")
         .menu-icon-wrapper
           div.menu-text APPROVED
+//-TODO: screenWidth chages does not reflect here. Move it to code modifier instead
 fa-animation(timeline="profileIconScroll")
   animate(targetmodselector="#profileIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-.4*screenWidth-16,0,0]")
   animate(targetmodselector="#profileIconMod", field="opacity", startvalue=".4", endvalue="1")
@@ -65,6 +66,6 @@ fa-animation(timeline="applyIconScroll2")
   animate(targetmodselector="#likeIconMod", field="opacity", startvalue="1", endvalue="0")
   animate(targetmodselector="#likeIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-.4*screenWidth-.4*screenWidth-50,0,0]")
   animate(targetmodselector="#applyIconMod", field="opacity", startvalue="1", endvalue="0")
-  animate(targetmodselector="#applyIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-.4*screenWidth-.2*screenWidth-50,0,0]")
+  animate(targetmodselector="#applyIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-.4*screenWidth-.2*screenWidth-60,0,0]")
   animate(targetmodselector="#approveIconMod", field="opacity", startvalue="1", endvalue="0")
   animate(targetmodselector="#approveIconMod", field="translate", endvalue="[0,0,0]", startvalue="[-.4*screenWidth-0-50,0,0]")
