@@ -54,10 +54,9 @@ class DetailCardCtrl extends Ctrl
       return
     @scope.status = "loading"
     @scope.loadAngelUser (err,user)=>
-      p = @http.post "#{@baseUrl}/angel/talent/pairing",
-        startup_id: "383073" #card.startup.id
-        user_id: "#{user.id}"
-        user_interested: "1"
+      p = @http.post "#{@baseUrl}/myangel/talent/pairing",
+        startup_id: card.startup.id #383073
+        user_interested: 1
         user_note: """
         [Applied via Simple.Careers]
       

@@ -114,8 +114,10 @@ fa-app.full-screen.detail-content(ng-if="card", ng-controller="DetailCardCtrl")
     //-   .btn.action-button-red.apply-btn PASS
   fa-animation(timeline="scrollYesPosition")
     animate(targetmodselector="#yesMod", field="scale", startvalue="[0.5,0.5,0.5]", endvalue="[2,2,2]")
+    animate(targetmodselector="#yesMod", field="opacity", startvalue=".5", endvalue="1")
   fa-animation(timeline="scrollNoPosition")
     animate(targetmodselector="#noMod", field="scale", startvalue="[2,2,2]", endvalue="[0.5,0.5,0.5]")
+    animate(targetmodselector="#noMod", field="opacity", startvalue="1", endvalue=".5")
   fa-modifier#questionMod
     include question
   fa-animation(timeline="scrollYPosition")

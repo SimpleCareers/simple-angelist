@@ -149,6 +149,10 @@ class AppCtrl extends Ctrl
     
     @scope.screenWidth = $(window).width()
     @scope.screenHeight = $(window).height()
+    $( window ).resize =>
+      @scope.screenWidth = $(window).width()
+      @scope.screenHeight = $(window).height()
+      
     # @famousState.go "job"
     # @scope.sync = true
     # @scope.speed = 500
