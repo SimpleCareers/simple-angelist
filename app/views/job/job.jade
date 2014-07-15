@@ -9,7 +9,7 @@ fa-app.full-screen.main-content
     animate(targetmodselector="#backgroundModCurrent", field="opacity", startvalue="0.1", endvalue="1")
   fa-modifier(fa-translate="[0,0,20]")
     fa-modifier(fa-translate="getPosition(card.index,curIdx)",ng-repeat="card in cards track by card.index", ng-controller="JobCardCtrl")
-      fa-modifier(fa-scale="[0.95,.95]", fa-origin="[0.5, 0.5]", fa-align="[0.5,0.45]")
+      fa-modifier(fa-scale="getScale()", fa-origin="[0.5, 0.5]", fa-align="[0.5,0.45]")
         fa-modifier(fa-rotate="getRotation(card.index,curIdx)")
           include job-card
 fa-app.help-icon

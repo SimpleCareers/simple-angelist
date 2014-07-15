@@ -233,7 +233,14 @@ class JobCtrl extends Ctrl
     @tutorialTimeline.set 1, duration: 400
     # console.log "open"
     
-
+  getScale: =>
+    cardH = 415*0.95+200
+    cardW = 300*0.95+50
+    ratio = Math.min(@scope.screenHeight/cardH,@scope.screenWidth/cardW)
+    return [ratio,ratio]
+    # if @scope.screenHeight < normal
+    # else
+    #   return [0.95,0.95]
   # getRotation: (idx)=>
   #   if idx != 0
   #     return [0,0,0]
